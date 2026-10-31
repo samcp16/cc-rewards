@@ -1,0 +1,20 @@
+/*
+ * 首屏兜底样式。
+ *
+ * 只放「React 挂载前必须生效」的两条：底色与 noscript 文案。
+ * 颜色一律引用 design-tokens.css 的变量（由 index.html 之前的 link 提供），
+ * 这里不出现任何裸 hex —— 否则它就成了 P0 色值门禁的一个例外口子。
+ */
+
+html,
+body {
+  margin: 0;
+  background-color: var(--surface-0, #0b0e14);
+}
+
+.noscript-note {
+  padding: var(--space-6, 24px);
+  color: var(--fg-2, #b7c0ce);
+  font-size: var(--text-base, 14px);
+  line-height: var(--leading-body, 1.6);
+}

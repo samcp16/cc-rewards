@@ -1,0 +1,7 @@
+- generic [ref=f1e112]:
+  - banner [ref=f1e114]:
+    - generic [ref=f1e115]:
+      - button "返回" [ref=f1e116]
+      - heading "卡片" [level=1] [ref=f1e120]
+  - main [ref=f1e121]:
+    - paragraph [ref=f1e122]: 正在读这张卡…

@@ -1,0 +1,414 @@
+/* ============================================================================
+   刷哪张 · Design Tokens v1.0.0
+   ---------------------------------------------------------------------------
+   本文件由 scripts/gen-tokens.ts 从 design/design-tokens.json 自动生成，请勿手工编辑。
+   重新生成：npm run gen:tokens        仅校验：npm run gen:tokens --check
+
+   为什么是生成而不是手写：设计师交付 .json（给程序读）与 .css（给浏览器读）两份，
+   两份手工维护必然漂移，而颜色是本项目 P0 门禁的对象（禁止硬编码色值）。
+   以 .json 为唯一源，漂移从流程上消失。
+
+   为什么变量名写死在脚本里：变量名属于设计契约（MASTER.md 与 pages/*.md 已按
+   这些短名写了实现指引）。命名映射集中在 scripts/gen-tokens.ts 的 CSS_NAME，
+   逐条显式声明 —— 机械按 JSON 路径生成会得到 --text-primary 这类与契约不符的名字。
+
+   三条不可协商的边界：
+     1. 仅深色。变量挂在 [data-theme="dark"]，同时用 :root 兜底。
+        浅色插槽刻意留空 —— SPEC O16 明确不做，写个假的浅色比不写更糟。
+     2. 层级靠背景色阶台阶表达，不靠阴影。
+     3. 组件里禁止出现裸 hex / rgb()。唯一例外 --on-accent。
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   1. 色板 — 层级台阶（Surface / 行底色 / 文字 / 边框）
+   ---------------------------------------------------------------------------
+   深色主题的层级不是越亮越靠前，而是越亮越靠前一层。5 级台阶差值刻意做小，台阶差一大界面立刻显廉价。
+--------------------------------------------------------------------------- */
+:root,
+:root[data-theme="dark"] {
+  /* 页面底色。不是纯黑：#000 在 OLED 上会与边框产生糖化边缘 */
+  --surface-0: #0B0E14;
+  /* 一级面板：答案卡、顶栏、TabBar、列表容器 */
+  --surface-1: #11151D;
+  /* 二级面板：未选中段按钮、输入框底 */
+  --surface-2: #171C26;
+  /* 三级面板：选中段按钮、bottom sheet 本体 */
+  --surface-3: #1F2532;
+  /* 四级面板：popover、日期弹层。全项目到此为止 */
+  --surface-4: #2A3140;
+  /* 冠军行整行底色。1.16:1，不做左侧彩色条纹 */
+  --row-champion: #1B2331;
+  --row-hover: #181E29;
+  /* 主文本 / 卡名 / 主角数字 */
+  --fg: #E8ECF2;
+  /* 次级文本：渠道行、解释句 */
+  --fg-2: #B7C0CE;
+  /* 三级：字段标签、列头、少赚差值、零净返 */
+  --muted: #8A94A6;
+  /* 四级：核实日期、计数 */
+  --meta: #7D8798;
+  /* 禁用态。必须同时带 aria-disabled，不靠颜色单独传达 */
+  --disabled: #5A6274;
+  /* accent 填充上的文字。全项目唯一允许的纯白 */
+  --on-accent: #FFFFFF;
+  /* 1px 分隔线，只做边界暗示 */
+  --line-subtle: #232A38;
+  /* 控件边框 */
+  --line: #2A3140;
+  /* 选中态描边 / 进度条轨道 */
+  --line-strong: #3D4659;
+}
+
+/* ---------------------------------------------------------------------------
+   2. 语义色与强调色
+   ---------------------------------------------------------------------------
+   铁律（SPEC §8）：颜色永不单独承担语义。金额强制带正负号，倒贴写「倒贴」，未知写「未知」。颜色只做第二遍阅读时的加速，第一遍靠文字与符号。
+--------------------------------------------------------------------------- */
+:root,
+:root[data-theme="dark"] {
+  /* 省钱 / 正净返。降饱和绿，满饱和在 40px 上会发光 */
+  --pos: #3DD68C;
+  --pos-tint: #122A20;
+  /* 亏钱 / 倒贴。仅真亏钱使用 */
+  --neg: #FF7A6E;
+  --neg-tint: #2B1614;
+  /* 警示：额度 >= 80%、优惠 <= 60 天到期、数据待核对 */
+  --warn: #E8B84B;
+  --warn-tint: #2B2411;
+  /* 信息：DCC 提示、来源说明、豁免生效 */
+  --info: #6BA6F0;
+  --info-tint: #121F33;
+  /* 只做填充色。做 15px 以下文字仅 3.54:1，用 --accent-text */
+  --accent: #2563EB;
+  /* accent 填充 hover */
+  --accent-hover: #2E6FE8;
+  /* accent 填充 pressed / 当前 Tab 文字 */
+  --accent-active: #1D4ED8;
+  /* 蓝色文字与图标必须用这个 */
+  --accent-text: #5B9DFF;
+  /* accent 极淡底：选中行底色、当前 Tab 底 */
+  --accent-tint: #12203A;
+}
+
+/* ---------------------------------------------------------------------------
+   3. 置信度（数据可信度，不是收益语义）
+   ---------------------------------------------------------------------------
+   unknown 是「我们不知道」，不是「这张卡不好」。所以置信度体系完全不用 pos/neg —— 用了会让用户把没数据读成亏钱。
+--------------------------------------------------------------------------- */
+:root,
+:root[data-theme="dark"] {
+  /* high 不给徽章，正常显示 */
+  --conf-high: var(--muted);
+  /* 详情内注来源，列表不加徽章 */
+  --conf-medium: var(--muted);
+  /* 「待核对」黄字 */
+  --conf-low-fg: var(--warn);
+  --conf-low-bg: var(--warn-tint);
+  /* 「未知」灰字。unknown 表示我们不知道，不是卡不好，故不用 neg 色 */
+  --conf-unknown-fg: var(--muted);
+  --conf-unknown-bg: var(--line);
+}
+
+/* ---------------------------------------------------------------------------
+   4. 字体
+   ---------------------------------------------------------------------------
+   中文走系统 PingFang，不加载 webfont（SPEC O17）。数字不用等宽，用 tabular-nums ——
+   对齐效果一样但更紧凑。
+--------------------------------------------------------------------------- */
+:root,
+:root[data-theme="dark"] {
+  --font-display: Inter, "Inter Display", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", -apple-system, sans-serif;
+  --font-body: Inter, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", -apple-system, sans-serif;
+  /* 金额/费率专用，必须配 tabular-nums */
+  --font-num: Inter, "PingFang SC", -apple-system, sans-serif;
+  /* 仅规则代码与 capId 展示，不用于金额 */
+  --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+  /* 正文、说明句、备注 */
+  --fw-read: 400;
+  /* 卡名、列表值、按钮文字、次级数字（L-Stat） */
+  --fw-emphasize: 510;
+  /* 唯一主角数字（40px）、页面标题、对比表冠军卡名 */
+  --fw-announce: 590;
+  /* 11px 徽章，必须配 0.06em 字距 */
+  --text-2xs: 0.6875rem;
+  /* 元数据、字段标签、列头 */
+  --text-xs: 0.75rem;
+  /* 次级说明、差值行、明细行 */
+  --text-sm: 0.8125rem;
+  /* 正文基准。手机上 14px 才是对的 */
+  --text-base: 0.875rem;
+  /* 卡名（列表行）、输入值、对比表卡名 */
+  --text-md: 1rem;
+  /* 区块标题 */
+  --text-lg: 1.125rem;
+  /* 答案卡卡名 / 额度页 KPI 数字（L-Stat 上限） */
+  --text-xl: 1.5rem;
+  /* 唯一主角：本次净返金额 */
+  --text-2xl: 2.5rem;
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.4;
+  --leading-body: 1.6;
+  /* 40px 主数字、24px 卡名 */
+  --tracking-display: -0.02em;
+  /* 18px 区块标题 */
+  --tracking-heading: -0.01em;
+  /* 中文正文必须 0，负字距会让汉字粘连 */
+  --tracking-body: 0em;
+  /* 11–13px 小字标签 */
+  --tracking-label: 0.01em;
+  /* 全大写英文 / 分组小标题 / 币种缩写 */
+  --tracking-caps: 0.06em;
+  /* 所有数字容器强制开启 */
+  --numeric-feature: "tnum" 1, "cv01" 1;
+}
+
+/* ---------------------------------------------------------------------------
+   5. 间距（4px 基准网格）
+   ---------------------------------------------------------------------------
+   只允许这些值。5 / 7 / 13 / 15 / 22 / 30 会让对齐在累积误差后崩掉。
+--------------------------------------------------------------------------- */
+:root,
+:root[data-theme="dark"] {
+  --space-0: 0px;
+  /* 图标与文字间隙、字号内衬 */
+  --space-1: 4px;
+  /* 同组元素间距、pill gap */
+  --space-2: 8px;
+  /* 表单标签与控件、列表行内行距 */
+  --space-3: 12px;
+  /* 页面左右 gutter（375px 视口）、卡片内边距 */
+  --space-4: 16px;
+  /* 输入分区之间的上间距 */
+  --space-5: 20px;
+  /* 区块间距、sheet 顶部内边距 */
+  --space-6: 24px;
+  /* 大区块间距 */
+  --space-8: 32px;
+  /* 页面级上下留白 */
+  --space-10: 40px;
+  /* 最大间距；同时也是最小触摸行高 */
+  --space-12: 48px;
+  /* 仅用于空状态的垂直居中留白 */
+  --space-16: 64px;
+}
+
+/* ---------------------------------------------------------------------------
+   6. 尺寸与安全区
+   ---------------------------------------------------------------------------
+   前端不要用 padding 拼这些高度：拼出来的高度在字体切换时会抖 1–2px，而本产品最怕抖动。安全区漏一处就会出现按钮被 Home
+   条盖住。
+--------------------------------------------------------------------------- */
+:root,
+:root[data-theme="dark"] {
+  /* 顶栏内容高（不含 safe-area） */
+  --size-topbar: 48px;
+  /* 底部 TabBar 内容高（不含 safe-area） */
+  --size-tabbar: 56px;
+  /* WCAG 2.5.5 最小命中区。视觉可小，命中区必须撑满 */
+  --size-touch: 44px;
+  /* 地区/类别段按钮高 */
+  --size-seg: 44px;
+  /* 金额输入框高 */
+  --size-amount-input: 56px;
+  /* 卡库列表行高（两行文字） */
+  --size-row-list: 64px;
+  /* 对比表行高（两行文字） */
+  --size-row-compare: 56px;
+  /* 视觉高 36px，命中区仍需 44px */
+  --size-pill: 36px;
+  /* 行内图标，配 12–13px 文字 */
+  --icon-inline: 16px;
+  /* 按钮内 / 列表行图标 */
+  --icon-button: 20px;
+  /* TabBar、空状态、独立图标 */
+  --icon-standalone: 24px;
+  /* 答案卡内额度条 */
+  --bar-thin: 4px;
+  /* 额度页每卡额度条 */
+  --bar-normal: 6px;
+  /* ≥768px：单列居中加宽，不新增功能 */
+  --container-desktop: 640px;
+  /* bottom sheet 最大高度，留 12vh 露出答案卡做空间锚点 */
+  --sheet-max-h: 88vh;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  /* 滚动内容底部预留，漏了会被 TabBar 遮住 */
+  --content-pad-bottom: calc(var(--size-tabbar) + var(--safe-bottom));
+}
+
+/* ---------------------------------------------------------------------------
+   7. 圆角
+   ---------------------------------------------------------------------------
+   对比表与列表行用 0：它们靠分隔线组织，加圆角会变成一堆卡片、破坏密度。
+--------------------------------------------------------------------------- */
+:root,
+:root[data-theme="dark"] {
+  /* 对比表行、列表行（用分隔线而不是圆角框） */
+  --radius-none: 0px;
+  /* 徽章、tag、小 pill */
+  --radius-sm: 4px;
+  /* 按钮、输入框、段按钮 */
+  --radius-md: 8px;
+  /* 卡片上限 12px。更大的圆角是 AI 味的明显指纹 */
+  --radius-lg: 12px;
+  /* 渠道 pill、圆点、标签药丸 */
+  --radius-pill: 9999px;
+}
+
+/* ---------------------------------------------------------------------------
+   8. 层级 / 阴影
+   ---------------------------------------------------------------------------
+   近黑底上投影 = 更黑的黑，视觉增益趋近 0。层级用背景台阶 + 1px 边框表达，shadow 只保留给真正浮起的元素。
+--------------------------------------------------------------------------- */
+:root,
+:root[data-theme="dark"] {
+  /* 默认。所有卡片、列表行、面板用 flat + 背景台阶 */
+  --elev-flat: none;
+  /* 1px 环比 border 更可控，不参与布局计算 */
+  --elev-ring: 0 0 0 1px var(--line-subtle);
+  /* 仅 3 处：FAB / popover / bottom sheet 上缘 */
+  --elev-raised: 0 8px 24px rgba(0, 0, 0, 0.48), 0 0 0 1px var(--line);
+  --z-base: 0;
+  --z-sticky-answer: 100;
+  --z-tabbar: 110;
+  --z-fab: 120;
+  --z-sheet-scrim: 200;
+  --z-sheet: 210;
+  --z-toast: 300;
+}
+
+/* ---------------------------------------------------------------------------
+   9. 动效
+   ---------------------------------------------------------------------------
+   SPEC §8 硬上限：答案 200ms、额度条 400ms。只允许动 transform 与 opacity，动 width/height
+   会触发 layout 掉帧。
+--------------------------------------------------------------------------- */
+:root,
+:root[data-theme="dark"] {
+  /* 旧值淡出（交叉淡入的前半） */
+  --motion-instant: 80ms;
+  /* 选中态换色、图标状态切换 */
+  --motion-fast: 120ms;
+  /* hover、tab 切换、Toast 进出（全系统收敛值） */
+  --motion-base: 150ms;
+  /* SPEC 锁定的 200ms */
+  --motion-answer: 200ms;
+  /* 对比 sheet / 明细 accordion 展开（grid-template-rows 0fr→1fr） */
+  --motion-expand: 220ms;
+  /* 全项目最长动效，不得超越 */
+  --motion-progress: 400ms;
+  /* 默认。出快入慢，符合「即时响应」的感知 */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  /* 仅用于元素离场 */
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  /* 额度条 eoe-out-quart：起步快、收尾稳，比 standard 更适合条形填充 */
+  --ease-progress: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ---------------------------------------------------------------------------
+   10. 焦点环
+   ---------------------------------------------------------------------------
+   只用 :focus-visible。鼠标点击不显示环，键盘与读屏用户 100% 可见。这两件事不矛盾，可以同时做到。
+--------------------------------------------------------------------------- */
+:root,
+:root[data-theme="dark"] {
+  --focus-width: 3px;
+  --focus-offset: 2px;
+  /* 所有台阶上都清晰 */
+  --focus-color: var(--accent-text);
+}
+
+/* ---------------------------------------------------------------------------
+   焦点环行为
+   ---------------------------------------------------------------------------
+   只用 :focus-visible：鼠标点击不显示环（减少视觉噪音），键盘与读屏用户 100% 可见。
+--------------------------------------------------------------------------- */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: var(--focus-width) solid var(--focus-color);
+  outline-offset: var(--focus-offset);
+  border-radius: var(--radius-sm); /* 让环贴合圆角控件，否则环的直角会切到圆角外 */
+}
+
+/* 全局兜底：禁止用 outline: none 灭掉焦点（ESLint 侧另有规则拦截） */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ---------------------------------------------------------------------------
+   prefers-reduced-motion（SPEC §8 硬要求）
+   ---------------------------------------------------------------------------
+   全部时长降为 0.01ms，颜色过渡也一起关。
+   用 0.01ms 而不是 0ms：部分浏览器对 0ms 的 transitionend 不触发，
+   依赖 transitionend 的逻辑（如 accordion 展开后 focus）会挂住。
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-instant: 0.01ms;
+    --motion-fast: 0.01ms;
+    --motion-base: 0.01ms;
+    --motion-answer: 0.01ms;
+    --motion-expand: 0.01ms;
+    --motion-progress: 0.01ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important; /* 本项目本不该有循环动画 */
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   基础排版复位
+   ---------------------------------------------------------------------------
+   只做本产品需要的部分，不做完整 reset（Tailwind preflight 已覆盖其余）。
+--------------------------------------------------------------------------- */
+:root {
+  color-scheme: dark; /* 让原生控件（日期选择、滚动条）跟着深色走，否则会出现刺眼白块 */
+}
+
+body {
+  background-color: var(--surface-0);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 数字容器：所有金额 / 费率 / 百分比必须带 .num 或 data-num。
+   目标是「改金额时数字宽度不跳」—— 这是信任问题，不是美观问题。 */
+.num,
+[data-num] {
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: var(--numeric-feature);
+  letter-spacing: 0; /* 字距会让 tabular 对齐失效 */
+}
+
+/* 金额列一律右对齐：中文用户扫读数字沿小数点对齐 */
+.num-right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: var(--numeric-feature);
+}
+
+/* ---------------------------------------------------------------------------
+   浅色插槽（刻意留空）
+   ---------------------------------------------------------------------------
+   SPEC O16 与用户 Phase 1 决策均明确「仅深色」。一套做对 4 个语义色的对比度
+   接近重做，写一个不达标的浅色比不写更糟。
+
+   将来若要做，唯一需要改的是上面第 1–3 段的颜色变量：组件层全部引用语义名，
+   不需要改任何组件代码。这就是「语义名挂 data-theme」的价值。
+--------------------------------------------------------------------------- */
+/* :root[data-theme="light"] { ... 待实现（不属 MVP 范围） } */

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-Hans" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>刷哪张</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="description" content="付款前比较港澳信用卡净回报率" />
+
+    <!-- 仅深色：让浏览器 UI（地址栏、滚动条）跟着深色走，避免加载时闪白 -->
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0B0E14" />
+
+    <!-- iOS 添加到主屏幕：不设备这几项，standalone 启动会带 Safari 的地址栏，
+         而 app 的粘底答案卡正是按「无地址栏」计算高度的 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="刷哪张" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <link rel="stylesheet" href="/boot.css" />
+
+    <!-- CSP 由 vite.config.ts 的 inject-csp-meta 插件按 dev/prod 注入 -->
+    <!--CSP-->
+  </head>
+  <body>
+    <!-- 首屏骨架：脚本加载完成前先给出底色，避免白闪。
+         这是纯静态标记，不参与 React 渲染 -->
+    <div id="root"></div>
+    <noscript>
+      <p class="noscript-note">
+        本工具需要 JavaScript 才能计算净回报率。请启用后重新打开。
+      </p>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

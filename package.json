@@ -1,0 +1,61 @@
+{
+  "name": "cc-rewards",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "刷卡决策器 — 付款前比较港澳信用卡净回报率",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run gen:tokens && tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "gen:tokens": "tsx scripts/gen-tokens.ts",
+    "gate:emoji": "node scripts/gate-emoji.mjs",
+    "gate:color": "node scripts/gate-color.mjs",
+    "gate": "npm run gate:emoji && npm run gate:color",
+    "verify": "npm run gate && npm run typecheck && npm run lint && npm run test:coverage && npm run build"
+  },
+  "dependencies": {
+    "dexie": "4.4.7",
+    "dexie-react-hooks": "4.4.0",
+    "lucide-react": "1.65.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-router-dom": "7.18.5",
+    "workbox-window": "7.4.1"
+  },
+  "devDependencies": {
+    "@eslint/css": "^0.14.0",
+    "@tailwindcss/vite": "4.3.3",
+    "@testing-library/react": "16.3.3",
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "@vitest/coverage-v8": "5.0.5",
+    "eslint": "9.39.5",
+    "jsdom": "30.1.3",
+    "tailwindcss": "4.3.3",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "typescript-eslint": "8.72.1",
+    "typescript6": "npm:typescript@^6.0.3",
+    "vite": "8.3.5",
+    "vite-plugin-pwa": "2.0.0",
+    "vitest": "5.0.5"
+  },
+  "overrides": {
+    "typescript-eslint": {
+      "typescript": "$typescript"
+    }
+  },
+  "_comment_typescript": "typescript@7.0.2 is pinned per SPEC 4. typescript-eslint 8.72.1 declares peer typescript <6.1.0; the override below is a declared, documented peer-range relaxation, not a silent --legacy-peer-deps install. See docs/decisions/ADR-008-typescript-7-peer-range.md.",
+  "_comment_versions": "All other versions match SPEC 4 exactly as published on the npm registry on 2026-10-31."
+}

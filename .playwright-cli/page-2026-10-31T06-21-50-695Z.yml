@@ -1,0 +1,22 @@
+- generic [ref=e269]:
+  - banner [ref=e271]:
+    - heading "我的卡" [level=1] [ref=e274]
+  - main [ref=e275]:
+    - generic [ref=e276]:
+      - tablist "卡库视图" [ref=e277]:
+        - tab "卡片" [selected] [ref=e278]
+        - tab "额度" [ref=e280]
+      - paragraph [ref=e281]: 正在读本机卡片数据…
+      - paragraph [ref=e282]: 点任意一张卡可以核对费率、看来源和核实日期。费率变了随时能改，改完答案立刻跟着变。
+    - button "添加卡片" [ref=e283]
+  - navigation "主导航" [ref=e285]:
+    - list [ref=e286]:
+      - listitem [ref=e287]:
+        - link "算一笔" [ref=e288] [cursor=pointer]:
+          - /url: "#/"
+      - listitem [ref=e292]:
+        - link "我的卡" [ref=e293] [cursor=pointer]:
+          - /url: "#/cards"
+      - listitem [ref=e297]:
+        - link "设置" [ref=e298] [cursor=pointer]:
+          - /url: "#/settings"

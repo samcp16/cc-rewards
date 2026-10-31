@@ -1,0 +1,29 @@
+# 依赖
+node_modules/
+
+# 构建产物
+dist/
+dev-dist/
+coverage/
+
+# 本地环境
+.env
+.env.*
+*.local
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# 日志
+*.log
+npm-debug.log*
+
+# 缓存
+.eslintcache
+.tsbuildinfo
+
+# 本地实验（不共享）
+/scratch/

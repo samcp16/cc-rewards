@@ -1,0 +1,52 @@
+- generic [ref=e605]:
+  - banner [ref=e607]:
+    - heading "刷哪张" [level=1] [ref=e613]
+  - main [ref=e614]:
+    - generic [ref=e615]:
+      - generic [ref=e616]:
+        - generic [ref=e617]: 消费地区
+        - radiogroup "消费地区" [ref=e618]:
+          - radio "澳门" [checked] [ref=e619]
+          - radio "内地" [ref=e620]
+      - generic [ref=e621]:
+        - generic [ref=e622]: 消费类别
+        - radiogroup "消费类别" [ref=e623]:
+          - radio "餐饮" [checked] [ref=e624]
+          - radio "超市" [ref=e630]
+          - radio "加油" [ref=e639]
+          - radio "机票" [ref=e645]
+          - radio "酒店" [ref=e650]
+          - radio "网购" [ref=e655]
+          - radio "其他" [ref=e662]
+      - generic [ref=e669]:
+        - generic [ref=e670]: 这笔消费多少
+        - generic [ref=e671]:
+          - generic [aria-hidden] [ref=e672]: MOP
+          - textbox "这笔消费多少" [ref=e673]:
+            - /placeholder: "0.00"
+            - text: "500"
+      - generic [ref=e674]:
+        - generic [ref=e675]:
+          - generic [ref=e676]: 走哪个渠道
+          - generic [ref=e677]: 上次用的记在这里
+        - radiogroup "走哪个渠道" [ref=e679]:
+          - radio [checked] [ref=e680]
+          - radio [ref=e684]
+          - radio [ref=e688]
+          - radio [ref=e692]
+          - radio [ref=e699]
+  - region "测算答案" [ref=e705]:
+    - generic [ref=e707]:
+      - paragraph [ref=e708]: 正在算
+      - paragraph [ref=e709]: ——
+  - navigation "主导航" [ref=e710]:
+    - list [ref=e711]:
+      - listitem [ref=e712]:
+        - link "算一笔" [ref=e713] [cursor=pointer]:
+          - /url: "#/"
+      - listitem [ref=e717]:
+        - link "我的卡" [ref=e718] [cursor=pointer]:
+          - /url: "#/cards"
+      - listitem [ref=e722]:
+        - link "设置" [ref=e723] [cursor=pointer]:
+          - /url: "#/settings"

@@ -1,0 +1,102 @@
+- generic [ref=e2]:
+  - generic [ref=e605]:
+    - banner [ref=e607]:
+      - heading "刷哪张" [level=1] [ref=e613]
+    - main [ref=e614]:
+      - generic [ref=e615]:
+        - generic [ref=e616]:
+          - generic [ref=e617]: 消费地区
+          - radiogroup "消费地区" [ref=e618]:
+            - radio "澳门" [checked] [ref=e619]
+            - radio "内地" [ref=e620]
+        - generic [ref=e621]:
+          - generic [ref=e622]: 消费类别
+          - radiogroup "消费类别" [ref=e623]:
+            - radio "餐饮" [checked] [ref=e624]
+            - radio "超市" [ref=e630]
+            - radio "加油" [ref=e639]
+            - radio "机票" [ref=e645]
+            - radio "酒店" [ref=e650]
+            - radio "网购" [ref=e655]
+            - radio "其他" [ref=e662]
+        - generic [ref=e669]:
+          - generic [ref=e670]: 这笔消费多少
+          - generic [ref=e671]:
+            - generic [aria-hidden] [ref=e672]: MOP
+            - textbox "这笔消费多少" [ref=e673]:
+              - /placeholder: "0.00"
+              - text: "2000"
+        - generic [ref=e674]:
+          - generic [ref=e675]:
+            - generic [ref=e676]: 走哪个渠道
+            - generic [ref=e677]: 上次用的记在这里
+          - radiogroup "走哪个渠道" [ref=e679]:
+            - radio [checked] [ref=e680]
+            - radio [ref=e684]
+            - radio [ref=e688]
+            - radio [ref=e692]
+            - radio [ref=e699]
+    - region "测算答案" [ref=e705]:
+      - generic [ref=e728]:
+        - paragraph [ref=e729]: 刷这张
+        - paragraph [ref=e730]: 中银香港 Chill 信用卡
+        - paragraph [ref=e731]: 净返 5.87% · 外币费 1.95% · 比第二名多 17.32 MOP
+        - paragraph [ref=e732]:
+          - generic [ref=e733]:
+            - text: +
+            - generic [ref=e734]: MOP
+            - text: "117.32"
+        - paragraph [ref=e735]: 净返 5.87% · 名义 7.82%
+        - paragraph [ref=e739]: 额度用尽后降为 +162.82 MOP
+        - button "查看全部 12 张对比 +5.87%" [ref=e740]:
+          - generic [ref=e737]: 查看全部 12 张对比
+          - generic [ref=e738]: +5.87%
+    - navigation "主导航" [ref=e710]:
+      - list [ref=e711]:
+        - listitem [ref=e712]:
+          - link "算一笔" [ref=e713] [cursor=pointer]:
+            - /url: "#/"
+        - listitem [ref=e717]:
+          - link "我的卡" [ref=e718] [cursor=pointer]:
+            - /url: "#/cards"
+        - listitem [ref=e722]:
+          - link "设置" [ref=e723] [cursor=pointer]:
+            - /url: "#/settings"
+  - generic [ref=e741]:
+    - button "关闭" [ref=e742]
+    - dialog [ref=e743]:
+      - generic [ref=e745]:
+        - generic [ref=e746]:
+          - heading "全部 12 张卡" [level=2] [ref=e747]
+          - generic [ref=e748]: 消费 2000 MOP · 餐饮 · 澳门
+        - button "关闭" [active] [ref=e749]
+      - generic [ref=e754]:
+        - generic [ref=e755]:
+          - generic [ref=e756]: 卡 / 渠道
+          - generic [ref=e757]: 费率
+          - generic [ref=e758]: 净返
+          - generic [ref=e759]: 差第一
+        - button "刷这张 中银香港 Chill 信用卡 刷卡 · 外币费 1.95% 7.82% +117.32 —" [ref=e762]:
+          - generic [ref=e763]:
+            - generic [ref=e764]:
+              - generic [ref=e765]: 刷这张
+              - generic [ref=e766]: 中银香港 Chill 信用卡
+            - generic [ref=e767]: 刷卡 · 外币费 1.95%
+          - generic [ref=e768]: 7.82%
+          - generic [ref=e769]: "+117.32"
+          - generic [ref=e770]: —
+        - button "大丰银联双币钻石卡（大湾区卡） 刷卡 · 外币费 0.00% 5.00% +100.00 −17.32" [ref=e773]:
+          - generic [ref=e774]:
+            - generic [ref=e775]: 大丰银联双币钻石卡（大湾区卡）
+            - generic [ref=e777]: 刷卡 · 外币费 0.00%
+          - generic [ref=e778]: 5.00%
+          - generic [ref=e779]: "+100.00"
+          - generic [ref=e780]: −17.32
+        - button "中银香港 Cheers 信用卡（Visa Signature） 刷卡 · 外币费 1.95% 4.00% +41.00 −76.32" [ref=e783]:
+          - generic [ref=e784]:
+            - generic [ref=e785]: 中银香港 Cheers 信用卡（Visa Signature）
+            - generic [ref=e787]: 刷卡 · 外币费 1.95%
+          - generic [ref=e788]: 4.00%
+          - generic [ref=e789]: "+41.00"
+          - generic [ref=e790]: −76.32
+        - button "展开其余 9 张" [ref=e791]

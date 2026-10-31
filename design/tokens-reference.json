@@ -1,0 +1,355 @@
+{
+  "$meta": {
+    "name": "刷哪张 · Token 与对比度校验参考",
+    "version": "1.0.0",
+    "date": "2026-10-31",
+    "designer": "颜好看",
+    "method": "WCAG 2.1 相对亮度公式脚本实算（非估算），舍入到 2 位",
+    "purpose": "这是 design-tokens.json 的校验附件：每个色值在每个背景上的实际对比度。Phase 3 若改任何色值，必须重跑此表并更新，否则 MASTER.md 的对比度声明会与实现不符。",
+    "thresholds": {
+      "bodyText": ">= 4.5:1",
+      "largeText(>=18.66px bold / >=24px regular)": ">= 3:1",
+      "nonText(必要控件边界/状态)": ">= 3:1",
+      "disabled": "豁免"
+    }
+  },
+  "surfaces": [
+    {
+      "token": "surface-0",
+      "hex": "#0B0E14",
+      "vsSurface0": 1.0,
+      "vsSurface1": 1.06
+    },
+    {
+      "token": "surface-1",
+      "hex": "#11151D",
+      "vsSurface0": 1.06,
+      "vsSurface1": 1.0
+    },
+    {
+      "token": "surface-2",
+      "hex": "#171C26",
+      "vsSurface0": 1.13,
+      "vsSurface1": 1.07
+    },
+    {
+      "token": "surface-3",
+      "hex": "#1F2532",
+      "vsSurface0": 1.26,
+      "vsSurface1": 1.19
+    },
+    {
+      "token": "surface-4",
+      "hex": "#2A3140",
+      "vsSurface0": 1.48,
+      "vsSurface1": 1.4
+    }
+  ],
+  "borders": [
+    {
+      "token": "line-subtle",
+      "hex": "#232A38",
+      "vsSurface0": 1.34,
+      "vsSurface1": 1.27,
+      "vsSurface2": 1.19
+    },
+    {
+      "token": "line",
+      "hex": "#2A3140",
+      "vsSurface0": 1.48,
+      "vsSurface1": 1.4,
+      "vsSurface2": 1.31
+    },
+    {
+      "token": "line-strong",
+      "hex": "#3D4659",
+      "vsSurface0": 2.04,
+      "vsSurface1": 1.93,
+      "vsSurface2": 1.8
+    }
+  ],
+  "textOnSurfaces": [
+    {
+      "token": "fg",
+      "hex": "#E8ECF2",
+      "role": "主文本 / 卡名 / 主角数字",
+      "on": {
+        "surface-0": 16.29,
+        "surface-1": 15.42,
+        "surface-2": 14.39,
+        "surface-3": 12.94,
+        "surface-4": 10.99,
+        "row-champion": 13.3
+      },
+      "minContrast": 10.99,
+      "passes4_5_everywhere": true
+    },
+    {
+      "token": "fg-2",
+      "hex": "#B7C0CE",
+      "role": "次级文本：渠道行、解释句",
+      "on": {
+        "surface-0": 10.53,
+        "surface-1": 9.96,
+        "surface-2": 9.3,
+        "surface-3": 8.36,
+        "surface-4": 7.1,
+        "row-champion": 8.6
+      },
+      "minContrast": 7.1,
+      "passes4_5_everywhere": true
+    },
+    {
+      "token": "muted",
+      "hex": "#8A94A6",
+      "role": "三级：字段标签、列头、币种符号、少赚差值、零净返",
+      "on": {
+        "surface-0": 6.32,
+        "surface-1": 5.98,
+        "surface-2": 5.58,
+        "surface-3": 5.02,
+        "surface-4": 4.26,
+        "row-champion": 5.16
+      },
+      "minContrast": 4.26,
+      "passes4_5_everywhere": true,
+      "allowedSurfaces": [
+        "surface-0",
+        "surface-1",
+        "surface-2",
+        "surface-3",
+        "row-champion"
+      ],
+      "constrainedUsage": "surface-4 上 4.26:1，禁用。surface-3 是最后可用层。"
+    },
+    {
+      "token": "meta",
+      "hex": "#7D8798",
+      "role": "元数据：核实日期、计数、来源域名",
+      "on": {
+        "surface-0": 5.33,
+        "surface-1": 5.04,
+        "surface-2": 4.71,
+        "surface-3": 4.23,
+        "surface-4": 3.59,
+        "row-champion": 4.35
+      },
+      "minContrast": 3.59,
+      "passes4_5_everywhere": true,
+      "allowedSurfaces": [
+        "surface-0",
+        "surface-1",
+        "surface-2"
+      ],
+      "constrainedUsage": "仅允许出现在 surface-0/1/2（4.71:1 起）。surface-3 及以上禁用。"
+    },
+    {
+      "token": "disabled",
+      "hex": "#5A6274",
+      "role": "禁用态文本",
+      "on": {
+        "surface-0": 3.16,
+        "surface-1": 2.99,
+        "surface-2": 2.79,
+        "surface-3": 2.51,
+        "surface-4": 2.13,
+        "row-champion": 2.58
+      },
+      "minContrast": 2.13,
+      "passes4_5_everywhere": false,
+      "allowedSurfaces": "任意（WCAG 豁免）",
+      "constrainedUsage": "豁免项。必须同时带 aria-disabled，不靠颜色传达禁用态。"
+    },
+    {
+      "token": "pos",
+      "hex": "#3DD68C",
+      "role": "省钱 / 正净返",
+      "on": {
+        "surface-0": 10.3,
+        "surface-1": 9.75,
+        "surface-2": 9.1,
+        "surface-3": 8.18,
+        "surface-4": 6.95,
+        "row-champion": 8.41
+      },
+      "minContrast": 6.95,
+      "passes4_5_everywhere": true
+    },
+    {
+      "token": "neg",
+      "hex": "#FF7A6E",
+      "role": "亏钱 / 倒贴",
+      "on": {
+        "surface-0": 7.6,
+        "surface-1": 7.19,
+        "surface-2": 6.71,
+        "surface-3": 6.03,
+        "surface-4": 5.13,
+        "row-champion": 6.2
+      },
+      "minContrast": 5.13,
+      "passes4_5_everywhere": true
+    },
+    {
+      "token": "warn",
+      "hex": "#E8B84B",
+      "role": "警示：额度≥80%、≤60天到期、待核对",
+      "on": {
+        "surface-0": 10.48,
+        "surface-1": 9.91,
+        "surface-2": 9.26,
+        "surface-3": 8.32,
+        "surface-4": 7.07,
+        "row-champion": 8.55
+      },
+      "minContrast": 7.07,
+      "passes4_5_everywhere": true
+    },
+    {
+      "token": "info",
+      "hex": "#6BA6F0",
+      "role": "信息：DCC、来源说明",
+      "on": {
+        "surface-0": 7.67,
+        "surface-1": 7.26,
+        "surface-2": 6.78,
+        "surface-3": 6.09,
+        "surface-4": 5.17,
+        "row-champion": 6.26
+      },
+      "minContrast": 5.17,
+      "passes4_5_everywhere": true
+    },
+    {
+      "token": "accent-text",
+      "hex": "#5B9DFF",
+      "role": "蓝色文字 / 图标 / 当前Tab / focus环",
+      "on": {
+        "surface-0": 7.09,
+        "surface-1": 6.71,
+        "surface-2": 6.27,
+        "surface-3": 5.63,
+        "surface-4": 4.78,
+        "row-champion": 5.79
+      },
+      "minContrast": 4.78,
+      "passes4_5_everywhere": true
+    }
+  ],
+  "accentFills": [
+    {
+      "token": "accent",
+      "hex": "#2563EB",
+      "fgOn": "#FFFFFF",
+      "contrast": 5.17,
+      "passes4_5": true
+    },
+    {
+      "token": "accent-hover",
+      "hex": "#2E6FE8",
+      "fgOn": "#FFFFFF",
+      "contrast": 4.61,
+      "passes4_5": true
+    },
+    {
+      "token": "accent-active",
+      "hex": "#1D4ED8",
+      "fgOn": "#FFFFFF",
+      "contrast": 6.7,
+      "passes4_5": true
+    }
+  ],
+  "tintPairs": [
+    {
+      "token": "pos-tint",
+      "bg": "#122A20",
+      "textOn": "#3DD68C",
+      "contrast": 8.13,
+      "passes4_5": true
+    },
+    {
+      "token": "neg-tint",
+      "bg": "#2B1614",
+      "textOn": "#FF7A6E",
+      "contrast": 6.73,
+      "passes4_5": true
+    },
+    {
+      "token": "warn-tint",
+      "bg": "#2B2411",
+      "textOn": "#E8B84B",
+      "contrast": 8.35,
+      "passes4_5": true
+    },
+    {
+      "token": "info-tint",
+      "bg": "#121F33",
+      "textOn": "#6BA6F0",
+      "contrast": 6.57,
+      "passes4_5": true
+    },
+    {
+      "token": "accent-tint",
+      "bg": "#12203A",
+      "textOn": "#5B9DFF",
+      "contrast": 5.96,
+      "passes4_5": true
+    }
+  ],
+  "rowStates": [
+    {
+      "token": "row-champion",
+      "hex": "#1B2331",
+      "vsSurface1": 1.16,
+      "fgOn": 13.3,
+      "posOn": 8.41,
+      "negOn": 6.2,
+      "note": "1.16:1 整行偏移 + 590 字重 + 文字标签，三件套建立冠军层级。不用左侧条纹、不用发光"
+    },
+    {
+      "token": "row-hover",
+      "hex": "#181E29",
+      "vsSurface1": 1.09,
+      "fgOn": 14.1
+    }
+  ],
+  "knownFailuresAndHandling": [
+    {
+      "case": "--muted / --meta 在 surface-4 上不足 4.5:1",
+      "numbers": {
+        "muted on s4": 4.26,
+        "meta on s4": 3.59,
+        "meta on s3": 4.23
+      },
+      "handling": "规则而非调色：muted 禁用于 surface-3 及以上嵌套层；meta 仅允许出现在 surface-0/1/2。已写入 MASTER §10 禁用组合表。"
+    },
+    {
+      "case": "--accent 做文字色不达标",
+      "numbers": {
+        "accent on s0": 3.74,
+        "accent on s1": 3.54
+      },
+      "handling": "accent 只做填充。文字/图标一律用 accent-text (#5B9DFF, 6.71 on s1)。这是最高频实现错误。"
+    },
+    {
+      "case": "--disabled 对比度低",
+      "numbers": {
+        "disabled on s1": 2.99
+      },
+      "handling": "WCAG 1.4.3 明确豁免 disabled 控件。但项目规则要求同时带 aria-disabled 语义，不靠颜色传达禁用。"
+    },
+    {
+      "case": "--line / --line-strong 未达非文本 3:1",
+      "numbers": {
+        "line on s1": 1.4,
+        "line-strong on s1": 1.93
+      },
+      "handling": "边框在本产品只做边界暗示，控件的可辨识性由「底色台阶 + 文字标签 + 44px 形状」承担（WCAG 1.4.11 允许以其他方式满足）。若需严格 3:1，把控件边框统一提为 line-strong 并用 2px。"
+    }
+  ],
+  "colorBlindnessCheck": {
+    "concern": "绿(pos) / 红(neg) 是 deuteranopia 与 protanopia 的高危对。",
+    "whyItStillWorks": "本产品三条硬规则确保颜色永不独自承担语义：(1) 金额强制带 + / − / ± 号；(2) 倒贴额外写「倒贴」二字；(3) 未知写「未知」二字。色盲用户读到的是符号与文字，颜色只是加速扫视的辅助。",
+    "additional": "pos 与 neg 在亮度上也可区分（10.30:1 vs 7.60:1），在灰度化后仍有明度差；「少赚」用中性灰而非第三色，进一步减少需要区分的色相数量。"
+  }
+}

@@ -1,0 +1,128 @@
+- generic [ref=e425]:
+  - banner [ref=e427]:
+    - generic [ref=e428]:
+      - button "返回" [ref=e429]
+      - heading "中银香港 Chill 信用卡" [level=1] [ref=e433]
+      - button "删除这张卡" [ref=e435]
+  - main [ref=e439]:
+    - generic [ref=e440]:
+      - generic [ref=e441]:
+        - heading "基本信息" [level=2] [ref=e442]
+        - generic [ref=e444]:
+          - generic [ref=e445]: 卡片名称
+          - textbox "例如 中银香港 Chill 信用卡" [ref=e447]: 中银香港 Chill 信用卡
+        - generic [ref=e449]:
+          - generic [ref=e450]: 发卡行
+          - textbox "例如 中银香港" [ref=e452]: 中银香港（Bank of China Hong Kong）
+        - generic [ref=e454]:
+          - generic [ref=e455]: 发卡地区
+          - combobox [ref=e458]:
+            - option "澳门发卡"
+            - option "香港发卡" [selected]
+        - generic [ref=e460]:
+          - generic [ref=e461]: 卡组织
+          - combobox [ref=e464]:
+            - option "维萨（Visa）" [selected]
+            - option "万事达（Mastercard）"
+            - option "银联（UnionPay）"
+            - option "美国运通（Amex）"
+            - option "吉士美（JCB）"
+        - generic [ref=e466]:
+          - generic [ref=e467]: 结算币种
+          - combobox [ref=e470]:
+            - option "澳门币（MOP）"
+            - option "港元（HKD）" [selected]
+            - option "人民币（CNY）"
+        - generic [ref=e471]:
+          - generic [ref=e472]:
+            - generic [ref=e473]: 年费
+            - generic [ref=e474]: 0.00 HKD
+          - paragraph [ref=e475]: 未查到官方明确年费金额
+      - generic [ref=e476]:
+        - heading "外币手续费" [level=2] [ref=e477]
+        - generic [ref=e478]:
+          - generic [ref=e479]:
+            - generic [ref=e480]: 费率
+            - generic [ref=e482]:
+              - textbox [ref=e483]: "1.95"
+              - generic [ref=e484]: "%"
+          - paragraph [ref=e485]: 这一项直接决定净回报算得对不对。空着不让保存。
+        - generic [ref=e487]:
+          - generic [ref=e488]: 豁免条件
+          - generic [ref=e489]: 无
+        - generic [ref=e491]:
+          - generic [ref=e492]: 来源
+          - generic [ref=e494]:
+            - link "bochk.com" [ref=e495] [cursor=pointer]:
+              - /url: https://www.bochk.com/creditcard/
+            - generic [ref=e499]: 2026-10-31 核实
+      - generic [ref=e500]:
+        - heading "各类别返现 7 类都填了" [level=2] [ref=e501]:
+          - generic [ref=e502]: 各类别返现
+          - generic [ref=e503]: 7 类都填了
+        - generic [ref=e504]:
+          - generic [ref=e505]:
+            - generic [ref=e506]:
+              - generic [ref=e507]: 餐饮
+              - generic [ref=e508]: 10.00%
+              - button "修改餐饮费率" [ref=e510]
+            - paragraph [ref=e514]: 每月上限 150.00 HKD · Chill 商户 10%（需当月实体签账 HK$1,500）；未达标 8%（需 HK$1,000）—— 属门槛型，见 thresholds
+          - generic [ref=e515]:
+            - generic [ref=e516]:
+              - generic [ref=e517]: 超市
+              - generic [ref=e518]: 0.40%
+              - button "修改超市费率" [ref=e520]
+            - paragraph [ref=e524]: 每月上限 150.00 HKD · 基本 0.4%，无上限
+          - generic [ref=e525]:
+            - generic [ref=e526]:
+              - generic [ref=e527]: 加油
+              - generic [ref=e528]: 0.40%
+              - button "修改加油费率" [ref=e530]
+            - paragraph [ref=e534]: 每月上限 150.00 HKD
+          - generic [ref=e535]:
+            - generic [ref=e536]:
+              - generic [ref=e537]: 机票
+              - generic [ref=e538]: 5.00%
+              - button "修改机票费率" [ref=e540]
+            - paragraph [ref=e544]: 每月上限 150.00 HKD · 海外签账 5%（需月实体签账 HK$1,500；未达标 4%）
+          - generic [ref=e545]:
+            - generic [ref=e546]:
+              - generic [ref=e547]: 酒店
+              - generic [ref=e548]: 5.00%
+              - button "修改酒店费率" [ref=e550]
+            - paragraph [ref=e554]: 每月上限 150.00 HKD · 海外签账 5%
+          - generic [ref=e555]:
+            - generic [ref=e556]:
+              - generic [ref=e557]: 网购
+              - generic [ref=e558]: 5.00%
+              - button "修改网购费率" [ref=e560]
+            - paragraph [ref=e564]: 每月上限 150.00 HKD · 网上签账 5%
+          - generic [ref=e565]:
+            - generic [ref=e566]:
+              - generic [ref=e567]: 其他
+              - generic [ref=e568]: 0.40%
+              - button "修改其他费率" [ref=e570]
+            - paragraph [ref=e574]: 每月上限 150.00 HKD · 基本 0.4% 无上限
+      - generic [ref=e575]:
+        - heading "上限与已用" [level=2] [ref=e576]
+        - generic [ref=e577]:
+          - generic [ref=e578]:
+            - generic [ref=e579]: 每月
+            - generic [ref=e580]: 0.00 / 150.00 HKD · 0.00%
+          - paragraph [ref=e582]: 还剩 150.00 HKD
+      - generic [ref=e583]:
+        - heading "数据来源" [level=2] [ref=e584]
+        - list [ref=e585]:
+          - listitem [ref=e586]:
+            - generic [ref=e587]:
+              - link "www.bochk.com/creditcard/" [ref=e589] [cursor=pointer]:
+                - /url: https://www.bochk.com/creditcard/
+              - generic [ref=e593]: 2026-10-31 核实
+            - paragraph [ref=e594]: Chill 商户 10%/8%（需月实体签账 HK$1,500/1,000）；海外及网上 5%/4%；额外回赠月上限 HK$150；基本 0.4% 无上限；推广期至 2026-12-31
+      - generic [ref=e595]:
+        - heading "数据可信度" [level=2] [ref=e596]
+        - generic [ref=e597]:
+          - generic [ref=e598]: 已核实
+          - generic [ref=e599]: 上次核对 2026-10-31
+        - paragraph [ref=e600]: 高回赠 + 低上限的典型陷阱：名义 10%，但额外回赠月封顶仅 HK$150，刷 HK$1,500 左右就到顶。若引擎忽略 cap 会严重高估。另：推广期至 2026-12-31，之后费率可能回落，需时效警示。
+  - button "已保存" [disabled] [ref=e604]

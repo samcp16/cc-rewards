@@ -1,0 +1,63 @@
+- generic [ref=f4e1]:
+  - generic [ref=f4e3]:
+    - banner [ref=f4e5]:
+      - heading "我的卡" [level=1] [ref=f4e8]
+    - main [ref=f4e9]:
+      - generic [ref=f4e10]:
+        - tablist "卡库视图" [ref=f4e11]:
+          - tab "卡片" [ref=f4e12]
+          - tab "额度" [selected] [ref=f4e13]
+        - button "中银香港 Chill 信用卡 33.33% 本月已用 50.00，上限 150.00 HKD 本月已用 50.00 / 150.00 HKD 还剩 100.00" [active] [ref=f4e116]:
+          - generic [ref=f4e34]:
+            - generic [ref=f4e35]: 中银香港 Chill 信用卡
+            - generic [ref=f4e36]: 33.33%
+          - img "本月已用 50.00，上限 150.00 HKD" [ref=f4e117]
+          - generic [ref=f4e38]:
+            - generic [ref=f4e39]: 本月已用 50.00 / 150.00 HKD
+            - generic [ref=f4e40]: 还剩 100.00
+        - button "AEON WAKUWAKU 信用卡 0.00% 本月已用 0.00，上限 300.00 HKD 本月已用 0.00 / 300.00 HKD 还剩 300.00" [ref=f4e17]:
+          - generic [ref=f4e18]:
+            - generic [ref=f4e19]: AEON WAKUWAKU 信用卡
+            - generic [ref=f4e20]: 0.00%
+          - img "本月已用 0.00，上限 300.00 HKD" [ref=f4e21]
+          - generic [ref=f4e22]:
+            - generic [ref=f4e23]: 本月已用 0.00 / 300.00 HKD
+            - generic [ref=f4e24]: 还剩 300.00
+        - button "BCM World Mastercard 0.00% 本月已用 0.00，上限 400.00 MOP 本月已用 0.00 / 400.00 MOP 还剩 400.00" [ref=f4e25]:
+          - generic [ref=f4e26]:
+            - generic [ref=f4e27]: BCM World Mastercard
+            - generic [ref=f4e28]: 0.00%
+          - img "本月已用 0.00，上限 400.00 MOP" [ref=f4e29]
+          - generic [ref=f4e30]:
+            - generic [ref=f4e31]: 本月已用 0.00 / 400.00 MOP
+            - generic [ref=f4e32]: 还剩 400.00
+        - button "EarnMORE 银联钻石卡 0.00% 本月已用 0.00，上限 3000.00 HKD 本月已用 0.00 / 3000.00 HKD 还剩 3000.00" [ref=f4e41]:
+          - generic [ref=f4e42]:
+            - generic [ref=f4e43]: EarnMORE 银联钻石卡
+            - generic [ref=f4e44]: 0.00%
+          - img "本月已用 0.00，上限 3000.00 HKD" [ref=f4e45]
+          - generic [ref=f4e46]:
+            - generic [ref=f4e47]: 本月已用 0.00 / 3000.00 HKD
+            - generic [ref=f4e48]: 还剩 3000.00
+        - button "大丰银联双币钻石卡（大湾区卡） 0.00% 本月已用 0.00，上限 100.00 MOP 本月已用 0.00 / 100.00 MOP 还剩 100.00" [ref=f4e49]:
+          - generic [ref=f4e50]:
+            - generic [ref=f4e51]: 大丰银联双币钻石卡（大湾区卡）
+            - generic [ref=f4e52]: 0.00%
+          - img "本月已用 0.00，上限 100.00 MOP" [ref=f4e53]
+          - generic [ref=f4e54]:
+            - generic [ref=f4e55]: 本月已用 0.00 / 100.00 MOP
+            - generic [ref=f4e56]: 还剩 100.00
+      - button "添加卡片" [ref=f4e57]
+    - navigation "主导航" [ref=f4e59]:
+      - list [ref=f4e60]:
+        - listitem [ref=f4e61]:
+          - link "算一笔" [ref=f4e62] [cursor=pointer]:
+            - /url: "#/"
+        - listitem [ref=f4e66]:
+          - link "我的卡" [ref=f4e67] [cursor=pointer]:
+            - /url: "#/cards"
+        - listitem [ref=f4e71]:
+          - link "设置" [ref=f4e72] [cursor=pointer]:
+            - /url: "#/settings"
+  - status:
+    - generic: 已记一笔，额度已更新

@@ -1,0 +1,77 @@
+- generic [ref=e160]:
+  - banner [ref=e162]:
+    - heading "设置" [level=1] [ref=e165]
+  - main [ref=e166]:
+    - generic [ref=e167]:
+      - generic [ref=e168]:
+        - heading "你的数据不离开这台设备" [level=2] [ref=e172]
+        - list [ref=e173]:
+          - listitem [ref=e174]:
+            - generic [aria-hidden] [ref=e175]: ·
+            - generic [ref=e176]: 卡库和账本只存在本机浏览器里，没有任何上传
+          - listitem [ref=e177]:
+            - generic [aria-hidden] [ref=e178]: ·
+            - generic [ref=e179]: 不存卡号、有效期、CVV
+          - listitem [ref=e180]:
+            - generic [aria-hidden] [ref=e181]: ·
+            - generic [ref=e182]: 没有账号，也没有后端服务器
+          - listitem [ref=e183]:
+            - generic [aria-hidden] [ref=e184]: ·
+            - generic [ref=e185]: 唯一会丢数据的情况：清浏览器数据，或 iOS 超过 7 天没打开（安装到主屏幕可以避免）
+        - generic [ref=e186]:
+          - generic [ref=e187]: 还没备份过
+          - button "立即导出备份" [ref=e188]
+      - generic [ref=e189]:
+        - heading "安装到主屏幕" [level=2] [ref=e190]
+        - button "安装到主屏幕 装好后离线也能算，数据不受清理影响" [ref=e192]:
+          - generic [ref=e196]:
+            - generic [ref=e197]: 安装到主屏幕
+            - generic [ref=e198]: 装好后离线也能算，数据不受清理影响
+      - generic [ref=e201]:
+        - heading "备份" [level=2] [ref=e202]
+        - generic [ref=e203]:
+          - button "导出备份 把卡库和账本存成一个 JSON 文件" [ref=e204]:
+            - generic [ref=e205]:
+              - generic [ref=e206]: 导出备份
+              - generic [ref=e207]: 把卡库和账本存成一个 JSON 文件
+          - button "导入备份 从 JSON 文件恢复" [ref=e210]:
+            - generic [ref=e211]:
+              - generic [ref=e212]: 导入备份
+              - generic [ref=e213]: 从 JSON 文件恢复
+          - generic [ref=e216]:
+            - generic [ref=e217]: 上次导出
+            - generic [ref=e219]: 还没导出过
+      - generic [ref=e220]:
+        - heading "汇率与积分" [level=2] [ref=e221]
+        - generic [ref=e222]:
+          - button "汇率参考 按参考汇率 HKD 1 = MOP 1.03 折算" [ref=e223]:
+            - generic [ref=e224]:
+              - generic [ref=e225]: 汇率参考
+              - generic [ref=e226]: 按参考汇率 HKD 1 = MOP 1.03 折算
+          - generic [ref=e229]:
+            - generic [ref=e230]:
+              - generic [ref=e231]: 汇率是否调整过
+              - generic [ref=e232]: 默认 HKD 1 = MOP 1.03
+            - generic [ref=e233]: 默认值
+      - generic [ref=e234]:
+        - heading "关于" [level=2] [ref=e235]
+        - generic [ref=e236]:
+          - generic [ref=e237]:
+            - generic [ref=e238]: 版本
+            - generic [ref=e240]: 1.0.0
+          - generic [ref=e241]:
+            - generic [ref=e242]: 数据核实批次
+            - generic [ref=e244]: —
+          - button "免责声明" [ref=e245]
+      - paragraph [ref=e250]: 本产品的数据全都存在这台设备上，没有任何上传。
+  - navigation "主导航" [ref=e251]:
+    - list [ref=e252]:
+      - listitem [ref=e253]:
+        - link "算一笔" [ref=e254] [cursor=pointer]:
+          - /url: "#/"
+      - listitem [ref=e258]:
+        - link "我的卡" [ref=e259] [cursor=pointer]:
+          - /url: "#/cards"
+      - listitem [ref=e263]:
+        - link "设置" [ref=e264] [cursor=pointer]:
+          - /url: "#/settings"

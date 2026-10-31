@@ -1,0 +1,3467 @@
+[
+  {
+    "cardId": "bnu-world-mc",
+    "issuer": "大西洋银行（Banco Nacional Ultramarino, BNU）",
+    "issuerRegion": "MO",
+    "cardName": "BNU World Mastercard",
+    "network": "mastercard",
+    "cardCurrency": "MOP",
+    "annualFee": {
+      "amount": 0,
+      "currency": "MOP",
+      "waiverNote": "官方产品页未列年费金额，仅以「免年费」表述；如后续收费以银行公告为准"
+    },
+    "fxFee": {
+      "rate": 0.019,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "MOP",
+      "waivedWhen": {
+        "settlementCurrencyIn": [
+          "MOP"
+        ]
+      },
+      "source": {
+        "url": "https://bnu.com.mo/storage/documents/PricingList/BNU_PricingList_CN.pdf",
+        "verifiedAt": "2026-10-31",
+        "note": "官方收费表 2026 年 10 月版第 18 页：Visa / 萬事達卡 / 美國運通金卡之跨境交易手續費為 1.90%；銀聯卡豁免。此为官方一手来源，优先于第三方汇总站的 1.75% 旧值。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "cashback",
+        "note": "本地零售及餐饮以基本 0.5% 计；官方未单列餐饮加码",
+        "rates": {
+          "local": 0.005
+        }
+      },
+      "grocery": {
+        "kind": "cashback",
+        "note": "按本地基本 0.5%",
+        "rates": {
+          "local": 0.005
+        }
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "cashback",
+        "note": "海外及网上签账 1.2%；机票属海外/网上商户时适用",
+        "rates": {
+          "local": 0.005,
+          "foreign": 0.012
+        }
+      },
+      "hotel": {
+        "kind": "cashback",
+        "note": "海外及网上签账 1.2%",
+        "rates": {
+          "local": 0.005,
+          "foreign": 0.012
+        }
+      },
+      "online": {
+        "kind": "cashback",
+        "note": "网上签账 1.2%",
+        "rates": {
+          "local": 0.005,
+          "foreign": 0.012
+        }
+      },
+      "other": {
+        "kind": "cashback",
+        "note": "本地零售 0.5%",
+        "rates": {
+          "local": 0.005
+        }
+      }
+    },
+    "caps": [],
+    "capsNote": "官方表述为「回赠无上限」",
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://bnu.com.mo/storage/documents/PricingList/BNU_PricingList_CN.pdf",
+        "verifiedAt": "2026-10-31",
+        "note": "跨境交易手续费 1.90%（Visa/MC/Amex 金卡）；银联卡豁免"
+      },
+      {
+        "url": "https://www.smartcardmacao.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "2026-10-26 更新版：World Mastercard 本地零售 0.5%、海外及网上 1.2%、回赠无上限"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "high",
+    "notes": "本地与海外费率差异明确，来源为官方收费表 + 汇总站交叉验证。fuel 类别无据，标 unknown。 fuel 类别确实无据可查（官方未单列燃油回赠），该缺口已是最小化：本地 0.5% / 海外及网上 1.2% 两档均来自官方收费表与汇总站交叉验证，其余 6 类齐全，故整卡仍判 high。"
+  },
+  {
+    "cardId": "bnu-vs-signature",
+    "issuer": "大西洋银行（Banco Nacional Ultramarino, BNU）",
+    "issuerRegion": "MO",
+    "cardName": "BNU Visa Signature",
+    "network": "visa",
+    "cardCurrency": "MOP",
+    "annualFee": {
+      "amount": null,
+      "currency": "MOP",
+      "waiverNote": "未查到官方明确年费金额，不填猜测值"
+    },
+    "fxFee": {
+      "rate": 0.019,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "MOP",
+      "waivedWhen": {
+        "settlementCurrencyIn": [
+          "MOP"
+        ]
+      },
+      "source": {
+        "url": "https://bnu.com.mo/storage/documents/PricingList/BNU_PricingList_CN.pdf",
+        "verifiedAt": "2026-10-31",
+        "note": "官方收费表第 18 页：跨境交易手續費 1.90%（Visa）"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "grocery": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "hotel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://bnu.com.mo/storage/documents/PricingList/BNU_PricingList_CN.pdf",
+        "verifiedAt": "2026-10-31",
+        "note": "仅确认跨境手续费 1.90%，未找到分品类回赠结构"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "unknown",
+    "notes": "仅手续费部分可溯源，返现结构未查到官方来源，全部类别留 null。UI 必须显示「待确认」，不得按 0 计算。"
+  },
+  {
+    "cardId": "bnu-unionpay",
+    "issuer": "大西洋银行（Banco Nacional Ultramarino, BNU）",
+    "issuerRegion": "MO",
+    "cardName": "BNU 银联信用卡",
+    "network": "unionpay",
+    "cardCurrency": "MOP",
+    "annualFee": {
+      "amount": null,
+      "currency": "MOP",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "MOP",
+      "waivedWhen": {
+        "settlementCurrencyIn": [
+          "MOP",
+          "HKD",
+          "CNY"
+        ]
+      },
+      "source": {
+        "url": "https://bnu.com.mo/storage/documents/PricingList/BNU_PricingList_CN.pdf",
+        "verifiedAt": "2026-10-31",
+        "note": "官方收费表第 18 页明确：銀聯卡跨境交易手續費「豁免」。此为澳门发卡银联卡在港澳及内地场景的核心优势，可直接采用。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "grocery": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "hotel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://bnu.com.mo/storage/documents/PricingList/BNU_PricingList_CN.pdf",
+        "verifiedAt": "2026-10-31",
+        "note": "银联卡跨境手续费豁免"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "fxFee 为 high confidence（官方明文豁免），但返现结构 unknown。整体 confidence 取较低值 medium 以提示返现侧不可用。"
+  },
+  {
+    "cardId": "bocmo-allcurrency",
+    "issuer": "中国银行澳门分行（BOC Macau）",
+    "issuerRegion": "MO",
+    "cardName": "中银全币种信用卡",
+    "network": "unionpay",
+    "cardCurrency": "MOP",
+    "annualFee": {
+      "amount": 2000,
+      "currency": "MOP",
+      "waiverNote": "主卡 MOP 2,000 / 附属卡 MOP 1,000（财富卡系列）；时尚卡系列为 MOP 500 / 250。每年签账 6 次免次年。"
+    },
+    "fxFee": {
+      "rate": 0,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "MOP",
+      "waivedWhen": {
+        "settlementCurrencyIn": [
+          "MOP",
+          "HKD",
+          "CNY"
+        ],
+        "validUntil": "2026-12-31"
+      },
+      "source": {
+        "url": "https://www.bocmacau.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "官方表述：免收 1.95% 跨境交易手续费，优惠期至 2026-12-31。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "grocery": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "hotel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.bocmacau.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "免收 1.95% 跨境交易手续费，优惠期至 2026-12-31"
+      },
+      {
+        "url": "https://www.bankofchina.com/mo/",
+        "verifiedAt": "2026-10-31",
+        "note": "银行卡各项服务收费表"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "时效风险：0% 手续费为优惠期政策，2026-12-31 后可能恢复 1.95%。engine 需在 verifiedAt 起 90 天内仍使用，超过或临近 validUntil 时必须弹 fx_fee_exempt_expired 类警示。"
+  },
+  {
+    "cardId": "bocmo-visa-biz",
+    "issuer": "中国银行澳门分行（BOC Macau）",
+    "issuerRegion": "MO",
+    "cardName": "中银 VISA 商务卡",
+    "network": "visa",
+    "cardCurrency": "MOP",
+    "annualFee": {
+      "amount": null,
+      "currency": "MOP",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0.0195,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "MOP",
+      "source": {
+        "url": "https://www.bocmacau.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "官方明确：中银 VISA 商务卡不适用跨境交易手续费豁免，仍收 1.95%。这是中银澳门全系中唯一的例外，必须单列建模，否则引擎会把商务卡错算成 0%。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "grocery": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "hotel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.bocmacau.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "VISA 商务卡除外，收 1.95%"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "该卡的存在意义就是作为「反例」被收录——防止引擎对所有中银澳门卡一律套用 0%。返现结构未查到，留 null。"
+  },
+  {
+    "cardId": "bocmo-taobao",
+    "issuer": "中国银行澳门分行（BOC Macau）",
+    "issuerRegion": "MO",
+    "cardName": "中银淘宝信用卡",
+    "network": "unionpay",
+    "cardCurrency": "MOP",
+    "annualFee": {
+      "amount": null,
+      "currency": "MOP",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "MOP",
+      "waivedWhen": {
+        "settlementCurrencyIn": [
+          "MOP",
+          "HKD",
+          "CNY"
+        ],
+        "validUntil": "2026-12-31"
+      },
+      "source": {
+        "url": "https://www.bocmacau.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "同属中银银联全币种体系，适用跨境交易手续费豁免（优惠期至 2026-12-31）"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "grocery": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "hotel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.bocmacau.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "银联全币种跨境手续费豁免"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "low",
+    "notes": "卡名来自用户侧常见称呼，官方产品命名与淘宝联名权益（如淘宝/天猫额外回赠）未取得官方页面佐证，故返现全 unknown、confidence 降为 low。建议用户自查后再启用。"
+  },
+  {
+    "cardId": "icbcmo-standard",
+    "issuer": "工银澳门（ICBC Macau）",
+    "issuerRegion": "MO",
+    "cardName": "工银澳门信用卡（积分型）",
+    "network": "visa",
+    "cardCurrency": "MOP",
+    "annualFee": {
+      "amount": null,
+      "currency": "MOP",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0.0195,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "MOP",
+      "source": {
+        "url": "https://www.smartcardmacao.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "smartcardmacao 手续费列表：工银澳门 1.95%。仅第三方汇总站来源，未取得官方收费表 PDF，故不标 high。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "icbc-mo-points",
+        "note": "工银澳门无分品类加码，全类别统一每签账 MOP 1 = 1 分"
+      },
+      "grocery": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "icbc-mo-points"
+      },
+      "fuel": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "icbc-mo-points"
+      },
+      "flight": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "icbc-mo-points"
+      },
+      "hotel": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "icbc-mo-points"
+      },
+      "online": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "icbc-mo-points"
+      },
+      "other": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "icbc-mo-points"
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": {
+      "programId": "icbc-mo-points",
+      "valuePerPoint": 0.005,
+      "currency": "MOP",
+      "derivation": "每签账 MOP 1 得 1 分；200 分可当 MOP 1 使用 → 每分价值 = 1/200 = MOP 0.005，即等效 0.5% 回赠",
+      "source": {
+        "url": "https://www.icbc.com.mo/sc/page/721852453447565313.html",
+        "verifiedAt": "2026-10-31",
+        "note": "官方积分大奖赏页：每签账消费澳门币 1 元得 1 分，每 200 积分当澳门币 1 元使用"
+      }
+    },
+    "source": [
+      {
+        "url": "https://www.icbc.com.mo/sc/page/721852453447565313.html",
+        "verifiedAt": "2026-10-31",
+        "note": "积分规则：MOP1=1分，200分=MOP1"
+      },
+      {
+        "url": "https://www.smartcardmacao.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "跨境手续费 1.95%"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "工银澳门只有统一的积分体系，没有结构性分品类返现。此处如实记录为积分轨道、全类别 1 倍，而不是编造类别差异。等效现金价值 0.5%，是港澳卡库中偏低的一档，推荐时多数场景会被淘汰。"
+  },
+  {
+    "cardId": "tai-fung-unionpay-dual",
+    "issuer": "大丰银行（Tai Fung Bank）",
+    "issuerRegion": "MO",
+    "cardName": "大丰银联双币钻石卡（大湾区卡）",
+    "network": "unionpay",
+    "cardCurrency": "MOP",
+    "annualFee": {
+      "amount": null,
+      "currency": "MOP",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "MOP",
+      "waivedWhen": {
+        "settlementCurrencyIn": [
+          "MOP",
+          "HKD",
+          "CNY"
+        ]
+      },
+      "source": {
+        "url": "https://www.taifungbank.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "官方收费表：银联卡跨境交易手续费 0%；Visa 卡 1.95%。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "cashback",
+        "note": "5% 仅限经云闪付 / 丰付宝 / 微信 / 支付宝渠道之交易（channelScope 声明）；实体刷卡费率官方未公开，标 unknown 不参与排序",
+        "rates": {
+          "local": 0.05
+        },
+        "channelScope": [
+          "unionpay_qr",
+          "wechat",
+          "alipay"
+        ]
+      },
+      "grocery": {
+        "kind": "cashback",
+        "note": "5% 仅限经云闪付 / 丰付宝 / 微信 / 支付宝渠道之交易（channelScope 声明）；实体刷卡费率官方未公开，标 unknown 不参与排序",
+        "rates": {
+          "local": 0.05
+        },
+        "channelScope": [
+          "unionpay_qr",
+          "wechat",
+          "alipay"
+        ]
+      },
+      "fuel": {
+        "kind": "cashback",
+        "note": "5% 仅限经云闪付 / 丰付宝 / 微信 / 支付宝渠道之交易（channelScope 声明）；实体刷卡费率官方未公开，标 unknown 不参与排序",
+        "rates": {
+          "local": 0.05
+        },
+        "channelScope": [
+          "unionpay_qr",
+          "wechat",
+          "alipay"
+        ]
+      },
+      "flight": {
+        "kind": "cashback",
+        "note": "5% 仅限经云闪付 / 丰付宝 / 微信 / 支付宝渠道之交易（channelScope 声明）；实体刷卡费率官方未公开，标 unknown 不参与排序",
+        "rates": {
+          "local": 0.05
+        },
+        "channelScope": [
+          "unionpay_qr",
+          "wechat",
+          "alipay"
+        ]
+      },
+      "hotel": {
+        "kind": "cashback",
+        "note": "5% 仅限经云闪付 / 丰付宝 / 微信 / 支付宝渠道之交易（channelScope 声明）；实体刷卡费率官方未公开，标 unknown 不参与排序",
+        "rates": {
+          "local": 0.05
+        },
+        "channelScope": [
+          "unionpay_qr",
+          "wechat",
+          "alipay"
+        ]
+      },
+      "online": {
+        "kind": "cashback",
+        "note": "5% 仅限经云闪付 / 丰付宝 / 微信 / 支付宝渠道之交易（channelScope 声明）；实体刷卡费率官方未公开，标 unknown 不参与排序",
+        "rates": {
+          "local": 0.05
+        },
+        "channelScope": [
+          "unionpay_qr",
+          "wechat",
+          "alipay"
+        ]
+      },
+      "other": {
+        "kind": "cashback",
+        "note": "5% 仅限经云闪付 / 丰付宝 / 微信 / 支付宝渠道之交易（channelScope 声明）；实体刷卡费率官方未公开，标 unknown 不参与排序",
+        "rates": {
+          "local": 0.05
+        },
+        "channelScope": [
+          "unionpay_qr",
+          "wechat",
+          "alipay"
+        ]
+      }
+    },
+    "caps": [
+      {
+        "id": "tai-fung-unionpay-dual:mobile-pay",
+        "categories": "all",
+        "limitAmount": 100,
+        "limitCurrency": "MOP",
+        "period": "month",
+        "overLimitFallback": {
+          "kind": "cashback",
+          "exclusivityGroup": "base",
+          "capIds": [],
+          "rates": {
+            "local": 0
+          }
+        },
+        "basis": "value"
+      }
+    ],
+    "capsNote": "官方原文：每月累计满 MOP 2,000 可获 MOP 100。即为「月返现上限 MOP 100，需月累计满 MOP 2,000 触发」，主卡与附属卡分开计算。注意这不是 5% 无上限——上限 MOP 100 对应 2,000 元消费，恰好等于 5%，超出部分按 0 计。",
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.taifungbank.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "银联双币钻石卡：云闪付/丰付宝/微信/支付宝交易 5% 现金回赠，每月累计满 MOP2,000 获 MOP100，主附卡分开计算"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "high",
+    "notes": "这是澳门发卡里「移动支付渠道 + 0% 跨境手续费」组合最优的一张，但必须让用户知道三件事：1) 5% 仅限经云闪付 / 丰付宝 / 微信 / 支付宝渠道之交易，实体刷卡与 Apple Pay 不适用（数据用 channelScope 声明，非适用渠道整卡进 unranked，不给数字）；2) 实体刷卡费率官方未核实——官方只公开了移动支付档，任何具体数字都是编造，故不填；3) 月返现上限仅 MOP 100，刷满 MOP 2,000 就到顶。如果把上限忽略，会严重高估。"
+  },
+  {
+    "cardId": "tai-fung-visa",
+    "issuer": "大丰银行（Tai Fung Bank）",
+    "issuerRegion": "MO",
+    "cardName": "大丰银行 Visa 信用卡",
+    "network": "visa",
+    "cardCurrency": "MOP",
+    "annualFee": {
+      "amount": null,
+      "currency": "MOP",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0.0195,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "MOP",
+      "source": {
+        "url": "https://www.taifungbank.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "官方收费表：Visa 卡跨境交易手续费 1.95%"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "grocery": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "hotel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.taifungbank.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "Visa 跨境手续费 1.95%"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "unknown",
+    "notes": "仅手续费可溯源。返现结构未找到官方页面，全类别 null。"
+  },
+  {
+    "cardId": "bcm-world-mc",
+    "issuer": "澳门商业银行（Banco Comercial de Macau, BCM）",
+    "issuerRegion": "MO",
+    "cardName": "BCM World Mastercard",
+    "network": "mastercard",
+    "cardCurrency": "MOP",
+    "annualFee": {
+      "amount": null,
+      "currency": "MOP",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0.015,
+      "splitRates": {
+        "foreign": 0.005,
+        "crossBorder": 0.01,
+        "crossCurrencyComponent": 0.005
+      },
+      "fixedFee": 0,
+      "fixedFeeCurrency": "MOP",
+      "source": {
+        "url": "https://www.smartcardmacao.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "官方收费表原文：外币交易 0.5%、跨域交易 1.0%、最多合共收取 1.5%（第三列为封顶，不是两项必收）。按 ADR-012 正交事实建模：跨境+换币 = crossBorder 1% + crossCurrencyComponent 0.5%（恰为封顶）；仅换币 = 0.5%；仅跨境 = 1%。原 waivedWhen（settlementCurrencyIn: MOP）已删除：本币结算两个事实皆否，天然为 0。rate 1.5% 仅作两项叠加的上限兜底。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "cashback",
+        "note": "本地餐饮 2X 积分，折合 1%（相对基本 0.5% 翻倍）",
+        "rates": {
+          "local": 0.01
+        }
+      },
+      "grocery": {
+        "kind": "cashback",
+        "note": "按本地基本 0.5%",
+        "rates": {
+          "local": 0.005
+        }
+      },
+      "fuel": {
+        "kind": "cashback",
+        "note": "按本地基本 0.5%",
+        "rates": {
+          "local": 0.005
+        }
+      },
+      "flight": {
+        "kind": "cashback",
+        "note": "海外及网上 4X 积分，折合 2%",
+        "rates": {
+          "local": 0.02
+        }
+      },
+      "hotel": {
+        "kind": "cashback",
+        "note": "海外及网上 4X，折合 2%",
+        "rates": {
+          "local": 0.02
+        }
+      },
+      "online": {
+        "kind": "cashback",
+        "note": "网上 4X，折合 2%",
+        "rates": {
+          "local": 0.02
+        }
+      },
+      "other": {
+        "kind": "cashback",
+        "note": "本地基本 0.5%",
+        "rates": {
+          "local": 0.005
+        }
+      }
+    },
+    "caps": [
+      {
+        "id": "bcm-world-mc:extra-rebate",
+        "categories": "all",
+        "limitAmount": 400,
+        "limitCurrency": "MOP",
+        "period": "month",
+        "overLimitFallback": {
+          "kind": "cashback",
+          "exclusivityGroup": "base",
+          "capIds": [],
+          "rates": {
+            "local": 0.005
+          }
+        },
+        "basis": "value"
+      }
+    ],
+    "capsNote": "官方：每月额外回赠上限 MOP 400（不含基本 0.5%）。即 0.5% 基本回赠无上限，加码部分（餐饮 2X、海外/网上 4X）合计月封顶 MOP 400。",
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.smartcardmacao.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "BCM World Mastercard 基本 0.5%，本地餐饮 2X、海外及网上 4X，每月额外回赠上限 MOP 400"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "分品类回赠来自第三方汇总站，未取得 BCM 官方 PDF 原件，故 confidence 定 medium。fxFee 已按官方收费表拆为 splitRates（跨境 1% / 跨货币 0.5%，两项可叠加），此前只存合计上限 1.5% 会让外币签账成本被高估 1 个百分点、拉低本卡排序。"
+  },
+  {
+    "cardId": "bcm-dual-currency",
+    "issuer": "澳门商业银行（Banco Comercial de Macau, BCM）",
+    "issuerRegion": "MO",
+    "cardName": "BCM 银联双币信用卡",
+    "network": "unionpay",
+    "cardCurrency": "MOP",
+    "annualFee": {
+      "amount": null,
+      "currency": "MOP",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "MOP",
+      "waivedWhen": {
+        "settlementCurrencyIn": [
+          "MOP",
+          "HKD",
+          "CNY"
+        ]
+      },
+      "source": {
+        "url": "https://www.smartcardmacao.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "澳门发卡银联卡普遍豁免跨境手续费（与大西洋银行官方收费表一致口径）"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "grocery": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "hotel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.smartcardmacao.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "银联双币卡跨境手续费豁免"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "low",
+    "notes": "手续费口径基于银联双币共性，非 BCM 官方逐卡确认。返现结构 unknown。"
+  },
+  {
+    "cardId": "mib-gba-platinum",
+    "issuer": "澳门国际银行（Macau Chinese Bank / MIB）",
+    "issuerRegion": "MO",
+    "cardName": "澳门国际银行大湾区白金卡",
+    "network": "unionpay",
+    "cardCurrency": "MOP",
+    "annualFee": {
+      "amount": null,
+      "currency": "MOP",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "MOP",
+      "waivedWhen": {
+        "settlementCurrencyIn": [
+          "MOP",
+          "HKD",
+          "CNY"
+        ]
+      },
+      "source": {
+        "url": "https://www.mib.com.mo/",
+        "verifiedAt": "2026-10-31",
+        "note": "官方：大湾区白金卡、银联三币钻石卡「一卡三币（MOP/HKD/RMB），豁免海外跨境手续费」"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "grocery": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "hotel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.mib.com.mo/",
+        "verifiedAt": "2026-10-31",
+        "note": "一卡三币，豁免海外跨境手续费"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "「一卡三币 + 豁免跨境手续费」是澳门发卡在澳门/内地/香港三地场景的核心卖点，官方明确。返现结构未取得。"
+  },
+  {
+    "cardId": "mib-unionpay-triple",
+    "issuer": "澳门国际银行（Macau Chinese Bank / MIB）",
+    "issuerRegion": "MO",
+    "cardName": "澳门国际银行银联三币钻石卡",
+    "network": "unionpay",
+    "cardCurrency": "MOP",
+    "annualFee": {
+      "amount": null,
+      "currency": "MOP",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "MOP",
+      "waivedWhen": {
+        "settlementCurrencyIn": [
+          "MOP",
+          "HKD",
+          "CNY"
+        ]
+      },
+      "source": {
+        "url": "https://www.mib.com.mo/",
+        "verifiedAt": "2026-10-31",
+        "note": "官方：一卡三币（MOP/HKD/RMB），豁免海外跨境手续费"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "grocery": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "hotel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.mib.com.mo/",
+        "verifiedAt": "2026-10-31",
+        "note": "一卡三币，豁免海外跨境手续费"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "与上一张同属官方「豁免海外跨境手续费」名单，手续费用官方原文，返现 unknown。"
+  },
+  {
+    "cardId": "mib-hkd-visa-platinum",
+    "issuer": "澳门国际银行（Macau Chinese Bank / MIB）",
+    "issuerRegion": "MO",
+    "cardName": "澳门国际银行港币 Visa 白金卡",
+    "network": "visa",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": null,
+      "currency": "HKD",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0.0175,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "waivedWhen": {
+        "settlementCurrencyIn": [
+          "HKD"
+        ]
+      },
+      "source": {
+        "url": "https://www.mib.com.mo/",
+        "verifiedAt": "2026-10-31",
+        "note": "官方：以港币结算之签账豁免海外签账手续费。反向理解：非港币结算仍收海外签账手续费，第三方汇总站列为 1.75%。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "grocery": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "hotel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.mib.com.mo/",
+        "verifiedAt": "2026-10-31",
+        "note": "港币结算豁免海外签账手续费"
+      },
+      {
+        "url": "https://www.smartcardmacao.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "国际银行 Visa 海外手续费 1.75%"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "这张卡是「结算币种决定费率」的最佳教学案例：HKD 结算 0%，MOP 结算 1.75%。引擎必须依赖 settlementCurrency 而非发卡地来判定，否则会算错。"
+  },
+  {
+    "cardId": "ocbc-mo-premier",
+    "issuer": "华侨永亨银行（OCBC Macau）",
+    "issuerRegion": "MO",
+    "cardName": "华侨永亨宏富理财信用卡",
+    "network": "visa",
+    "cardCurrency": "MOP",
+    "annualFee": {
+      "amount": null,
+      "currency": "MOP",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "MOP",
+      "source": {
+        "url": "https://www.ocbc.com.mo/",
+        "verifiedAt": "2026-10-31",
+        "note": "官方：宏富理财信用卡「豁免海外签账手续费」"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "cashback",
+        "note": "周末 3 倍现金回赠（限定周末）",
+        "rates": {
+          "local": 0.03
+        }
+      },
+      "grocery": {
+        "kind": "cashback",
+        "note": "周末 3 倍（限定周末）",
+        "rates": {
+          "local": 0.03
+        }
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "hotel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "cashback",
+        "note": "基本回赠口径由「3 倍」反推为 1%（1% × 3 = 3%）。此为推算值，非官方基数声明，需用户自查。",
+        "rates": {
+          "local": 0.01
+        }
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.ocbc.com.mo/",
+        "verifiedAt": "2026-10-31",
+        "note": "豁免海外签账手续费；周末 3 倍现金回赠"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "low",
+    "notes": "官方只说「3 倍」，未直接写「基本 1%」，other 的 1% 是反推值，已在 note 中显式标注为推算。若 UI 要展示绝对数值，建议标注「推算」。周末限定也无法用当前 categories 字段表达（缺 weekday 维度），建议架构侧评估是否需要 dayOfWeek 条件。"
+  },
+  {
+    "cardId": "ocbc-mo-unionpay",
+    "issuer": "华侨永亨银行（OCBC Macau）",
+    "issuerRegion": "MO",
+    "cardName": "华侨永亨银联信用卡",
+    "network": "unionpay",
+    "cardCurrency": "MOP",
+    "annualFee": {
+      "amount": null,
+      "currency": "MOP",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "MOP",
+      "waivedWhen": {
+        "settlementCurrencyIn": [
+          "MOP",
+          "HKD",
+          "CNY"
+        ]
+      },
+      "source": {
+        "url": "https://www.ocbc.com.mo/",
+        "verifiedAt": "2026-10-31",
+        "note": "官方：豁免海外签账手续费（银联卡）"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "grocery": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "hotel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.ocbc.com.mo/",
+        "verifiedAt": "2026-10-31",
+        "note": "豁免海外签账手续费"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "手续费 0% 有官方表述；返现 unknown。"
+  },
+  {
+    "cardId": "wlbank-visa-gold",
+    "issuer": "立桥银行（Well Link Bank）",
+    "issuerRegion": "MO",
+    "cardName": "立桥银行 VISA 金卡",
+    "network": "visa",
+    "cardCurrency": "MOP",
+    "annualFee": {
+      "amount": 0,
+      "currency": "MOP",
+      "waiverNote": "首年免年费，之后每年消费满 6 次免当年年费"
+    },
+    "fxFee": {
+      "rate": 0,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "MOP",
+      "waivedWhen": {
+        "settlementCurrencyIn": [
+          "MOP",
+          "HKD",
+          "CNY"
+        ],
+        "validUntil": "2026-06-30"
+      },
+      "source": {
+        "url": "https://www.wlbank.com.mo/",
+        "verifiedAt": "2026-10-31",
+        "note": "官方：VISA 金卡「免收跨境交易货币转换手续费」，但页面标注推广期为「即日起至 2026-06-30」。该日期已过（今天为 2026-10-31），0% 是否延续官方未更新说明。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "wlbank-points"
+      },
+      "grocery": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "wlbank-points"
+      },
+      "fuel": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "wlbank-points"
+      },
+      "flight": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "wlbank-points"
+      },
+      "hotel": {
+        "kind": "points",
+        "multiplier": 2,
+        "pointProgramId": "wlbank-points",
+        "note": "银联信用卡指定酒店住宿 2 倍积分，单月上限 10 万分（此条为同系列银联卡条款，Visa 金卡是否同享未确认）"
+      },
+      "online": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "wlbank-points"
+      },
+      "other": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "wlbank-points"
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": {
+      "programId": "wlbank-points",
+      "valuePerPoint": 0.005,
+      "currency": "MOP",
+      "derivation": "每 MOP1 消费 = 1 分；10,000 分 = MOP 50 → 每分价值 = 50/10000 = MOP 0.005，即等效 0.5% 回赠",
+      "source": {
+        "url": "https://www.wlbank.com.mo/",
+        "verifiedAt": "2026-10-31"
+      }
+    },
+    "source": [
+      {
+        "url": "https://www.wlbank.com.mo/",
+        "verifiedAt": "2026-10-31",
+        "note": "免收跨境交易货币转换手续费（推广期至 2026-06-30，已过期）；MOP1=1分，10000分=MOP50"
+      },
+      {
+        "url": "https://www.smartcardmacao.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "补充：指定酒店 2 倍积分单月上限 10 万分；签满 MOP100,000 获机场贵宾室 1 次"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "low",
+    "notes": "高风险卡：手续费 0% 的推广期已于 2026-06-30 到期，当前是否仍免收无法从官方页面确认。若引擎按 0% 计算，可能低估用户实际成本 1.75%-1.95%。建议 UI 对此卡强制显示「费率待确认」警示，或默认按行业值 1.9% 保守计算并允许用户手动改。"
+  },
+  {
+    "cardId": "hsbc-vs-signature",
+    "issuer": "香港上海汇丰银行（HSBC HK）",
+    "issuerRegion": "HK",
+    "cardName": "汇丰 Visa Signature",
+    "network": "visa",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": 2000,
+      "currency": "HKD",
+      "waiverNote": "首年免年费；年签账达标可免次年，具体门槛需查官方 KFS"
+    },
+    "fxFee": {
+      "rate": 0.0195,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.hsbc.com.hk/credit-cards/",
+        "verifiedAt": "2026-10-31",
+        "note": "HSBC 官方费率表：港币个人卡非港元交易收 1.95%。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "grocery": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "hotel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.hsbc.com.hk/credit-cards/",
+        "verifiedAt": "2026-10-31",
+        "note": "港元个人卡非港元交易 1.95%"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "Visa Signature 的「额外 3X 奖赏」为限时推广（至 2026-12-31），且需登记 + 有上限，属活动价值而非结构性费率，本 JSON 不计入 categories 以免虚高。返现结构未取得官方逐类别数字。"
+  },
+  {
+    "cardId": "hsbc-pulse-unionpay",
+    "issuer": "香港上海汇丰银行（HSBC HK）",
+    "issuerRegion": "HK",
+    "cardName": "汇丰 PULSE 银联双币钻石信用卡",
+    "network": "unionpay",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": null,
+      "currency": "HKD",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "waivedWhen": {
+        "settlementCurrencyIn": [
+          "HKD",
+          "MOP",
+          "CNY"
+        ]
+      },
+      "source": {
+        "url": "https://www.hsbc.com.hk/credit-cards/products/unionpay-dual-currency/",
+        "verifiedAt": "2026-10-31",
+        "note": "HSBC 官方 FAQ 明文：「就使用滙豐PULSE銀聯雙幣鑽石信用卡並以澳門幣計算之信用卡款項，此交易費用則會被豁免。」另官方费率页：银联双币卡非港元/澳门币/人民币交易，汇率已含 1% 手续费。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "grocery": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "hotel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.hsbc.com.hk/credit-cards/products/unionpay-dual-currency/",
+        "verifiedAt": "2026-10-31",
+        "note": "MOP 结算豁免交易费用（官方 FAQ 原文）"
+      },
+      {
+        "url": "https://www.hsbc.com.hk/credit-cards/",
+        "verifiedAt": "2026-10-31",
+        "note": "银联双币卡非 HKD/MOP/CNY 交易汇率已含 1%"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "本卡是整个卡库在「港卡 · 澳门 MOP 结算」场景下的最优解，且由官方一句话直接证实。这是三地交叉场景最重要的结论，必须在 UI 中给出明确推荐位。注意：只有 MOP/HKD/CNY 三种结算币种为 0%，其他外币（如 JPY、USD）仍含 1%。 整卡 confidence 降为 medium：手续费 0%（MOP/HKD/CNY）由官方 FAQ 明文证实，属本卡库最可靠的单点结论；但返现结构完全未取得官方数字，全类别 unknown。故以 medium 标注整卡，避免下游误认为返现侧也可用。"
+  },
+  {
+    "cardId": "hsbc-red",
+    "issuer": "香港上海汇丰银行（HSBC HK）",
+    "issuerRegion": "HK",
+    "cardName": "汇丰 Red 信用卡",
+    "network": "visa",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": null,
+      "currency": "HKD",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0.0195,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.hsbc.com.hk/credit-cards/",
+        "verifiedAt": "2026-10-31",
+        "note": "港元个人卡非港元交易 1.95%"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "grocery": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "hotel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "online": {
+        "kind": "cashback",
+        "note": "网上签账 4% 为常见市场口径，但未取到 HSBC 官方 KFS 原文，标为待确认",
+        "rates": {
+          "local": 0.04
+        }
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.hsbc.com.hk/credit-cards/",
+        "verifiedAt": "2026-10-31",
+        "note": "1.95% 外币手续费"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "low",
+    "notes": "仅确认手续费。4% 网上回赠来自二手资讯，未获官方页面确认，且该类回赠通常有月度上限（易赏钱 RC 体系），本 JSON 缺上限数据，若按 4% 无上限计算会显著高估。建议用户自查后方可使用。"
+  },
+  {
+    "cardId": "hsbc-everymile",
+    "issuer": "香港上海汇丰银行（HSBC HK）",
+    "issuerRegion": "HK",
+    "cardName": "汇丰 EveryMile 信用卡",
+    "network": "visa",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": 2000,
+      "currency": "HKD",
+      "waiverNote": "首年免年费；年签账 HK$80,000 免次年"
+    },
+    "fxFee": {
+      "rate": 0.0195,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.hsbc.com.hk/credit-cards/products/everymile/",
+        "verifiedAt": "2026-10-31",
+        "note": "官方 KFS：外币交易手续费 1.95%；跨境港币交易费 1%"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "hsbc-rc",
+        "note": "指定日常消费 HK$2 = 1 里（约 2.5% RC 价值口径）"
+      },
+      "grocery": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "hsbc-rc",
+        "note": "指定日常消费 HK$2 = 1 里"
+      },
+      "fuel": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "hsbc-rc"
+      },
+      "flight": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "hsbc-rc"
+      },
+      "hotel": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "hsbc-rc"
+      },
+      "online": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "hsbc-rc"
+      },
+      "other": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "hsbc-rc",
+        "note": "其他消费 HK$5 = 1 里（约 1% RC）"
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": {
+      "programId": "hsbc-rc",
+      "valuePerPoint": null,
+      "currency": "HKD",
+      "derivation": "本卡以「奖赏钱 RC」+ 里数双轨计，里数价值随兑换渠道波动大，官方未给固定值。留 null 避免给用户虚假精确度。",
+      "source": {
+        "url": "https://www.hsbc.com.hk/credit-cards/products/everymile/",
+        "verifiedAt": "2026-10-31"
+      }
+    },
+    "source": [
+      {
+        "url": "https://www.hsbc.com.hk/credit-cards/products/everymile/",
+        "verifiedAt": "2026-10-31",
+        "note": "年费 HK$2,000 首年免，年签 8 万免次年；HK$2/里（指定日常）、HK$5/里（其他）；FTF 1.95%、CBF 1%"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "本卡门槛是商户类别路由，不是金额门槛，故不建 thresholds（2026-10-31 依 ADR-009 裁定）。原 tiers 为「HK$5=1 里」与「HK$2=1 里」两档，minSpend: 1 是错误占位值——它会让引擎在本笔 > HK$1 时恒判达标、恒取高档。分档依据实为汇丰 T&C §2(a) 指定日常及旅游消费 vs §2(b) 本地及海外消费，MVP 已由 categories + settlementRoute 承担。里数型卡的核心问题：积分价值不稳定，且「指定日常消费」名单未公开枚举。建议引擎对里数卡默认不计入净收益（ValueParams.includePoints=false），只作为「额外价值」提示。"
+  },
+  {
+    "cardId": "hang-seng-enjoy",
+    "issuer": "恒生银行（Hang Seng Bank）",
+    "issuerRegion": "HK",
+    "cardName": "恒生 enJoy 信用卡",
+    "network": "visa",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": 0,
+      "currency": "HKD",
+      "waiverNote": "永久免年费"
+    },
+    "fxFee": {
+      "rate": 0.0195,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.hangseng.com/enjoy-card/",
+        "verifiedAt": "2026-10-31",
+        "note": "恒生信用卡外币交易手续费 1.95%（与 HSBC 同属汇丰集团口径）"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "points",
+        "multiplier": 4,
+        "pointProgramId": "yuu",
+        "note": "美心集团及指定食府 4 yuu 积分 = 2% 回赠；其他餐厅按 1 yuu = 0.5%"
+      },
+      "grocery": {
+        "kind": "points",
+        "multiplier": 3,
+        "pointProgramId": "yuu",
+        "note": "超市及生活百货 3 yuu = 1.5%"
+      },
+      "fuel": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "yuu",
+        "note": "其他消费 1 yuu = 0.5%"
+      },
+      "flight": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "yuu"
+      },
+      "hotel": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "yuu"
+      },
+      "online": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "yuu",
+        "note": "网上按其他消费 0.5%，本卡无网上加码"
+      },
+      "other": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "yuu",
+        "note": "含海外签账，一律 0.5%"
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": {
+      "programId": "yuu",
+      "valuePerPoint": 0.005,
+      "currency": "HKD",
+      "derivation": "yuu 200 分 = HK$1 → 每分 HK$0.005。因此 4 yuu/元 = 2%、3 yuu = 1.5%、1 yuu = 0.5%。",
+      "source": {
+        "url": "https://www.hangseng.com/enjoy-card/",
+        "verifiedAt": "2026-10-31"
+      }
+    },
+    "source": [
+      {
+        "url": "https://www.hangseng.com/enjoy-card/",
+        "verifiedAt": "2026-10-31",
+        "note": "美心/指定食府 4 yuu、超市生活百货 3 yuu、其他含海外 1 yuu；永久免年费；yuu 200 分 = HK$1"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "high",
+    "notes": "结构清晰、积分价值固定、永久免年费，是本卡库中「可算得准」的代表。注意海外/澳门场景只有 0.5%，扣掉 1.95% 外币费后是净负 —— 这正是产品要向用户揭示的典型反例。"
+  },
+  {
+    "cardId": "sc-simply-cash",
+    "issuer": "渣打银行香港（Standard Chartered HK）",
+    "issuerRegion": "HK",
+    "cardName": "渣打 Simply Cash Visa 卡",
+    "network": "visa",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": 2000,
+      "currency": "HKD",
+      "waiverNote": "首年免年费；渣打优先理财/Premium 理财/出粮户口客户可享主卡永久免年费"
+    },
+    "fxFee": {
+      "rate": 0.0195,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.sc.com/hk/credit-cards/simplycash/",
+        "verifiedAt": "2026-10-31",
+        "note": "官方产品页：本地货币签账 1.5% 现金回赠、外币签账 2.0%；MoneySmart 与 cardshk 均列外币交易手续费 1.95%。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "cashback",
+        "note": "港币签账 1.5%（不分类别）",
+        "rates": {
+          "local": 0.015,
+          "foreign": 0.02
+        }
+      },
+      "grocery": {
+        "kind": "cashback",
+        "note": "港币签账 1.5%",
+        "rates": {
+          "local": 0.015,
+          "foreign": 0.02
+        }
+      },
+      "fuel": {
+        "kind": "cashback",
+        "rates": {
+          "local": 0.015,
+          "foreign": 0.02
+        }
+      },
+      "flight": {
+        "kind": "cashback",
+        "note": "外幣簽賬 2.0%（机票通常以外币结算）",
+        "rates": {
+          "local": 0.015,
+          "foreign": 0.02
+        }
+      },
+      "hotel": {
+        "kind": "cashback",
+        "note": "外幣簽賬 2.0%",
+        "rates": {
+          "local": 0.015,
+          "foreign": 0.02
+        }
+      },
+      "online": {
+        "kind": "cashback",
+        "note": "网上以港币结算 1.5%；如以外币结算则 2.0%",
+        "rates": {
+          "local": 0.015,
+          "foreign": 0.02
+        }
+      },
+      "other": {
+        "kind": "cashback",
+        "note": "港币签账 1.5%",
+        "rates": {
+          "local": 0.015,
+          "foreign": 0.02
+        }
+      }
+    },
+    "caps": [],
+    "capsNote": "官方明确「无上限现金回赠、不设最低消费要求」",
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.sc.com/hk/credit-cards/simplycash/",
+        "verifiedAt": "2026-10-31",
+        "note": "官方：Unlimited CashBack all year-round；1.5% local currency、2.0% foreign currencies；任何商户类别"
+      },
+      {
+        "url": "https://www.moneysmart.hk/zh-hk/credit-cards/standard-chartered-simply-cash-visa-card",
+        "verifiedAt": "2026-10-31",
+        "note": "海外签账手续费 1.95%；回赠需于 360 全面赏平台换领（最低 HK$50）"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "high",
+    "notes": "官方页一句话确认「外币 2.0% > 本地 1.5% 且无上限」，这是港卡中少见的「外币高于本地」结构。但关键反直觉点：外币 2.0% − FTF 1.95% = 净 0.05%，几乎打平。这恰好是本产品最有说服力的示例——名义 2% 的卡在海外实际只赚 0.05%。"
+  },
+  {
+    "cardId": "sc-smart",
+    "issuer": "渣打银行香港（Standard Chartered HK）",
+    "issuerRegion": "HK",
+    "cardName": "渣打 Smart 信用卡",
+    "network": "visa",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": 0,
+      "currency": "HKD",
+      "waiverNote": "永久免年费"
+    },
+    "fxFee": {
+      "rate": 0,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.sc.com/hk/zh/credit-cards/smart",
+        "verifiedAt": "2026-10-31",
+        "note": "官方：永久免年费、不设海外签账手续费/外币交易费，海外及外币签账可享高达 1.2% 现金回赠、无上限。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "grocery": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "cashback",
+        "note": "海外及外币签账高达 1.2%",
+        "rates": {
+          "local": 0.012
+        }
+      },
+      "hotel": {
+        "kind": "cashback",
+        "note": "海外及外币签账高达 1.2%",
+        "rates": {
+          "local": 0.012
+        }
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [],
+    "capsNote": "海外回赠官方表述为「无上限」",
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.sc.com/hk/zh/credit-cards/smart",
+        "verifiedAt": "2026-10-31",
+        "note": "永久免年费、免海外签账手续费、海外高达 1.2% 无上限"
+      },
+      {
+        "url": "https://www.moneysmart.hk/credit-cards/standard-chartered-smart-card",
+        "verifiedAt": "2026-10-31",
+        "note": "特约商户（屈臣氏、百佳等）高达 5%，非特约商户约 0.56%"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "本卡是「0% 外币手续费」这一稀缺属性的港卡持有者，因此海外场景净回报 = 1.2% 全额，不被 FTF 侵蚀。但本地类别结构（特约商户 5% / 非特约 0.56%）依赖商户名单，无法用固定类别映射，故 dining/grocery/other 留 unknown 而不硬填 5%。特约商户 5% 应作为「活动/商户加成」另建模型，不进 categories。"
+  },
+  {
+    "cardId": "citi-cash-back",
+    "issuer": "花旗银行香港（Citi HK）",
+    "issuerRegion": "HK",
+    "cardName": "Citi Cash Back 信用卡",
+    "network": "mastercard",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": 1800,
+      "currency": "HKD",
+      "waiverNote": "首年免年费"
+    },
+    "fxFee": {
+      "rate": 0.0195,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.citibank.com.hk/credit-cards/",
+        "verifiedAt": "2026-10-31",
+        "note": "Citi 香港：外币交易费 1.95%，跨境港币交易费 1%"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "cashback",
+        "note": "本地食肆 2%，无上限",
+        "rates": {
+          "local": 0.02
+        }
+      },
+      "grocery": {
+        "kind": "cashback",
+        "note": "其他本地消费 1%",
+        "rates": {
+          "local": 0.01
+        }
+      },
+      "fuel": {
+        "kind": "cashback",
+        "note": "其他本地消费 1%",
+        "rates": {
+          "local": 0.01
+        }
+      },
+      "flight": {
+        "kind": "cashback",
+        "note": "外币签账 2%（机票以外币结算时适用）",
+        "rates": {
+          "local": 0.02
+        }
+      },
+      "hotel": {
+        "kind": "cashback",
+        "note": "本地酒店 2%；外币签账 2%",
+        "rates": {
+          "local": 0.02
+        }
+      },
+      "online": {
+        "kind": "cashback",
+        "note": "其他本地 1%；若外币结算则 2%",
+        "rates": {
+          "local": 0.01
+        }
+      },
+      "other": {
+        "kind": "cashback",
+        "note": "其他本地消费 1%",
+        "rates": {
+          "local": 0.01
+        }
+      }
+    },
+    "caps": [],
+    "capsNote": "官方表述为无上限",
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.citibank.com.hk/credit-cards/",
+        "verifiedAt": "2026-10-31",
+        "note": "本地食肆/酒店/外币 2% 无上限，其他本地 1%；FTF 1.95%、CBF 1%；年费 HK$1,800 首年免"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "high",
+    "notes": "外币 2% 无上限，但 FTF 1.95% 吃掉后净 0.05%。与渣打 Simply Cash 同属「名义好看、海外几乎白干」类型，是产品教育用户的绝佳对比样本。"
+  },
+  {
+    "cardId": "citi-premier-miles",
+    "issuer": "花旗银行香港（Citi HK）",
+    "issuerRegion": "HK",
+    "cardName": "Citi PremierMiles 信用卡",
+    "network": "mastercard",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": null,
+      "currency": "HKD",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0.0195,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.citibank.com.hk/credit-cards/",
+        "verifiedAt": "2026-10-31",
+        "note": "Citi 香港标准外币交易费 1.95%、CBF 1%"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "citi-miles"
+      },
+      "grocery": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "citi-miles"
+      },
+      "fuel": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "citi-miles"
+      },
+      "flight": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "citi-miles"
+      },
+      "hotel": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "citi-miles"
+      },
+      "online": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "citi-miles"
+      },
+      "other": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "citi-miles"
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": {
+      "programId": "citi-miles",
+      "valuePerPoint": null,
+      "currency": "HKD",
+      "derivation": "里数价值随兑换渠道波动，官方无固定值，留 null",
+      "source": {
+        "url": "https://www.citibank.com.hk/credit-cards/",
+        "verifiedAt": "2026-10-31"
+      }
+    },
+    "source": [
+      {
+        "url": "https://www.citibank.com.hk/credit-cards/",
+        "verifiedAt": "2026-10-31",
+        "note": "FTF 1.95%、CBF 1%"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "low",
+    "notes": "仅手续费可溯源，里程累积比例未取得官方数字，不做猜测。"
+  },
+  {
+    "cardId": "boc-hk-chill",
+    "issuer": "中银香港（Bank of China Hong Kong）",
+    "issuerRegion": "HK",
+    "cardName": "中银香港 Chill 信用卡（World Mastercard）",
+    "network": "visa",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": null,
+      "currency": "HKD",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0.0195,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.bochk.com/creditcard/",
+        "verifiedAt": "2026-10-31",
+        "note": "中银香港信用卡外币交易手续费 1.95%（与主流港卡一致）"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "cashback",
+        "note": "Chill 商户 10%（需当月实体签账 HK$1,500）；未达门槛仅基本 0.4%。10% = 基础 0.4% + 额外 9.6%（额外部分受 HK$150 月上限）",
+        "rates": {
+          "local": 0.1
+        },
+        "capIds": [
+          "boc-hk-chill:extra"
+        ],
+        "isBaseTierRate": false
+      },
+      "grocery": {
+        "kind": "cashback",
+        "note": "基本 0.4%，无上限，不受门槛影响",
+        "rates": {
+          "local": 0.004
+        },
+        "capIds": []
+      },
+      "fuel": {
+        "kind": "cashback",
+        "note": "基本 0.4%，无上限，不受门槛影响",
+        "rates": {
+          "local": 0.004
+        },
+        "capIds": []
+      },
+      "flight": {
+        "kind": "cashback",
+        "note": "海外签账 5%（需月实体签账 HK$1,500）；未达标 4%",
+        "rates": {
+          "local": 0.05
+        },
+        "isBaseTierRate": false
+      },
+      "hotel": {
+        "kind": "cashback",
+        "note": "海外签账 5%（需月实体签账 HK$1,500）；未达标 4%",
+        "rates": {
+          "local": 0.05
+        },
+        "isBaseTierRate": false
+      },
+      "online": {
+        "kind": "cashback",
+        "note": "网上签账 5%（需月实体签账 HK$1,500）；未达标 4%",
+        "rates": {
+          "local": 0.05
+        },
+        "isBaseTierRate": false
+      },
+      "other": {
+        "kind": "cashback",
+        "note": "基本 0.4% 无上限，不受门槛影响",
+        "rates": {
+          "local": 0.004
+        },
+        "capIds": []
+      }
+    },
+    "caps": [
+      {
+        "id": "boc-hk-chill:extra",
+        "categories": "all",
+        "limitAmount": 150,
+        "limitCurrency": "HKD",
+        "period": "month",
+        "overLimitFallback": {
+          "kind": "cashback",
+          "exclusivityGroup": "base",
+          "capIds": [],
+          "rates": {
+            "local": 0.004
+          }
+        },
+        "basis": "value"
+      }
+    ],
+    "capsNote": "额外回赠合计月上限 HK$150；基本 0.4% 不受此上限约束",
+    "thresholds": [
+      {
+        "id": "boc-hk-chill:physical-spend",
+        "accrualCategories": "all",
+        "thresholdAmount": 1500,
+        "includeCurrentSpend": true,
+        "period": "month",
+        "currency": "HKD",
+        "categoryBindings": {
+          "dining": {
+            "fallback": {
+              "rate": 0.004
+            },
+            "note": "categories 记达标值 0.1（官方 10%，受 HK$150 月上限）；未达标 0.4%，故必须显式声明 fallback（ADR-011 第四轮勘误：categories 记达标档，达标时不叠加，gain 字段已删除）"
+          },
+          "flight": {
+            "fallback": {
+              "rate": 0.04
+            },
+            "note": "categories 记达标值 5%；未达标 4%，故必须显式声明 fallback"
+          },
+          "hotel": {
+            "fallback": {
+              "rate": 0.04
+            },
+            "note": "同 flight"
+          },
+          "online": {
+            "fallback": {
+              "rate": 0.04
+            },
+            "note": "同 flight"
+          }
+        },
+        "note": "本卡为 Chill World 版本：月实体签账满 HK$1,500 后餐饮 10%、海外/网上 5%（未达标餐饮 0.4%、海外/网上 4%）。grocery / fuel / other 恒 0.4%，不受本门槛影响。原 8%/HK$1,000 档属 Chill Platinum 口径，已于 2026-10-31 移除（依据 Chill T&C 第 20/21 条，bochk.com）",
+        "source": {
+          "url": "https://www.bochk.com/creditcard/",
+          "verifiedAt": "2026-10-31",
+          "note": "World 卡满 HK$1,500 得 10%；Platinum 卡满 HK$1,000 得 8%——两款卡各自门槛，非同一张卡的两档。海外未达标 4%、达标 5%"
+        }
+      }
+    ],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.bochk.com/creditcard/",
+        "verifiedAt": "2026-10-31",
+        "note": "Chill 商户 10%/8%（需月实体签账 HK$1,500/1,000）；海外及网上 5%/4%；额外回赠月上限 HK$150；基本 0.4% 无上限；推广期至 2026-12-31"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "本卡按 Chill World 版本建模（cardName 为 World Mastercard）。官方分两款卡：World 满 HK$1,500 得 10%、Platinum 满 HK$1,000 得 8%，是两款卡各自的条款而非同一张卡的两档；卡库原先把两档并列，2026-10-31 按 World 口径收敛，8% 档已移除。若用户持有 Platinum，本卡数据不再覆盖其条款。高回赠 + 低上限的典型陷阱：名义 10%，但额外回赠月封顶仅 HK$150，刷 HK$1,500 左右就到顶。另：推广期至 2026-12-31，之后费率可能回落，需时效警示。"
+  },
+  {
+    "cardId": "boc-hk-icard",
+    "issuer": "中银香港（Bank of China Hong Kong）",
+    "issuerRegion": "HK",
+    "cardName": "中银香港 i-card 信用卡",
+    "network": "visa",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": null,
+      "currency": "HKD",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0.0195,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.bochk.com/creditcard/",
+        "verifiedAt": "2026-10-31",
+        "note": "中银香港标准外币手续费 1.95%"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "cashback",
+        "note": "基本 0.4%",
+        "rates": {
+          "local": 0.004
+        }
+      },
+      "grocery": {
+        "kind": "cashback",
+        "rates": {
+          "local": 0.004
+        }
+      },
+      "fuel": {
+        "kind": "cashback",
+        "rates": {
+          "local": 0.004
+        }
+      },
+      "flight": {
+        "kind": "cashback",
+        "rates": {
+          "local": 0.004
+        }
+      },
+      "hotel": {
+        "kind": "cashback",
+        "rates": {
+          "local": 0.004
+        }
+      },
+      "online": {
+        "kind": "cashback",
+        "note": "网上签账 / 感应式手机支付 10X 积分，折合 4% 现金回赠。此数字来自官方结构性表述，但配套限时优惠条款（2022 年版）已过期，实际是否仍适用存疑。",
+        "rates": {
+          "local": 0.04
+        }
+      },
+      "other": {
+        "kind": "cashback",
+        "note": "基本 0.4%",
+        "rates": {
+          "local": 0.004
+        }
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.bochk.com/creditcard/",
+        "verifiedAt": "2026-10-31",
+        "note": "i-card 网上签账/感应式手机支付 10X 积分 = 4% 现金回赠（官方结构性表述）；注意官方 PDF 为 2022 年版本，内含 2022-12-31 截止的过期促销，未采用其促销数字"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "low",
+    "notes": "官方 PDF 为 2022 年旧促销文案（含「每月狂赏 BUY 2%」等已过期条款），只采信「10X 积分 = 4%」这一结构性表述，促销期标 unknown。若 UI 展示 4%，必须提示「促销状态待确认」。"
+  },
+  {
+    "cardId": "boc-hk-cheers",
+    "issuer": "中银香港（Bank of China Hong Kong）",
+    "issuerRegion": "HK",
+    "cardName": "中银香港 Cheers 信用卡（Visa Signature）",
+    "network": "visa",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": 2000,
+      "currency": "HKD",
+      "waiverNote": "首年免年费；年薪要求 HK$150,000"
+    },
+    "fxFee": {
+      "rate": 0.0195,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.bochk.com/creditcard/",
+        "verifiedAt": "2026-10-31",
+        "note": "中银香港标准外币手续费 1.95%"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "cashback",
+        "note": "餐饮类别 10X 积分，折合 4% 现金回赠，需月累计零售满 HK$5,000 触发；未达标仅基本 0.4%",
+        "rates": {
+          "local": 0.04
+        },
+        "isBaseTierRate": false
+      },
+      "grocery": {
+        "kind": "cashback",
+        "note": "非指定类别，基本 0.4%，不受门槛影响",
+        "rates": {
+          "local": 0.004
+        }
+      },
+      "fuel": {
+        "kind": "cashback",
+        "note": "非指定类别，基本 0.4%，不受门槛影响",
+        "rates": {
+          "local": 0.004
+        }
+      },
+      "flight": {
+        "kind": "cashback",
+        "note": "旅游类别 10X，折合 4% 现金回赠，需月累计零售满 HK$5,000；未达标 0.4%",
+        "rates": {
+          "local": 0.04
+        },
+        "isBaseTierRate": false
+      },
+      "hotel": {
+        "kind": "cashback",
+        "note": "旅游类别 10X 折合 4%，需月累计零售满 HK$5,000；未达标 0.4%",
+        "rates": {
+          "local": 0.04
+        },
+        "isBaseTierRate": false
+      },
+      "online": {
+        "kind": "cashback",
+        "note": "非指定类别，基本 0.4%，不受门槛影响",
+        "rates": {
+          "local": 0.004
+        }
+      },
+      "other": {
+        "kind": "cashback",
+        "note": "非指定类别，基本 0.4%，不受门槛影响",
+        "rates": {
+          "local": 0.004
+        }
+      }
+    },
+    "caps": [],
+    "thresholds": [
+      {
+        "id": "boc-hk-cheers:monthly-retail",
+        "accrualCategories": "all",
+        "thresholdAmount": 5000,
+        "includeCurrentSpend": true,
+        "period": "month",
+        "currency": "HKD",
+        "categoryBindings": {
+          "dining": {
+            "fallback": {
+              "rate": 0.004
+            },
+            "note": "categories 记达标值 4%；未达标 0.4%。达标时直接使用 categories，不叠加（gain 字段已删除，ADR-011 第四轮勘误）"
+          },
+          "flight": {
+            "fallback": {
+              "rate": 0.004
+            },
+            "note": "同 dining"
+          },
+          "hotel": {
+            "fallback": {
+              "rate": 0.004
+            },
+            "note": "同 dining"
+          }
+        },
+        "note": "未达门口径依据中银官网「基本積分率 $1=1 分，相等於 0.4% 現金回贈，無門檻」；达标档依据「餐飲、旅遊及寵物簽賬 10X 積分，相等於 HK$1.5/里或 4% 現金回贈」。grocery / fuel / online / other 恒 0.4%，不受本门槛影响",
+        "source": {
+          "url": "https://www.bochk.com/creditcard/",
+          "verifiedAt": "2026-10-31",
+          "note": "月零售满 HK$5,000 → 指定类别 10X = 4%；未达门槛基本 0.4%"
+        }
+      }
+    ],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.bochk.com/creditcard/",
+        "verifiedAt": "2026-10-31",
+        "note": "Cheers：餐饮+旅游+宠物月累计零售满 HK$5,000 后 10X = HK$1.5/里（4% 现金回赠）；Visa Signature 年费 HK$2,000 首年免、年薪 HK$150,000"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "门槛型结构：月消费不到 HK$5,000 时，餐饮只有基础回赠，4% 完全不生效。引擎必须先判门槛再算费率。上限数据未取得，若非无上限则会高估，建议用户自查。"
+  },
+  {
+    "cardId": "bea-world-mc",
+    "issuer": "东亚银行（Bank of East Asia, BEA）",
+    "issuerRegion": "HK",
+    "cardName": "东亚银行 World Mastercard",
+    "network": "mastercard",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": null,
+      "currency": "HKD",
+      "waiverNote": "未查到官方明确年费金额"
+    },
+    "fxFee": {
+      "rate": 0.0195,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.hkbea.com/credit-card/",
+        "verifiedAt": "2026-10-31",
+        "note": "东亚银行：外币交易手续费 1.95%，跨境港币交易费 1%"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "cashback",
+        "note": "五大指定类别之一，12.5X = 5%。需当月合格签账满 HK$4,000 + 每月 BEA Mall App 登记；未达标 0.4%",
+        "rates": {
+          "local": 0.05
+        },
+        "capIds": [
+          "bea-world-mc:reward"
+        ],
+        "isBaseTierRate": false
+      },
+      "grocery": {
+        "kind": "unknown",
+        "note": "非五大指定类别，基础回赠未取得官方数字",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "cashback",
+        "note": "海外类别属五大指定之一，5%（需门槛 + 登记）；未达标 0.4%",
+        "rates": {
+          "local": 0.05
+        },
+        "capIds": [
+          "bea-world-mc:reward"
+        ],
+        "isBaseTierRate": false
+      },
+      "hotel": {
+        "kind": "cashback",
+        "note": "海外类别 5%（需门槛 + 登记）；本地酒店不在指定五类。未达标 0.4%",
+        "rates": {
+          "local": 0.05
+        },
+        "capIds": [
+          "bea-world-mc:reward"
+        ],
+        "isBaseTierRate": false
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [
+      {
+        "id": "bea-world-mc:reward",
+        "categories": "all",
+        "limitAmount": 500,
+        "limitCurrency": "HKD",
+        "period": "month",
+        "overLimitFallback": {
+          "kind": "cashback",
+          "exclusivityGroup": "base",
+          "capIds": [],
+          "rates": {
+            "local": 0.004
+          }
+        },
+        "basis": "value"
+      }
+    ],
+    "capsNote": "月上限签账 HK$10,000 / 回赠 HK$500（针对五大指定类别加码部分）",
+    "thresholds": [
+      {
+        "id": "bea-world-mc:qualified-spend",
+        "accrualCategories": "all",
+        "thresholdAmount": 4000,
+        "includeCurrentSpend": true,
+        "period": "month",
+        "currency": "HKD",
+        "categoryBindings": {
+          "dining": {
+            "fallback": {
+              "rate": 0.004
+            },
+            "note": "categories 记达标值 5%（受 HK$500 月上限）；未达标 0.4%"
+          },
+          "flight": {
+            "fallback": {
+              "rate": 0.004
+            },
+            "note": "同 dining"
+          },
+          "hotel": {
+            "fallback": {
+              "rate": 0.004
+            },
+            "note": "同 dining"
+          }
+        },
+        "note": "未达门口径依据 pickcardrebate 与 debitbaba 双源一致的「基本 0.4%」；达标档依据东亚官网「持卡人須每月累積基本獎賞合資格交易達 HK$4,000 或以上方可享指定類別簽賬高達 12.5X 獎分」。grocery / fuel / online / other 的费率本身未知，与达标状态无关，不受本门槛影响",
+        "source": {
+          "url": "https://www.hkbea.com/credit-card/",
+          "verifiedAt": "2026-10-31",
+          "note": "月合格签账满 HK$4,000 + BEA Mall App 登记 → 五大指定类别 12.5X = 5%；未达标基本 0.4%"
+        }
+      }
+    ],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.hkbea.com/credit-card/",
+        "verifiedAt": "2026-10-31",
+        "note": "五大指定类别（食肆/海外/电器/医疗/健身）12.5X=5%；需当月合格签账满 HK$4,000；月上限签账 HK$10,000 / 回赠 HK$500；需 BEA Mall App 每月登记；推广期至 2026-12-31；FTF 1.95% / CBF 1%"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "三重限制叠加：门槛 HK$4,000 + 月上限 + 每月需手动登记（不登记 = 0 加码）。这类「需登记」条款不建模进费率，会误导用户，必须在 UI 里作为前置提醒。推广期至 2026-12-31。"
+  },
+  {
+    "cardId": "dbs-black-world",
+    "issuer": "星展银行香港（DBS HK）",
+    "issuerRegion": "HK",
+    "cardName": "DBS Black World Mastercard",
+    "network": "mastercard",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": 3600,
+      "currency": "HKD",
+      "waiverNote": "首年免年费"
+    },
+    "fxFee": {
+      "rate": 0.0195,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.dbs.com.hk/credit-cards/",
+        "verifiedAt": "2026-10-31",
+        "note": "DBS 香港：外币交易手续费 1.95%"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "dbs-miles",
+        "note": "本地 HK$6 = 1 里（基础）"
+      },
+      "grocery": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "dbs-miles",
+        "note": "本地 HK$6 = 1 里"
+      },
+      "fuel": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "dbs-miles"
+      },
+      "flight": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "dbs-miles",
+        "note": "海外 HK$4 = 1 里（基础）；月签满 HK$20,000 并登记后低至 HK$2 = 1 里"
+      },
+      "hotel": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "dbs-miles",
+        "note": "海外 HK$4 = 1 里"
+      },
+      "online": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "dbs-miles"
+      },
+      "other": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "dbs-miles"
+      }
+    },
+    "caps": [
+      {
+        "id": "dbs-black-world:ewallet",
+        "categories": "all",
+        "limitAmount": 5000,
+        "limitCurrency": "HKD",
+        "period": "month",
+        "basis": "value"
+      }
+    ],
+    "capsNote": "电子钱包交易合计月上限 HK$5,000（签账额上限，非回赠上限）",
+    "thresholds": [
+      {
+        "id": "dbs-black-world:monthly-spend",
+        "accrualCategories": "all",
+        "thresholdAmount": 20000,
+        "includeCurrentSpend": true,
+        "period": "month",
+        "currency": "HKD",
+        "bonusTiers": [
+          {
+            "minSpend": 0,
+            "gain": {},
+            "note": "未达 HK$20,000：海外 HK$4 = 1 里、本地 HK$6 = 1 里（3X DBS$），无额外增益"
+          },
+          {
+            "minSpend": 20000,
+            "gain": {
+              "multiplierDelta": 1
+            },
+            "note": "月签满 HK$20,000 并登记：里程翻倍（6X DBS$），即 categories 的 1x + 1x = 2x"
+          }
+        ],
+        "note": "本门槛是累计型（与类别正交），故用 bonusTiers 而非 categoryBindings：gain 一律为增量。multiplierDelta 1 表示 categories 的倍数 +1；categories 怎么改，门槛都只是 +1（ADR-011 §4e）。",
+        "source": {
+          "url": "https://www.dbs.com.hk/credit-cards/",
+          "verifiedAt": "2026-10-31",
+          "note": "累積合資格零售簽賬達 HK$20,000 或以上 → 合資格海外簽賬低至 HK$2 = 1 里（DBS$ 基本及額外獎賞合共 6X）；未达标 3X（海外 HK$4 = 1 里）"
+        }
+      }
+    ],
+    "pointsValuation": {
+      "programId": "dbs-miles",
+      "valuePerPoint": null,
+      "currency": "HKD",
+      "derivation": "里程价值随兑换渠道波动，官方无固定值，留 null",
+      "source": {
+        "url": "https://www.dbs.com.hk/credit-cards/",
+        "verifiedAt": "2026-10-31"
+      }
+    },
+    "source": [
+      {
+        "url": "https://www.dbs.com.hk/credit-cards/",
+        "verifiedAt": "2026-10-31",
+        "note": "本地 HK$6=1里、海外 HK$4=1里；月签满 HK$20,000 并登记后海外低至 HK$2=1里；年费 HK$3,600 首年免；电子钱包合计月上限 HK$5,000"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "纯里程卡，且高倍率需月签 HK$20,000 + 登记，门槛极高。对澳门/内地小额消费场景基本无意义，收录用于完整度。"
+  },
+  {
+    "cardId": "amex-hk-explorer",
+    "issuer": "美国运通香港（American Express HK）",
+    "issuerRegion": "HK",
+    "cardName": "Amex Explorer 信用卡",
+    "network": "amex",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": 2200,
+      "currency": "HKD",
+      "waiverNote": "首年免年费；年签账 HK$150,000 可免次年"
+    },
+    "fxFee": {
+      "rate": 0.02,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.americanexpress.com/hk/credit-cards/explorer/",
+        "verifiedAt": "2026-10-31",
+        "note": "Amex 官方 KFS 明列：外币交易费 2%。另确认 Amex 香港不收跨境港币交易费（CBF 0%）。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "amex-mr"
+      },
+      "grocery": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "amex-mr"
+      },
+      "fuel": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "amex-mr"
+      },
+      "flight": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "amex-mr",
+        "note": "外币 HK$1.68 = 1 里（登记后）"
+      },
+      "hotel": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "amex-mr",
+        "note": "外币 HK$1.68 = 1 里（登记后）"
+      },
+      "online": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "amex-mr"
+      },
+      "other": {
+        "kind": "points",
+        "multiplier": 1,
+        "pointProgramId": "amex-mr"
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": {
+      "programId": "amex-mr",
+      "valuePerPoint": null,
+      "currency": "HKD",
+      "derivation": "MR 积分价值随兑换方式波动大，官方无固定值，留 null",
+      "source": {
+        "url": "https://www.americanexpress.com/hk/credit-cards/explorer/",
+        "verifiedAt": "2026-10-31"
+      }
+    },
+    "source": [
+      {
+        "url": "https://www.americanexpress.com/hk/credit-cards/explorer/",
+        "verifiedAt": "2026-10-31",
+        "note": "外币交易费 2%、CBF 0%；年费 HK$2,200 首年免，年签 HK$150,000 免次年；外币 HK$1.68=1里（登记后）"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "high",
+    "notes": "Amex 的 CBF 为 0% 是重要事实：港币结算的跨境交易不额外收 1%，与 Visa/MC 不同。但外币交易费 2% 是市场最高档。澳门 MOP 结算场景 = 2%（最差档），HKD 结算 = 0%（最优）。这张卡最能体现「结算币种决定一切」。"
+  },
+  {
+    "cardId": "aeon-wakuwaku",
+    "issuer": "AEON 信贷财务（AEON Credit Service HK）",
+    "issuerRegion": "HK",
+    "cardName": "AEON WAKUWAKU 信用卡",
+    "network": "visa",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": 0,
+      "currency": "HKD",
+      "waiverNote": "永久免年费"
+    },
+    "fxFee": {
+      "rate": 0.0195,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.aeon.com.hk/",
+        "verifiedAt": "2026-10-31",
+        "note": "AEON WAKUWAKU：外币交易手续费 1.95%（woodofinance 2026-10-08 核实）。注：AEON 另有部分卡种为 1.5%，WAKUWAKU 不适用该低档。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "cashback",
+        "note": "本地餐饮 1%",
+        "rates": {
+          "local": 0.01
+        }
+      },
+      "grocery": {
+        "kind": "cashback",
+        "note": "其他 0.4%",
+        "rates": {
+          "local": 0.004
+        }
+      },
+      "fuel": {
+        "kind": "cashback",
+        "note": "其他 0.4%",
+        "rates": {
+          "local": 0.004
+        }
+      },
+      "flight": {
+        "kind": "cashback",
+        "note": "日本签账 6% 仅限日本境内商户，机票不算",
+        "rates": {
+          "local": 0.004
+        }
+      },
+      "hotel": {
+        "kind": "cashback",
+        "rates": {
+          "local": 0.004
+        }
+      },
+      "online": {
+        "kind": "cashback",
+        "note": "网上签账 6%",
+        "rates": {
+          "local": 0.06
+        }
+      },
+      "other": {
+        "kind": "cashback",
+        "note": "其他 0.4%",
+        "rates": {
+          "local": 0.004
+        }
+      }
+    },
+    "caps": [
+      {
+        "id": "aeon-wakuwaku:monthly",
+        "categories": "all",
+        "limitAmount": 300,
+        "limitCurrency": "HKD",
+        "period": "month",
+        "overLimitFallback": {
+          "kind": "cashback",
+          "exclusivityGroup": "base",
+          "capIds": [],
+          "rates": {
+            "local": 0.004
+          }
+        },
+        "basis": "value"
+      }
+    ],
+    "capsNote": "加码回赠月上限 HK$300（网上 6% / 日本 6% / 餐饮 1% 合计）",
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.aeon.com.hk/",
+        "verifiedAt": "2026-10-31",
+        "note": "网上 6%、日本 6%、本地餐饮 1%、其他 0.4%；月上限 HK$300；永久免年费；FTF 1.95%"
+      },
+      {
+        "url": "https://www.woodofinance.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "2026-10-08 核实 WAKUWAKU 外币手续费 1.95%"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "网上 6% 是本卡库最高，但月上限仅 HK$300（对应约 HK$5,000 网上消费），且海外网上刷 MOP 还要扣 1.95%。实际净回报 = 6% − 1.95% = 4.05%，仍属优秀，但上限会很快打满。"
+  },
+  {
+    "cardId": "aeon-unionpay-premium",
+    "issuer": "AEON 信贷财务（AEON Credit Service HK）",
+    "issuerRegion": "HK",
+    "cardName": "AEON Card Premium UnionPay",
+    "network": "unionpay",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": 0,
+      "currency": "HKD",
+      "waiverNote": "永久免年费；无年薪要求"
+    },
+    "fxFee": {
+      "rate": 0,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "waivedWhen": {
+        "settlementCurrencyIn": [
+          "HKD",
+          "MOP",
+          "CNY"
+        ]
+      },
+      "source": {
+        "url": "https://www.aeon.com.hk/",
+        "verifiedAt": "2026-10-31",
+        "note": "官方 Premium 页：AEON Card Premium UnionPay 免收海外签账手续费。银联通道在 HKD/MOP/CNY 场景 0%。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "grocery": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "hotel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.aeon.com.hk/",
+        "verifiedAt": "2026-10-31",
+        "note": "免收海外签账手续费；永久免年费、无年薪要求"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "「永久免年费 + 无年薪要求 + 0% 海外手续费」三项叠加，是港卡在澳门/内地场景的低门槛优选。但返现结构未取得官方数字，不能按有回赠计算。"
+  },
+  {
+    "cardId": "aeon-standard",
+    "issuer": "AEON 信贷财务（AEON Credit Service HK）",
+    "issuerRegion": "HK",
+    "cardName": "AEON 信用卡（标准卡）",
+    "network": "visa",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": 0,
+      "currency": "HKD",
+      "waiverNote": "永久免年费"
+    },
+    "fxFee": {
+      "rate": 0.015,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.smartcardmacao.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "AEON 信用卡外币手续费 1.5%，为香港市场最低档之一（对比主流 1.95%）。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "grocery": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "fuel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "flight": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "hotel": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "online": {
+        "kind": "unknown",
+        "rates": null
+      },
+      "other": {
+        "kind": "unknown",
+        "rates": null
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.smartcardmacao.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "AEON 外币手续费 1.5%；永久免年费"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "low",
+    "notes": "1.5% 是港卡里的低档优势（比 1.95% 省 0.45%），但仅第三方汇总站来源，未取得 AEON 官方收费表，故 low。返现 unknown。"
+  },
+  {
+    "cardId": "mox-credit",
+    "issuer": "Mox Bank",
+    "issuerRegion": "HK",
+    "cardName": "Mox 信用卡",
+    "network": "mastercard",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": 0,
+      "currency": "HKD",
+      "waiverNote": "年费 HK$0"
+    },
+    "fxFee": {
+      "rate": 0.0195,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://mox.com/credit-card/",
+        "verifiedAt": "2026-10-31",
+        "note": "官方：0% 外币手续费仅适用于选用 Asia Miles 模式的客户；CashBack 模式仍收 1.95%。此处按 CashBack 模式（默认）记 1.95%，并在 waivedWhen 之外单独说明。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "cashback",
+        "note": "非 Mox+ 其他消费 1%；Mox+ 为 2%",
+        "rates": {
+          "local": 0.01
+        }
+      },
+      "grocery": {
+        "kind": "cashback",
+        "note": "超市/杂货 3%，无上限",
+        "rates": {
+          "local": 0.03
+        }
+      },
+      "fuel": {
+        "kind": "cashback",
+        "rates": {
+          "local": 0.01
+        }
+      },
+      "flight": {
+        "kind": "cashback",
+        "rates": {
+          "local": 0.01
+        }
+      },
+      "hotel": {
+        "kind": "cashback",
+        "rates": {
+          "local": 0.01
+        }
+      },
+      "online": {
+        "kind": "cashback",
+        "rates": {
+          "local": 0.01
+        }
+      },
+      "other": {
+        "kind": "cashback",
+        "note": "非 Mox+ 其他 1%；Mox+ 其他 2%",
+        "rates": {
+          "local": 0.01
+        }
+      }
+    },
+    "caps": [],
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://mox.com/credit-card/",
+        "verifiedAt": "2026-10-31",
+        "note": "超市/杂货 3% 无上限；其他 1%（Mox+ 2%）；0% FX 仅限 Asia Miles 模式；年费 HK$0"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "medium",
+    "notes": "关键条件性：0% 外币费只在 Asia Miles 模式下生效，CashBack 模式仍 1.95%。这是「同一张卡因所选计划不同而费率不同」的典型，现有 FxFeeRule 无法表达这种「模式切换」，建议架构侧评估。JSON 默认按 CashBack 模式保守记 1.95%。"
+  },
+  {
+    "cardId": "wewa-unionpay",
+    "issuer": "安信信贷（PrimeCredit / WeWa）",
+    "issuerRegion": "HK",
+    "cardName": "WeWa 银联信用卡",
+    "network": "unionpay",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": 0,
+      "currency": "HKD",
+      "waiverNote": "永久免年费"
+    },
+    "fxFee": {
+      "rate": 0.01,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.wewacard.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "争议项：MoneySmart 注明「WeWa 卡同 EarnMORE 卡在 2025 年开始海外签账都将收取 1% 手续费」。早期宣传的「0%」已不适用，按 1% 记录（保守，不低估成本）。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "cashback",
+        "note": "自 2026-10-01 起，「海外签账」为预设玩乐类别；另可选手机支付/旅游/线上娱乐之一。4% 为「两类别合计」上限口径：与另一自选类别合计 4%，非各自 4%。需月签满 HK$1,500；未达标 0.4%",
+        "rates": {
+          "local": 0.04
+        },
+        "capIds": [
+          "wewa-unionpay:extra"
+        ],
+        "isBaseTierRate": false
+      },
+      "grocery": {
+        "kind": "cashback",
+        "note": "其他签账 HK$250 得 HK$1（0.4%），不受门槛影响",
+        "rates": {
+          "local": 0.004
+        },
+        "capIds": []
+      },
+      "fuel": {
+        "kind": "cashback",
+        "note": "其他签账 0.4%，不受门槛影响",
+        "rates": {
+          "local": 0.004
+        },
+        "capIds": []
+      },
+      "flight": {
+        "kind": "cashback",
+        "note": "旅游类别可选，4%（与另一自选类别合计 4%，非各自 4%）；需月签满 HK$1,500，未达标 0.4%",
+        "rates": {
+          "local": 0.04
+        },
+        "capIds": [
+          "wewa-unionpay:extra"
+        ],
+        "isBaseTierRate": false
+      },
+      "hotel": {
+        "kind": "cashback",
+        "note": "海外签账预设类别，4%（与另一自选类别合计 4%，非各自 4%）；需月签满 HK$1,500，未达标 0.4%",
+        "rates": {
+          "local": 0.04
+        },
+        "capIds": [
+          "wewa-unionpay:extra"
+        ],
+        "isBaseTierRate": false
+      },
+      "online": {
+        "kind": "cashback",
+        "note": "线上娱乐类别可选，4%（与另一自选类别合计 4%，非各自 4%）；需月签满 HK$1,500，未达标 0.4%",
+        "rates": {
+          "local": 0.04
+        },
+        "capIds": [
+          "wewa-unionpay:extra"
+        ],
+        "isBaseTierRate": false
+      },
+      "other": {
+        "kind": "cashback",
+        "note": "其他 0.4%，不受门槛影响",
+        "rates": {
+          "local": 0.004
+        },
+        "capIds": []
+      }
+    },
+    "caps": [
+      {
+        "id": "wewa-unionpay:extra",
+        "categories": "all",
+        "limitAmount": 200,
+        "limitCurrency": "HKD",
+        "period": "month",
+        "overLimitFallback": {
+          "kind": "cashback",
+          "exclusivityGroup": "base",
+          "capIds": [],
+          "rates": {
+            "local": 0.004
+          }
+        },
+        "basis": "value"
+      }
+    ],
+    "capsNote": "两类别合计额外回赠月上限 HK$200；需月签满 HK$1,500 触发",
+    "thresholds": [
+      {
+        "id": "wewa-unionpay:monthly",
+        "accrualCategories": "all",
+        "thresholdAmount": 1500,
+        "includeCurrentSpend": true,
+        "period": "month",
+        "currency": "HKD",
+        "categoryBindings": {
+          "dining": {
+            "fallback": {
+              "rate": 0.004
+            },
+            "note": "categories 记达标值 4%（受 HK$200 月上限）；未达标 0.4%"
+          },
+          "flight": {
+            "fallback": {
+              "rate": 0.004
+            },
+            "note": "同 dining"
+          },
+          "hotel": {
+            "fallback": {
+              "rate": 0.004
+            },
+            "note": "同 dining"
+          },
+          "online": {
+            "fallback": {
+              "rate": 0.004
+            },
+            "note": "同 dining"
+          }
+        },
+        "note": "未达门口径依据官网「其他簽賬類別 基本現金回贈 簽賬 HK$250 可獲 HK$1（0.4%）」；达标档依据「每月合資格零售簽賬滿 HK$1,500…高達 4%」（wewacard.com，2026-10-31 核实）。grocery / fuel / other 恒 0.4%，不受本门槛影响。已知口径缺陷：「两类别合计 4%」意味着 4 个 4% 类别中用户实际只享两个，本条未建模，见 OPEN-DECISIONS",
+        "source": {
+          "url": "https://www.wewacard.com/",
+          "verifiedAt": "2026-10-31",
+          "note": "未达门槛 0.4% / 达标 4%（两类别合计），额外回赠月上限 HK$200"
+        }
+      }
+    ],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.wewacard.com/",
+        "verifiedAt": "2026-10-31",
+        "note": "自 2026-10-01 起海外签账为预设玩乐类别；可选手机支付/旅游/线上娱乐之一；月签满 HK$1,500 触发；两类别合计额外回赠月上限 HK$200；其他 0.4%"
+      },
+      {
+        "url": "https://www.moneysmart.hk/",
+        "verifiedAt": "2026-10-31",
+        "note": "WeWa 与 EarnMORE 自 2025 年起海外签账收取 1% 手续费"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "low",
+    "notes": "两个不确定点：1) 海外手续费 0% vs 1% 存在公开矛盾信息，按 1% 保守处理；2) 「自 2026-10-01 起」的类别重构距今仅一个月，实际执行细则仍需用户自查。类别是「选一 + 预设」的组合，现有 categories 静态映射无法表达，已在 note 说明。"
+  },
+  {
+    "cardId": "earnmore-unionpay",
+    "issuer": "安信信贷（PrimeCredit）",
+    "issuerRegion": "HK",
+    "cardName": "EarnMORE 银联钻石卡",
+    "network": "unionpay",
+    "cardCurrency": "HKD",
+    "annualFee": {
+      "amount": 1500,
+      "currency": "HKD",
+      "waiverNote": "首 2 年免年费（学生卡首 5 年免）；其后 HK$1,500/年，可致电客服申请豁免"
+    },
+    "fxFee": {
+      "rate": 0.01,
+      "fixedFee": 0,
+      "fixedFeeCurrency": "HKD",
+      "source": {
+        "url": "https://www.moneysmart.hk/credit-cards/earnmore-unionpay-card",
+        "verifiedAt": "2026-10-31",
+        "note": "海外签账手续费 1%（2025 年起新增）。与部分早期资料称「免 1.95%」矛盾，按 1% 记录（保守）。"
+      }
+    },
+    "categories": {
+      "dining": {
+        "kind": "cashback",
+        "note": "全类别统一 2%（计年度 HK$150,000 上限内）",
+        "rates": {
+          "local": 0.02
+        }
+      },
+      "grocery": {
+        "kind": "cashback",
+        "rates": {
+          "local": 0.02
+        }
+      },
+      "fuel": {
+        "kind": "cashback",
+        "rates": {
+          "local": 0.02
+        }
+      },
+      "flight": {
+        "kind": "cashback",
+        "note": "海外同样 2%，但要扣 1% 手续费，净 1%",
+        "rates": {
+          "local": 0.02
+        }
+      },
+      "hotel": {
+        "kind": "cashback",
+        "rates": {
+          "local": 0.02
+        }
+      },
+      "online": {
+        "kind": "cashback",
+        "note": "本地网签 2%；海外网签 2% 仍需扣 1%",
+        "rates": {
+          "local": 0.02
+        }
+      },
+      "other": {
+        "kind": "cashback",
+        "rates": {
+          "local": 0.02
+        }
+      }
+    },
+    "caps": [
+      {
+        "id": "earnmore-unionpay:semi-annual-2pct",
+        "categories": "all",
+        "limitAmount": 80000,
+        "limitCurrency": "HKD",
+        "period": "half_year",
+        "overLimitFallback": {
+          "kind": "cashback",
+          "exclusivityGroup": "base",
+          "capIds": [],
+          "rates": {
+            "local": 0.01
+          }
+        },
+        "basis": "spend"
+      }
+    ],
+    "capsNote": "官方现行口径：每半年首 HK$80,000 签账享 2% 现金回赠，超出部分回落 1%（points852 2026-10-31 核实，架构师另经三源确认）。此处按「可享优惠的签账额上限」建模：period = half_year、basis = 'spend'、limitAmount = 80000，跨半年不重置、跨年重置。原记录为 period: month + limitAmount 3000 + basis: value（id 里自己写着 annual），是把年度回赠上限强行折算进月度字段，导致每月都重置满额、收益被系统性高估，2026-10-31 依 ADR-009 decision_2 更正。注：另一说「2% 回赠年上限 HK$1,500」在 2% 档下等价于年签账 HK$75,000，与半年 80,000 口径不等价，以半年签账额口径为准。",
+    "thresholds": [],
+    "pointsValuation": null,
+    "source": [
+      {
+        "url": "https://www.moneysmart.hk/credit-cards/earnmore-unionpay-card",
+        "verifiedAt": "2026-10-31",
+        "note": "2% 现金回赠；年费 HK$1,500 首 2 年免；海外手续费 1%"
+      },
+      {
+        "url": "https://points852.com/?p=58882/",
+        "verifiedAt": "2026-10-31",
+        "note": "2026 起每半年首 HK$80,000 享 2%，超出回落 1%——现行口径，architecture 另经三源确认（2026-10-31）"
+      }
+    ],
+    "verifiedAt": "2026-10-31",
+    "confidence": "low",
+    "notes": "上限口径已于 2026-10-31 收敛：官方现行是「每半年首 HK$80,000 签账享 2%，其后 1%」，按 half_year + basis: spend 建模（此前的 month + value 折算会每月重置满额）。仍需注意两点：1) 该口径只约束可享 2% 的签账额度，不设回赠金额上限，故半年刷满 80,000 后回赠为 1,600 HKD 而非 3,000；2) 海外签账另有 1% 手续费，净 1%，已由 fxFee 承担。"
+  }
+]
