@@ -26,6 +26,21 @@ import { fileURLToPath } from 'node:url';
 
 const SRC = fileURLToPath(new URL('./src', import.meta.url));
 
+/**
+ * 构建时间戳，格式 `YYYY-MM-DD HH:mm`（澳门/香港/内地同一时区 UTC+8）。
+ *
+ * 不用 `toISOString()` 直接截断：那是 UTC，用户看到的时间会比他按下
+ * 「立即更新」的时刻早 8 小时，反而增加困惑。
+ */
+function buildStamp(): string {
+  const now = new Date(Date.now() + 8 * 60 * 60 * 1000);
+  const pad = (n: number): string => String(n).padStart(2, '0');
+  return (
+    `${String(now.getUTCFullYear())}-${pad(now.getUTCMonth() + 1)}-${pad(now.getUTCDate())}` +
+    ` ${pad(now.getUTCHours())}:${pad(now.getUTCMinutes())}`
+  );
+}
+
 export default defineConfig(({ mode }) => {
   const isDev = mode === 'development';
 
@@ -40,7 +55,12 @@ export default defineConfig(({ mode }) => {
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data:",
     "font-src 'self'",
-    isDev ? "connect-src 'self' ws: http://localhost:*" : "connect-src 'none'",
+    // 生产环境必须放行同源连接：浏览器内核读取 manifest.webmanifest 与注册
+    // Service Worker 都受 connect-src 约束（manifest-src 支持度有限，回退到
+    // connect-src）。若写 'none'，PWA 能正常打开却永远不弹安装入口，比白屏更隐蔽。
+    // 'self' 仍禁止一切跨域连接，"零外部请求" 的卖点不变。
+    isDev ? "connect-src 'self' ws: http://localhost:*" : "connect-src 'self'",
+    "manifest-src 'self'",
     "form-action 'none'",
     // frame-ancestors 只能经 HTTP 头下发，写在 meta 里浏览器直接忽略并报
     // 控制台错误。部署到静态托管时用 _headers / vercel.json 补这条。
@@ -50,6 +70,10 @@ export default defineConfig(({ mode }) => {
 
   return {
     base: './',
+    define: {
+      // 构建时间写进 bundle，设置页用它回答「我是不是新版」
+      __BUILD_STAMP__: JSON.stringify(buildStamp()),
+    },
     resolve: {
       alias: { '@': SRC },
     },

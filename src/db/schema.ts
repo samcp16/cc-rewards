@@ -36,6 +36,14 @@ export interface CardRow extends Card {
   nickname?: string;
   /** 写入/更新时间，ISO */
   updatedAt: string;
+  /**
+   * 用户亲手改过这行（在详情页点过保存）。
+   *
+   * 存在的唯一目的：卡库升级时不覆盖用户自己的改动。没有这个标记，
+   * 我们一改官方数据就会把用户调过的值悄悄改回去 —— 那比数据旧更糟。
+   * 播种走 `bulkPut` 不经过 `putCard`，所以播种出来的行永远没有这个标记。
+   */
+  editedByUser?: boolean;
 }
 
 /** 设置项。单表 KV，值类型在读取处收窄（见 settingsRepository）。 */

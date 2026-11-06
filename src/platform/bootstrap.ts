@@ -13,7 +13,7 @@
  * 会把 effect 跑两遍，播种逻辑虽然幂等，但 transaction 会真的执行两次。
  */
 
-import { seedCardsIfNeeded } from '../db/cardsRepository';
+import { seedCardsIfNeeded, syncPresetCardsIfOutdated } from '../db/cardsRepository';
 
 export type PersistState = 'granted' | 'denied' | 'unsupported' | 'pending';
 
@@ -55,7 +55,11 @@ let bootstrapPromise: Promise<void> | null = null;
 /** 幂等：多次调用只会真正执行一次 */
 export function bootstrapApp(): Promise<void> {
   bootstrapPromise ??= (async () => {
+    // 先播种（首次用户），再升级（老用户拿到新卡库数据）。
+    // 顺序不能反：新用户还没卡，直接跑升级会先把版本号推到最新，
+    // 随后播种写入的却是同版本数据 —— 看起来对，但版本号已经失去意义。
     await Promise.all([requestPersist(), seedCardsIfNeeded()]);
+    await syncPresetCardsIfOutdated();
   })();
   return bootstrapPromise;
 }

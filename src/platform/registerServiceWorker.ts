@@ -7,35 +7,16 @@
  * 为什么是 prompt 而非 autoUpdate（与 vite.config.ts 的 registerType 对应）：
  * 卡库是用户手改的数据。用户正在编辑规则时 app 被静默换成新版本，
  * 表单里未保存的输入会原地消失且没有任何解释。宁可让用户自己选时机。
+ *
+ * 「暂存 + 补发」的时序在这个文件之外（updateSignal.ts），因为那个文件
+ * 可测；这里 import 了虚拟模块，只有真实构建环境才存在。
  */
 
 import { registerSW } from 'virtual:pwa-register';
+import { notifyUpdateReady } from './updateSignal';
 
-/** 更新可见时的处置方式，由 UI 层提供。 */
-type UpdateReadyHandler = (apply: () => void) => void;
-
-let updateReadyHandler: UpdateReadyHandler | undefined;
-
-/**
- * UI 层注册「有新版本」提示。返回取消注册函数。
- *
- * 注意时序：SW 的 onNeedRefresh 可能在 UI 挂载之前就触发
- * （首屏就检测到新版本），所以这里会把「待处理的更新」暂存，
- * 等 UI 注册时立刻补发一次 —— 否则那条最该被看到的提示会丢。
- */
-export function listenForUpdate(handler: UpdateReadyHandler): () => void {
-  updateReadyHandler = handler;
-  if (pendingApply) {
-    handler(pendingApply);
-    pendingApply = undefined;
-  }
-  return () => {
-    if (updateReadyHandler === handler) updateReadyHandler = undefined;
-  };
-}
-
-/** 待补发的更新动作。onNeedRefresh 先于 UI 挂载时暂存于此。 */
-let pendingApply: (() => void) | undefined;
+/** 后台检查更新的间隔。本产品数据变化频率是「天」级，更密只增加耗电。 */
+const UPDATE_CHECK_INTERVAL_MS = 60 * 60 * 1000;
 
 export function registerServiceWorker(): void {
   // dev 环境不注册（vite.config.ts 里 devOptions.enabled = false）。
@@ -48,28 +29,28 @@ export function registerServiceWorker(): void {
     const updateSW = registerSW({
       immediate: true,
       onNeedRefresh() {
-        const apply = (): void => {
+        notifyUpdateReady(() => {
           void updateSW(true);
-        };
-        if (updateReadyHandler) {
-          updateReadyHandler(apply);
-        } else {
-          pendingApply = apply;
-        }
+        });
       },
       onOfflineReady() {
         console.warn('离线壳已就绪：断网后仍可打开应用。');
       },
       onRegisteredSW(_swUrl, registration) {
-        // 每小时检查一次更新。本产品数据变化频率是「天」级，
-        // 更频繁的轮询只增加耗电，没有收益。
         if (!registration) return;
-        setInterval(
-          () => {
-            void registration.update();
-          },
-          60 * 60 * 1000,
-        );
+
+        const check = (): void => {
+          // 只在前台检查：手机 PWA 经常整夜留在后台，
+          // 那个时段的轮询既拿不到新版本也没有意义。
+          if (document.visibilityState !== 'visible') return;
+          void registration.update();
+        };
+
+        setInterval(check, UPDATE_CHECK_INTERVAL_MS);
+
+        // 手机上「切回应用」比「等满一小时」常见得多。
+        // 不补这一条，用户可能整整一天都收不到更新提示。
+        document.addEventListener('visibilitychange', check);
       },
       onRegisterError(error) {
         // SW 注册失败不影响功能，但要让开发者在控制台看见

@@ -118,8 +118,8 @@ export function NewCardPage(): React.JSX.Element {
         </div>
 
         <p className="pb-[var(--space-8)] text-[length:var(--text-xs)] leading-[var(--leading-body)] text-meta">
-          预置卡里还有 {templates.filter((t) => unknownCategories(t).length > 0).length} 张有类别费率没查到。
-          建卡后详情页会逐条列出是哪几个类别，方便你对着官方页面补。
+          预置卡中另有 {templates.filter((t) => unknownCategories(t).length > 0).length} 张的部分类别官方尚未公布，
+          暂不参与对应排序；我们会持续核实补充，无需你手动填写。
         </p>
       </div>
     </PageShell>

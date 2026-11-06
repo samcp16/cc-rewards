@@ -148,6 +148,9 @@ export default [
   {
     ignores: [
       'dist/**',
+      // docs/ 是 GitHub Pages 的发布目录（构建产物），不是文档。
+      // 项目文档在 documents/。压缩后的 bundle 过 lint 只会产出几千条噪音。
+      'docs/**',
       'coverage/**',
       'node_modules/**',
       'public/**',

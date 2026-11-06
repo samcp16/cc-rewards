@@ -27,10 +27,9 @@ import { markExported, loadLastExportAt } from '../db/settingsRepository';
 import { useCards } from '../db/useDb';
 import { useEngineParams } from '../db/paramsRepository';
 import { getPlatformInfo } from '../platform/installGuide';
+import { APP_VERSION, BUILD_STAMP } from '../platform/buildInfo';
 import { daysBetween } from '../lib/period';
 import { DEFAULT_FX_TABLE, describeRate } from '../domain/fx/fxReference';
-
-const APP_VERSION = '1.0.0';
 
 export function SettingsPage(): React.JSX.Element {
   const { cards } = useCards();
@@ -182,7 +181,11 @@ export function SettingsPage(): React.JSX.Element {
         </Group>
 
         <Group title="关于">
-          <ValueRow label="版本" value={APP_VERSION} />
+          <ValueRow
+            label="版本"
+            value={`${APP_VERSION} · ${BUILD_STAMP}`}
+            hint="更新到这版后，检测到新版本会弹提示"
+          />
           <ValueRow label="数据核实批次" value={loaded && batchDate ? batchDate : '—'} hint={loaded ? `覆盖 ${String(cards.length)} 张卡` : undefined} />
           <ActionRow
             label="免责声明"

@@ -73,7 +73,7 @@ export function CategorySection({ card, onEditCategory, capNotes }: CategorySect
             </div>
             {unknown ? (
               <p className="pl-[88px] text-[length:var(--text-xs)] leading-[var(--leading-body)] text-muted">
-                这一类我们没查到。不填就不参与排序 —— 填了才算得准。
+                官方未收录此项，本卡不参与该类排序（我们持续核实补充）。
               </p>
             ) : (
               (capNotes[opt.value] !== undefined || rule.note !== undefined) && (

@@ -17,6 +17,7 @@
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastHost } from './components/common/Toast';
+import { UpdateBanner } from './components/common/UpdateBanner';
 import { CardDetailPage } from './pages/CardDetailPage';
 import { CardsPage } from './pages/CardsPage';
 import { DecidePage } from './pages/DecidePage';
@@ -36,6 +37,9 @@ export function App(): React.JSX.Element {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <ToastHost />
+      {/* 新版本提示：放在 Routes 之外，任何页面都能收到（用户在设置页
+          停留时也可能检测到更新）。z 层级与 Toast 同级，二者不会同时出现 */}
+      <UpdateBanner />
     </>
   );
 }
