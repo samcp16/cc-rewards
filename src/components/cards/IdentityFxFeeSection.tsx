@@ -15,6 +15,7 @@ import type { CardNetwork, CurrencyCode, IssuerRegion } from '../../domain/types
 import { PercentField, ReadOnlyRow, SelectField, TextField } from './FieldRows';
 import { SourceLink } from '../common/SourceLink';
 import { CURRENCY_LABEL, ISSUER_REGION_LABEL, NETWORK_LABEL } from '../../lib/labels';
+import { shortIssuer } from '../../lib/issuerGroups';
 import { formatMoney } from '../../lib/format';
 
 interface IdentityFxFeeSectionProps {
@@ -33,7 +34,7 @@ export function IdentityFxFeeSection({ draft, patch, fxError, fxRef }: IdentityF
           基本信息
         </h2>
         <TextField label="卡片名称" value={draft.cardName} onChange={(v) => patch({ cardName: v })} placeholder="例如 中银香港 Chill 信用卡" />
-        <TextField label="发卡行" value={draft.issuer} onChange={(v) => patch({ issuer: v })} placeholder="例如 中银香港" />
+        <ReadOnlyRow label="发卡行" value={shortIssuer(draft.issuer)} hint="发卡行决定这张卡归在哪一组，要换请在卡库里重新选一张" />
         <SelectField<IssuerRegion>
           label="发卡地区"
           value={draft.issuerRegion}

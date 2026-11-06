@@ -60,10 +60,28 @@
 
   /* 卡面光泽：单层斜向，一色起一色落。多色渐变是 AI 模板味的第一个指纹 */
   --card-sheen: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.16) 0%,
-    rgba(255, 255, 255, 0) 38%,
-    rgba(0, 0, 0, 0.32) 100%
+    158deg,
+    rgba(255, 255, 255, 0.24) 0%,
+    rgba(255, 255, 255, 0.05) 24%,
+    rgba(0, 0, 0, 0.08) 60%,
+    rgba(0, 0, 0, 0.44) 100%
+  );
+  /* 窄斜光带：卡面塑料膜反的那一道。放在 sheen 之上，是「像卡」而非「像色块」的分界 */
+  --card-streak: linear-gradient(
+    112deg,
+    rgba(255, 255, 255, 0) 24%,
+    rgba(255, 255, 255, 0.17) 39%,
+    rgba(255, 255, 255, 0.03) 47%,
+    rgba(255, 255, 255, 0) 62%
+  );
+  /* 左上角柔光：模拟顶灯打在塑料卡面上的漫反射。没有它，深色银行色就是一块死色 */
+  --card-bloom: radial-gradient(125% 95% at 6% -4%, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0) 58%);
+  /* 官方素材上的同一层反光。比绘制卡面更淡 —— 照片本身已有光，再加会发灰 */
+  --card-gloss: linear-gradient(
+    118deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(0, 0, 0, 0.12) 100%
   );
   /* 卡面边缘：1px 内高光 + 1px 内暗边，制造「一片有厚度的塑料」 */
   --card-rim: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 0 0 1px rgba(0, 0, 0, 0.35);
@@ -80,6 +98,10 @@
   --card-shade-2: rgba(0, 0, 0, 0.36);
   --card-shade-3: rgba(0, 0, 0, 0.54);
 
+  /* 详情页大卡面的悬空投影。用 drop-shadow 而不是 box-shadow：
+     卡面有圆角透明区，box-shadow 会画出一个方形的影子 */
+  --card-float: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.5));
+
   /* 卡组织官方标志色 */
   --net-visa: #1a1f71;
   --net-mastercard-red: #eb001b;
@@ -89,4 +111,9 @@
   --net-unionpay-blue: #00447c;
   --net-unionpay-green: #007b84;
   --net-amex: #006fcf;
+}
+
+/* 浅色下卡面是「白纸上的一张卡」，投影要更淡更散，否则像贴了一张贴纸 */
+:root[data-theme='light'] {
+  --card-float: drop-shadow(0 10px 16px rgba(18, 24, 38, 0.24));
 }

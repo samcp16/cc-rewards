@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { AmountInput } from '../components/form/AmountInput';
 import { CategoryGrid } from '../components/form/CategoryGrid';
 import { ChannelPills } from '../components/form/ChannelPills';
+import { QuickAmount } from '../components/form/QuickAmount';
 import { RegionSegment } from '../components/form/RegionSegment';
 import { PageShell } from '../components/layout/PageShell';
 import { TabBar } from '../components/layout/TabBar';
@@ -67,17 +68,28 @@ export function DecidePage(): React.JSX.Element {
           />
         }
       >
-        <div className="mx-auto flex w-full max-w-[var(--container-desktop)] flex-col gap-[var(--space-5)] px-[var(--space-4)] pt-[var(--space-2)]">
+        {/* 内容集中在上半部，剩余空间留给答案卡上方的呼吸区。
+            之前试过 justify-between 把四组控件摊平 —— 结果是三块孤岛，
+            控件之间的空隙比控件本身还大，比留白更难看 */}
+        <div className="mx-auto flex w-full max-w-[var(--container-desktop)] flex-col gap-[var(--space-6)] px-[var(--space-4)] pt-[var(--space-4)] pb-[var(--space-4)]">
           <RegionSegment value={spend.region} onChange={spend.setRegion} />
           <CategoryGrid value={spend.category} onChange={spend.setCategory} />
-          <AmountInput
-            value={spend.amountText}
-            currency={spend.settlementCurrency}
-            error={spend.amountError}
-            onChange={spend.setAmountText}
-            onBlur={spend.blurAmount}
-            inputRef={amountRef}
-          />
+          <div className="flex flex-col gap-[var(--space-3)]">
+            <AmountInput
+              value={spend.amountText}
+              currency={spend.settlementCurrency}
+              error={spend.amountError}
+              onChange={spend.setAmountText}
+              onBlur={spend.blurAmount}
+              inputRef={amountRef}
+            />
+            <QuickAmount
+              current={spend.amount}
+              onPick={(value) => {
+                spend.setAmountText(String(value));
+              }}
+            />
+          </div>
           <ChannelPills value={spend.channel} onChange={spend.setChannel} />
         </div>
       </PageShell>

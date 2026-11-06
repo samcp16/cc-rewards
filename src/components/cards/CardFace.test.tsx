@@ -71,8 +71,8 @@ describe('CardFace：卡组织标识', () => {
 });
 
 describe('CardFace：尺寸档位', () => {
-  it('thumb 是 76 宽，full 是 100%', () => {
-    expect(render()).toContain('width:76px');
+  it('thumb 是 89 宽，full 是 100%', () => {
+    expect(render()).toContain('width:89px');
     expect(render({ size: 'full' })).toContain('width:100%');
   });
 
@@ -84,6 +84,31 @@ describe('CardFace：尺寸档位', () => {
   it('两档都保持信用卡的 1.586:1 比例', () => {
     expect(render()).toContain('1.586 / 1');
     expect(render({ size: 'full' })).toContain('1.586 / 1');
+  });
+});
+
+describe('CardFace：官方素材', () => {
+  it('登记过的卡渲染成 img，而不是继续画假卡面', () => {
+    const html = render({ card: { ...HSBC, cardId: 'hsbc-red' } });
+    expect(html).toContain('<img');
+    expect(html).toContain('.webp');
+    // 有真图就不该再叠品牌底色，否则图片没加载出来时会露出一个假卡面
+    expect(html).not.toContain('var(--brand-hsbc)');
+  });
+
+  it('没登记素材的卡仍然画卡面 —— 空槽比假卡面更糟', () => {
+    const html = render({ card: { ...HSBC, cardId: 'mox-credit' } });
+    expect(html).not.toContain('<img');
+    expect(html).toContain('var(--brand-hsbc)');
+  });
+
+  it('没有 cardId 时走绘制路径，不抛错', () => {
+    expect(render()).not.toContain('<img');
+  });
+
+  it('有素材的卡不叠同银行暗阶 —— 真图本来就各不相同', () => {
+    const html = render({ card: { ...HSBC, cardId: 'hsbc-red' }, indexInIssuer: 2 });
+    expect(html).not.toContain('--card-shade');
   });
 });
 

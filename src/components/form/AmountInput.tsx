@@ -1,9 +1,13 @@
 /**
  * 金额输入（main-query.md §4.3）。
  *
+ * 这一版把输入框的「框」去掉了：金额是这一屏的主角，一个描边矩形会把它降级成
+ * 一条表单字段。取而代之的是「整块可点 + 聚焦时浮现的底线」—— 可发现性靠光标
+ * 和标签保留，视觉重量全部让给数字。
+ *
  * 三个容易漏的边界，全部实现在这里：
  *
- * 1. **>99,999 降字号**（28px → 20px）。绝不截断、绝不横向滚动 —— 用户输入的
+ * 1. **>99,999 降字号**（48px → 30px）。绝不截断、绝不横向滚动 —— 用户输入的
  *    六位数如果滚出视野，他会以为少打了一位。
  * 2. **粘贴 `1,234.56` 自动清洗逗号**。用户从账单里复制金额是最常见的路径。
  * 3. **不 autofocus**。iOS 禁止无手势聚焦，写了也会被忽略；写上去只会让
@@ -47,18 +51,26 @@ export function AmountInput({ value, currency, error, onChange, onBlur, inputRef
 
   return (
     <div>
-      <label htmlFor="amount-input" className="mb-[var(--space-2)] block text-[length:var(--text-xs)] text-muted">
-        这笔消费多少
-      </label>
+      <div className="mb-[var(--space-1)] flex items-baseline justify-between">
+        <label htmlFor="amount-input" className="block text-[length:var(--text-xs)] tracking-[var(--tracking-caps)] text-muted">
+          这笔消费多少
+        </label>
+        <span className="text-[length:var(--text-2xs)] tracking-[var(--tracking-caps)] text-meta">{currency}</span>
+      </div>
+
       <div
         className={[
-          'flex h-[var(--size-amount-input)] items-center gap-[var(--space-2)] rounded-md border bg-surface-2',
-          'px-[var(--space-4)] transition-colors duration-[var(--motion-fast)]',
-          'focus-within:outline focus-within:outline-[length:var(--focus-width)] focus-within:outline-offset-[var(--focus-offset)] focus-within:outline-accent-text',
-          error ? 'border-neg' : 'border-line focus-within:border-accent-text',
+          'amount-field group relative flex items-end gap-[var(--space-1)] pb-[var(--space-2)]',
+          'border-b transition-[border-color,box-shadow] duration-[var(--motion-fast)]',
+          error
+            ? 'border-neg focus-within:border-neg'
+            : 'border-line focus-within:border-accent-text focus-within:shadow-[0_2px_0_-1px_var(--accent-text)]',
         ].join(' ')}
       >
-        <span className="shrink-0 text-[length:var(--text-md)] text-muted" aria-hidden="true">
+        <span
+          className="shrink-0 pb-[10px] text-[length:var(--text-2xl)] font-[var(--fw-emphasize)] leading-none text-muted"
+          aria-hidden="true"
+        >
           {currencySymbol(currency).trim()}
         </span>
         <input
@@ -71,18 +83,19 @@ export function AmountInput({ value, currency, error, onChange, onBlur, inputRef
           aria-invalid={error !== null}
           aria-describedby={error !== null ? 'amount-error' : undefined}
           value={value}
-          placeholder="0.00"
+          placeholder="0"
           onChange={handleChange}
           onPaste={handlePaste}
           onBlur={onBlur}
           className={[
-            'num min-w-0 flex-1 bg-transparent text-right text-fg caret-accent-text outline-none',
+            'num min-w-0 flex-1 bg-transparent text-fg caret-accent-text outline-none',
             'placeholder:text-disabled',
-            large ? 'text-[length:var(--text-lg)]' : 'text-[length:var(--text-xl)]',
             'font-[var(--fw-announce)] tracking-[var(--tracking-display)]',
+            large ? 'text-[length:var(--text-2xl)] leading-[1.1]' : 'text-[length:var(--text-3xl)] leading-none',
           ].join(' ')}
         />
       </div>
+
       {error !== null && (
         <p
           id="amount-error"

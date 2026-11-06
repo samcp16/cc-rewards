@@ -78,6 +78,21 @@
  * 2. 禁止用户选中 UI 文案时误选 —— 单手操作时很容易拖出一片蓝色高亮，
  *    而本产品满屏是数字，误选会让人以为数字被改过。金额本身仍允许选中复制。
  */
+/*
+ * 金额输入的自定义焦点指示。
+ *
+ * 全局 :focus-visible 是 3px 描边 + 2px offset，对按钮和列表行是对的，
+ * 但对「无边框的大号金额输入」会画出一个突兀的方框 —— 它把一个不该有边框的
+ * 控件变成了表单字段，用户第一眼看到的是框而不是数字。
+ *
+ * 所以这里换成同等的替代指示：聚焦时底线由 1px 变 2px 并染 accent，
+ * 加上整块光晕。对比度 ≥3:1、位置与控件边界重合，符合 WCAG 2.4.11。
+ * **不是把焦点环删掉了**，是换成贴合这个控件形态的画法。
+ */
+.amount-field input:focus-visible {
+  outline: none;
+}
+
 @layer base {
   body {
     /* preflight 不设，Safari 上会有 8px 的橡皮筋区域 */
@@ -92,5 +107,45 @@
   :where(input, textarea, .num, [data-num]) {
     -webkit-user-select: text;
     user-select: text;
+  }
+}
+
+
+/*
+ * 页面进入：6px 上浮 + 淡入，150ms。
+ *
+ * 只做「换页时不是硬切」这一件事。不做逐元素错峰入场 —— 那是落地页的手法，
+ * 在一个「3 秒内要给出答案」的工具里，错峰会让人等动画。
+ *
+ * 在 prefers-reduced-motion 下由 design-tokens.css 的全局规则压到 0.01ms，
+ * 不需要在这里再写一遍媒体查询。
+ */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-enter {
+  animation: page-enter var(--motion-base) var(--ease-standard) both;
+}
+
+/*
+ * 卡片 / 列表行的按压反馈。
+ *
+ * 移动端没有 hover，按下时若毫无变化，用户会怀疑「点到了吗」，
+ * 于是再点一次 —— 那才是真正的慢。
+ */
+@media (hover: none) {
+  .pressable {
+    transition: transform var(--motion-fast) var(--ease-standard);
+  }
+  .pressable:active {
+    transform: scale(0.985);
   }
 }

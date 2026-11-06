@@ -31,7 +31,7 @@ export function PageShell({ topbar, children, sticky, tabbar, contentPaddingBott
         </div>
       )}
       <main
-        className="min-h-0 flex-1 overflow-y-auto overscroll-contain"
+        className="page-enter min-h-0 flex-1 overflow-y-auto overscroll-contain"
         style={{
           WebkitOverflowScrolling: 'touch',
           paddingBottom: contentPaddingBottom ?? 'var(--space-4)',

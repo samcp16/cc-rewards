@@ -25,6 +25,7 @@ const CSS_NAME: Array<[string, string, string?]> = [
   // --- 行级底色 ------------------------------------------------------------
   ['row.championBg', '--row-champion', '冠军行整行底色。1.16:1，不做左侧彩色条纹'],
   ['row.hoverBg', '--row-hover', undefined],
+  ['row.raised', '--row-raised', '抬起块：段控件滑块。浅色=最白，深色=更亮，方向相反'],
 
   // --- 文字 ----------------------------------------------------------------
   ['color.text.primary', '--fg', '主文本 / 卡名 / 主角数字'],
@@ -73,7 +74,8 @@ const CSS_NAME: Array<[string, string, string?]> = [
   ['font.size.md', '--text-md', undefined],
   ['font.size.lg', '--text-lg', undefined],
   ['font.size.xl', '--text-xl', undefined],
-  ['font.size.2xl', '--text-2xl', '唯一主角：本次净返金额'],
+  ['font.size.2xl', '--text-2xl', '次级金额 / 额度页 KPI'],
+  ['font.size.3xl', '--text-3xl', '金额主角 48px。全屏只允许 1–2 处'],
 
   // --- 行高（JSON 未单列，来自 font.size.*.lineHeight）---------------------
   ['font.size.2xl.lineHeight', '--leading-tight', undefined],
@@ -195,12 +197,17 @@ const DERIVED: Emitted[] = [
     source: 'elevation.ring',
     name: '--elev-ring',
     value: '0 0 0 1px var(--line-subtle)',
+    /* 浅色下 1px 环在白面上几乎不可见，改用真实微阴影 —— 浅色主题的厚度靠光影，
+       深色主题的厚度靠色阶（见 elevation.$comment）。这里必须分主题给值，
+       否则浅色界面的所有卡片都会「贴死」在背景上，看起来像印刷品而不是界面 */
+    lightValue: '0 1px 2px rgba(18, 24, 38, 0.07), 0 0 0 1px var(--line-subtle)',
     comment: '1px 环比 border 更可控，不参与布局计算',
   },
   {
     source: 'elevation.raised',
     name: '--elev-raised',
     value: '0 8px 24px rgba(0, 0, 0, 0.48), 0 0 0 1px var(--line)',
+    lightValue: '0 8px 28px -10px rgba(18, 24, 38, 0.18), 0 0 0 1px var(--line)',
     comment: '仅 3 处：FAB / popover / bottom sheet 上缘',
   },
   {

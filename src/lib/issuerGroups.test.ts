@@ -8,7 +8,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { CARDS, getCardById } from '../domain/data/loadCards';
-import { cardSummary, cardsOfIssuer, issuerGroups, issuerKey } from './issuerGroups';
+import { cardSummary, cardsOfIssuer, issuerGroups, issuerKey, shortIssuer } from './issuerGroups';
 
 describe('issuerGroups', () => {
   it('每张卡只被分到一组，且总量守恒', () => {
@@ -135,5 +135,27 @@ describe('cardSummary', () => {
       },
     };
     expect(cardSummary(mixed).state).toBe('cashback');
+  });
+});
+
+
+describe('shortIssuer：列表副行用的短名', () => {
+  it('剥掉括号里的法定名与拉丁名', () => {
+    expect(shortIssuer('澳门商业银行（Banco Comercial de Macau, BCM）')).toBe('澳门商业');
+    expect(shortIssuer('大丰银行（Tai Fung Bank）')).toBe('大丰银行');
+  });
+
+  it('有特例的走特例 —— 两个「中银」必须分得开', () => {
+    expect(shortIssuer('中国银行澳门分行（BOC Macau）')).toBe('中银澳门');
+    expect(shortIssuer('中银香港（Bank of China Hong Kong）')).toBe('中银香港');
+  });
+
+  it('没有括号的名字原样返回', () => {
+    expect(shortIssuer('Mox Bank')).toBe('Mox Bank');
+  });
+
+  it('结果一定短于原始全名，否则截断白做了', () => {
+    const full = '澳门国际银行（Macau Chinese Bank / MIB）';
+    expect(shortIssuer(full).length).toBeLessThan(full.length);
   });
 });

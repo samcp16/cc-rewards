@@ -1,6 +1,6 @@
 # ADR-017: 卡面用绘制，不抓官网照片
 
-**Status:** Accepted (2026-11-06)
+**Status:** Superseded by ADR-018 (2026-11-06) —— 第 1 条「不抓官网照片」已被推翻，第 2 条（品牌色独立文件）仍然有效
 **Related:** ADR-014（卡库数据同步）
 
 ## Background

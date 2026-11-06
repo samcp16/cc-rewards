@@ -125,7 +125,10 @@ export default defineConfig(({ mode }) => {
           navigateFallback: 'index.html',
           // 逐项预缓存而非 cache.addAll：一个图标 404 不该让整个安装失败，
           // 否则用户连离线壳都没有。plugin 默认行为即如此，不要手写覆盖。
-          globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
+          /* webp 必须在内：卡面是本地打包的官方素材，不进预缓存的话
+             离线打开（收银台常常没信号）会看到一片空白卡位 —— 而离线正是这个
+             PWA 存在的理由。11 张共 268KB，加进来后总预缓存约 650KB */
+          globPatterns: ['**/*.{js,css,html,svg,png,webp,woff2}'],
           runtimeCaching: [
             {
               // 页面导航：弱网下 3s 必回退，不让用户对着白屏等

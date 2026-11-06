@@ -76,6 +76,36 @@ export function issuerGroups(options?: {
 }
 
 /** 某家银行下的全部卡（已排序）。 */
+/**
+ * 机构短名 —— 列表副行用。
+ *
+ * 数据里的 issuer 是完整法定名（「澳门商业银行（Banco Comercial de Macau, BCM）」），
+ * 完整名在详情页有用（能确认是哪一家），但在 84px 的行里只会被截成
+ * 「澳门商业银行（Banco Comercial de...」—— 截断位置随机，反而认不出。
+ *
+ * 只做「剥括号 + 少数特例」，不做智能缩写：机构名是专有名词，
+ * 自动缩写（取首字、去后缀）会把「中银香港」变成「中银」，
+ * 而澳门和香港各有一个「中银」，那不叫简洁，叫歧义。
+ */
+const SHORT_OVERRIDE: Record<string, string> = {
+  香港上海汇丰银行: '汇丰',
+  中国银行澳门分行: '中银澳门',
+  澳门商业银行: '澳门商业',
+  华侨永亨银行: '华侨永亨',
+  澳门国际银行: '澳门国际',
+  渣打银行香港: '渣打',
+  花旗银行香港: '花旗',
+  东亚银行: '东亚',
+  星展银行香港: '星展',
+  美国运通香港: '美国运通',
+  安信信贷: '安信',
+};
+
+export function shortIssuer(issuer: string): string {
+  const base = issuer.split('（')[0]?.trim() ?? issuer;
+  return SHORT_OVERRIDE[base] ?? base;
+}
+
 export function cardsOfIssuer(issuer: string): Card[] {
   return issuerGroups().find((g) => g.issuer === issuer)?.cards ?? [];
 }

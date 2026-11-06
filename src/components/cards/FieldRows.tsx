@@ -161,7 +161,12 @@ export function ReadOnlyRow({ label, value, hint }: ReadOnlyRowProps): React.JSX
     <div className="flex flex-col gap-[var(--space-1)] border-b border-line-subtle py-[var(--space-2)] last:border-b-0">
       <div className="flex min-h-[36px] items-center gap-[var(--space-3)]">
         <span className="w-[76px] shrink-0 text-[length:var(--text-sm)] text-muted">{label}</span>
-        <span className="num min-w-0 flex-1 text-right text-[length:var(--text-md)] text-fg-2">{value}</span>
+        <span
+          className="num min-w-0 flex-1 truncate text-right text-[length:var(--text-md)] text-fg-2"
+          title={typeof value === 'string' ? value : undefined}
+        >
+          {value}
+        </span>
       </div>
       {hint !== undefined && <p className="pl-[88px] text-[length:var(--text-xs)] leading-[var(--leading-body)] text-muted">{hint}</p>}
     </div>

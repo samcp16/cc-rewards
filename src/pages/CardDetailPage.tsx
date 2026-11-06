@@ -23,6 +23,7 @@ import { IconAction, TopBar } from '../components/layout/TopBar';
 import { SourceLink } from '../components/common/SourceLink';
 import { showToast } from '../components/common/Toast';
 import { CardFace } from '../components/cards/CardFace';
+import { cardArt } from '../lib/cardArt';
 import { DeleteConfirm } from '../components/cards/DeleteConfirm';
 import { TemplatePickerSheet } from '../components/cards/TemplatePickerSheet';
 import { IdentityFxFeeSection } from '../components/cards/IdentityFxFeeSection';
@@ -98,6 +99,10 @@ export function CardDetailPage(): React.JSX.Element {
   }
 
   const validity = validityOf(draft, params.today);
+  /* 卡面来源：只对已登记官方素材的卡显示。写出来是这套产品的一贯做法 ——
+     数据能溯源，图也应该能 */
+  const artEntry = cardArt(draft.cardId);
+  const artSource = artEntry === undefined ? null : new URL(artEntry.issuerPage).hostname.replace(/^www\./, '');
   const staleDays = staleDaysOf(draft, params.today);
   const unknown = unknownCategories(draft);
 
@@ -209,10 +214,15 @@ export function CardDetailPage(): React.JSX.Element {
         {/* 卡面只做「这是我的那张卡」的视觉确认。
             卡名不在这里重复 —— 顶栏已经是它，下面「基本信息」的第一个字段也是它。
             同一个名字在一屏出现三次，是在用信息填空，不是在给信息。 */}
-        <div className="flex justify-center pb-[var(--space-2)] pt-[var(--space-4)]">
-          <div className="w-[200px]">
+        <div className="flex flex-col items-center gap-[var(--space-2)] pb-[var(--space-2)] pt-[var(--space-4)]">
+          <div className="w-[280px]" style={{ filter: 'var(--card-float)' }}>
             <CardFace card={draft} size="full" muted={draft.active === false} />
           </div>
+          {artSource !== null && (
+            <p className="text-[length:var(--text-2xs)] tracking-[var(--tracking-label)] text-meta">
+              卡面来自 {artSource}
+            </p>
+          )}
         </div>
 
         <CardStatusBands

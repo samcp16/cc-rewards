@@ -15,7 +15,7 @@
  */
 
 import { ChevronRight, Minus } from 'lucide-react';
-import type { IssuerGroup } from '../../lib/issuerGroups';
+import { shortIssuer, type IssuerGroup } from '../../lib/issuerGroups';
 import { ISSUER_REGION_LABEL } from '../../lib/labels';
 
 interface IssuerPickerProps {
@@ -88,7 +88,10 @@ export function IssuerPicker({ groups, onPick, editing = false, onHide }: Issuer
 function IssuerLabel({ group }: { group: IssuerGroup }): React.JSX.Element {
   return (
     <span className="flex min-w-0 flex-1 flex-col gap-1">
-      <span className="truncate text-[length:var(--text-base)] font-[var(--fw-emphasize)] text-fg">{group.issuer}</span>
+      {/* 用短名：全名是法定名 + 拉丁名，在手机上永远被截成半句，读起来像加载失败 */}
+      <span className="truncate text-[length:var(--text-base)] font-[var(--fw-emphasize)] text-fg">
+        {shortIssuer(group.issuer)}
+      </span>
       <span className="truncate text-[length:var(--text-xs)] text-muted">
         {group.cards.length} 张卡
         {group.usableCount < group.cards.length ? ` · ${String(group.cards.length - group.usableCount)} 张核实中` : ''}

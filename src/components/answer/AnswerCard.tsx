@@ -15,6 +15,7 @@ import { TriangleAlert } from 'lucide-react';
 import type { ReactNode } from 'react';
 import type { RankResult, Scheme } from '../../domain/types.result';
 import { formatMoney, percent2, signedMoney, signedPercent } from '../../lib/format';
+import { CardFace } from '../cards/CardFace';
 
 export type AnswerState =
   | { kind: 'loading' }
@@ -32,14 +33,16 @@ interface AnswerCardProps {
   children?: ReactNode;
 }
 
-const MIN_HEIGHT = 184;
+const MIN_HEIGHT = 216;
 
 export function AnswerCard({ state, onOpenCompare, onGoLimits, onGoImport }: AnswerCardProps): React.JSX.Element {
   return (
     <section
       aria-live="polite"
       aria-label="测算答案"
-      className="border-t border-line bg-surface-1"
+      /* 顶角圆 + 1px 描边 + 上投阴影：让它读作「从内容区浮起来的一块」，
+         而不是页面被切成两半。深色下阴影几乎不可见，所以主要靠描边和圆角 */
+      className="rounded-t-[var(--radius-lg)] border-x border-t border-line bg-surface-1 shadow-[0_-10px_28px_-16px_rgba(0,0,0,0.9)]"
       style={{ minHeight: MIN_HEIGHT }}
     >
       <div className="mx-auto w-full max-w-[var(--container-desktop)] px-[var(--space-4)] pb-[var(--space-3)] pt-[var(--space-4)]">
@@ -171,27 +174,41 @@ function ReadyBody({
 
   return (
     <div className="flex flex-col">
-      <Label>刷这张</Label>
-      <p
-        className="mt-[var(--space-1)] text-[length:var(--text-xl)] font-[var(--fw-announce)] leading-[var(--leading-snug)] tracking-[var(--tracking-heading)] text-fg"
-        style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
-      >
-        {champion.cardName}
-      </p>
-      <p className="num mt-[var(--space-1)] text-[length:var(--text-sm)] text-fg-2">
-        {subLine(champion, result)}
-      </p>
+      <div className="flex items-start justify-between gap-[var(--space-3)]">
+        <div className="min-w-0 flex-1">
+          <Label>刷这张</Label>
+          <p
+            className="mt-[var(--space-1)] text-[length:var(--text-xl)] font-[var(--fw-announce)] leading-[var(--leading-snug)] tracking-[var(--tracking-heading)] text-fg"
+            style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
+          >
+            {champion.cardName}
+          </p>
+          <p className="num mt-[var(--space-1)] text-[length:var(--text-sm)] text-fg-2">
+            {subLine(champion, result)}
+          </p>
+        </div>
+        {/* 小卡面：让「刷这张」从一句卡名变成一张看得见的卡。
+            没有官方素材时自动退回绘制卡面，不会留空 */}
+        <CardFace
+          card={{
+            cardId: champion.cardId,
+            issuer: champion.issuer,
+            cardName: champion.cardName,
+            network: champion.network,
+          }}
+        />
+      </div>
 
-      {/* 40px 主数字：全屏唯一 */}
+      {/* 48px 主数字：全屏唯一 */}
       <p className="mt-[var(--space-3)] flex items-baseline gap-[var(--space-1)]">
         <span
           className={[
-            'num text-[length:var(--text-2xl)] font-[var(--fw-announce)] leading-[var(--leading-tight)]',
+            'num text-[length:var(--text-3xl)] font-[var(--fw-announce)] leading-[var(--leading-tight)]',
             'tracking-[var(--tracking-display)]',
             champion.netRealistic < 0 ? 'text-neg' : champion.netRealistic > 0 ? 'text-pos' : 'text-muted',
           ].join(' ')}
         >
-          {/* 符号 28px、币种 20px(0.7em)、数字 40px —— 视觉重量集中在数字上 */}
+          {/* 符号与币种降两号：视觉重量全部集中到数字本身 */}
           <span className="text-[length:var(--text-xl)]">{champion.netRealistic > 0 ? '+' : champion.netRealistic < 0 ? '−' : '±'}</span>
           <span className="text-[length:var(--text-xl)]">{currency} </span>
           {formatMoney(champion.netRealistic)}

@@ -1,7 +1,7 @@
 {
   "$meta": {
     "name": "刷哪张 · Design Tokens",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "designer": "颜好看",
     "date": "2026-10-31",
     "phase": "Phase 2",
@@ -14,12 +14,14 @@
     },
     "theme": {
       "implemented": [
-        "dark"
+        "dark",
+        "light"
       ],
-      "structure": "语义名挂 [data-theme]，浅色仅留空插槽不实现（SPEC §0 / O16）",
-      "followSystem": false
+      "structure": "两套完整调色板。深色 = :root 默认；浅色 = :root[data-theme=\"light\"] 覆盖块，由 scripts/gen-tokens.ts 生成。未标 light/lightTint/lightBg 的 token 两主题共用（字体、间距、尺寸、动效、层级）。映射见 scripts/token-light.ts",
+      "followSystem": true,
+      "switch": "跟随系统 / 手动深 / 手动浅，三态。持久化 localStorage 而非 Dexie —— 首帧必须同步读到，异步 IndexedDB 会闪白"
     },
-    "contrastMethod": "WCAG 2.1 相对亮度公式，脚本实算（/tmp/contrast*.py），非估算",
+    "contrastMethod": "WCAG 2.1 相对亮度公式脚本实算（/tmp/c.py），非估算。浅色全量结果见各 token 的 lightNote",
     "usage": "前端 import 后写入 CSS 变量或 Tailwind @theme。禁止在 src/ 出现裸 hex（SPEC §8 硬编码色禁令，仅 #fff/#000 例外）。"
   },
   "color": {
@@ -33,7 +35,9 @@
         "contrast": {
           "onSelf": "—",
           "note": "基准背景，diffusers 的参照物"
-        }
+        },
+        "light": "#EEF1F7",
+        "lightNote": "页面底色。浅色下这是「纸」不是「白」——纯白打底会让白色面板无处安放"
       },
       "1": {
         "value": "#11151D",
@@ -42,7 +46,9 @@
         "usage": "答案卡、顶栏、底部 TabBar、列表容器",
         "contrast": {
           "vsSurface0": 1.12
-        }
+        },
+        "light": "#FFFFFF",
+        "lightNote": "一级面板：唯一纯白面。浅色主题的层级靠「谁最白」表达，与深色相反"
       },
       "2": {
         "value": "#171C26",
@@ -52,7 +58,9 @@
         "contrast": {
           "vsSurface0": 1.32,
           "vsSurface1": 1.18
-        }
+        },
+        "light": "#E4EAF4",
+        "lightNote": "二级面板：控件底、未选中段按钮。vs surface-1 = 1.21:1"
       },
       "3": {
         "value": "#1F2532",
@@ -62,7 +70,8 @@
         "contrast": {
           "vsSurface0": 1.63,
           "vsSurface1": 1.45
-        }
+        },
+        "light": "#DDE3EE"
       },
       "4": {
         "value": "#2A3140",
@@ -72,7 +81,8 @@
         "contrast": {
           "vsSurface0": 2.04,
           "vsSurface1": 1.82
-        }
+        },
+        "light": "#CDD6E4"
       }
     },
     "text": {
@@ -87,7 +97,9 @@
           "onSurface3": 12.94,
           "onSurface4": 10.99
         },
-        "note": "刻意不用 #FFFFFF。近白（≈91%）降低长时间读金额的刺眼感，与 Copilot Money 同策略"
+        "note": "刻意不用 #FFFFFF。近白（≈91%）降低长时间读金额的刺眼感，与 Copilot Money 同策略",
+        "light": "#0F131C",
+        "lightNote": "近黑而非纯黑。纯黑在浅底上边缘发硬，长时间读金额更累"
       },
       "secondary": {
         "value": "#B7C0CE",
@@ -99,7 +111,8 @@
           "onSurface2": 9.3,
           "onSurface3": 8.36,
           "onSurface4": 7.11
-        }
+        },
+        "light": "#39414F"
       },
       "tertiary": {
         "value": "#8A94A6",
@@ -112,7 +125,9 @@
           "onSurface3": 5.02,
           "onSurface4": 4.26
         },
-        "note": "surface-4 上 4.26 < 4.5，故 tertiary 文本不得出现在 surface-3 及以上嵌套层（见 MASTER §10 禁用组合）"
+        "note": "surface-4 上 4.26 < 4.5，故 tertiary 文本不得出现在 surface-3 及以上嵌套层（见 MASTER §10 禁用组合）",
+        "light": "#586172",
+        "lightNote": "surface-4 上 4.26:1，与深色同款限制：不得出现在 surface-4"
       },
       "meta": {
         "value": "#7D8798",
@@ -124,7 +139,9 @@
           "onSurface2": 4.71,
           "onSurface3": 4.23
         },
-        "note": "仅允许出现在 surface 0/1/2。11–12px 小字必须 ≥4.5:1，不用 3:1 大字阈值"
+        "note": "仅允许出现在 surface 0/1/2。11–12px 小字必须 ≥4.5:1，不用 3:1 大字阈值",
+        "light": "#5C6577",
+        "lightNote": "仅允许 surface 0/1/2"
       },
       "disabled": {
         "value": "#5A6274",
@@ -133,7 +150,9 @@
         "contrast": {
           "onSurface1": 2.99
         },
-        "note": "WCAG 明确豁免 disabled 控件。但项目规则：禁用控件必须同时带 disabled 语义（aria-disabled），不靠颜色传达"
+        "note": "WCAG 明确豁免 disabled 控件。但项目规则：禁用控件必须同时带 disabled 语义（aria-disabled），不靠颜色传达",
+        "light": "#959FB2",
+        "lightNote": "2.66:1 于 surface-1。WCAG 豁免 disabled，但项目仍要求同时带 aria-disabled"
       },
       "onAccent": {
         "value": "#FFFFFF",
@@ -142,7 +161,8 @@
         "contrast": {
           "onAccent": 5.17
         },
-        "note": "全项目唯一允许的纯白使用点（SPEC §8 例外条款）"
+        "note": "全项目唯一允许的纯白使用点（SPEC §8 例外条款）",
+        "light": "#FFFFFF"
       }
     },
     "border": {
@@ -154,7 +174,8 @@
           "vsSurface0": 1.34,
           "vsSurface1": 1.27
         },
-        "note": "纯结构线，不承担信息。1px"
+        "note": "纯结构线，不承担信息。1px",
+        "light": "#E1E7F0"
       },
       "default": {
         "value": "#2A3140",
@@ -164,7 +185,8 @@
           "vsSurface0": 1.48,
           "vsSurface1": 1.4
         },
-        "note": "1px 结构线。UI 组件非文本对比 3:1 不适用于本产品的静默边框——控件的可辨识性由底色台阶 + 文字承担，边框只做边界暗示"
+        "note": "1px 结构线。UI 组件非文本对比 3:1 不适用于本产品的静默边框——控件的可辨识性由底色台阶 + 文字承担，边框只做边界暗示",
+        "light": "#D5DDE9"
       },
       "strong": {
         "value": "#3D4659",
@@ -175,7 +197,8 @@
           "vsSurface1": 1.93,
           "vsSurface2": 1.8
         },
-        "note": "2.04:1。若前端需要完全满足 WCAG 1.4.11（非文本 3:1），将控件边框统一提为 strong 并把控件最小尺寸做到 44px（形状可辨），二者取其一即可"
+        "note": "2.04:1。若前端需要完全满足 WCAG 1.4.11（非文本 3:1），将控件边框统一提为 strong 并把控件最小尺寸做到 44px（形状可辨），二者取其一即可",
+        "light": "#C6D0DF"
       }
     },
     "semantic": {
@@ -193,7 +216,10 @@
         "tint": "#122A20",
         "tintSource": "极低透明度绿底，用于「省钱」小面积底（如额度条已用段、正收益徽章）",
         "textOnTint": 8.13,
-        "note": "降饱和绿（非 #22C55E 满饱和）。40px 大字号下满饱和绿会发光刺眼"
+        "note": "降饱和绿（非 #22C55E 满饱和）。40px 大字号下满饱和绿会发光刺眼",
+        "light": "#0A6E44",
+        "lightNote": "深绿。浅底上荧光绿完全不可读（深色的 #3DD68C 在白底仅 1.8:1）",
+        "lightTint": "#E6F4EC"
       },
       "neg": {
         "value": "#FF7A6E",
@@ -207,7 +233,10 @@
         },
         "tint": "#2B1614",
         "textOnTint": 6.73,
-        "note": "偏橙红而非纯红 #DC2626。纯红在近黑底上会「烧边」，偏橙红保 7.19:1 且不刺眼"
+        "note": "偏橙红而非纯红 #DC2626。纯红在近黑底上会「烧边」，偏橙红保 7.19:1 且不刺眼",
+        "light": "#B3261E",
+        "lightNote": "深砖红。浅底不能沿用深色主题的橙红",
+        "lightTint": "#FBE9E7"
       },
       "loss": {
         "value": "#8A94A6",
@@ -239,7 +268,10 @@
         },
         "tint": "#2B2411",
         "textOnTint": 8.35,
-        "note": "不用 #F2C14E 更亮的黄——11.5:1 在暗底上过亮会抢走主数字注意力"
+        "note": "不用 #F2C14E 更亮的黄——11.5:1 在暗底上过亮会抢走主数字注意力",
+        "light": "#8A5B00",
+        "lightNote": "深琥珀。深色的 #E8B84B 在白底仅 1.9:1",
+        "lightTint": "#FBF1DC"
       },
       "info": {
         "value": "#6BA6F0",
@@ -252,7 +284,9 @@
         },
         "tint": "#121F33",
         "textOnTint": 6.57,
-        "note": "与 accent 同族但更亮，确保在非按钮语境中不被误读为可点击"
+        "note": "与 accent 同族但更亮，确保在非按钮语境中不被误读为可点击",
+        "light": "#17509E",
+        "lightTint": "#E7F0FC"
       }
     },
     "accent": {
@@ -266,7 +300,9 @@
           "whiteOnIt": 5.17
         },
         "constraint": "只做填充色，不做 15px 以下文字色（3.54:1 不达 4.5:1）。需要蓝色文字时用 accent.text",
-        "hueJustification": "中性偏冷的蓝（hue ≈ 218，饱和度受控）。绿色已被 pos 占用，故主色绝不能是绿；蓝色不承载任何金额语义，只表示「可点/选中」"
+        "hueJustification": "中性偏冷的蓝（hue ≈ 218，饱和度受控）。绿色已被 pos 占用，故主色绝不能是绿；蓝色不承载任何金额语义，只表示「可点/选中」",
+        "light": "#2563EB",
+        "lightNote": "白色文字在其上 5.17:1"
       },
       "hover": {
         "value": "#2E6FE8",
@@ -276,7 +312,9 @@
           "whiteOnIt": 4.61,
           "onSurface0": 4.19
         },
-        "note": "深色主题下 hover 明确提亮（不是压暗），白色文字仍 4.61:1 达标"
+        "note": "深色主题下 hover 明确提亮（不是压暗），白色文字仍 4.61:1 达标",
+        "light": "#1D4ED8",
+        "lightNote": "浅色下 hover 压暗，与深色的提亮方向相反"
       },
       "active": {
         "value": "#1D4ED8",
@@ -286,7 +324,8 @@
           "whiteOnIt": 6.7,
           "onSurface0": 2.88
         },
-        "note": "pressed 压暗，形成「按下去」的方向感"
+        "note": "pressed 压暗，形成「按下去」的方向感",
+        "light": "#1A43BF"
       },
       "text": {
         "value": "#5B9DFF",
@@ -299,7 +338,9 @@
           "onSurface3": 5.63,
           "onSurface4": 4.78
         },
-        "note": "accent.base 做文字不达标（3.54），故单独给一个 accent.text。前端混淆这两个是最高频错误之一"
+        "note": "accent.base 做文字不达标（3.54），故单独给一个 accent.text。前端混淆这两个是最高频错误之一",
+        "light": "#1D4ED8",
+        "lightNote": "深色的 #5B9DFF 在白底仅 2.4:1，必须换"
       },
       "tint": {
         "value": "#12203A",
@@ -311,7 +352,8 @@
         "textOnTint": {
           "accentText": 5.96,
           "textPrimary": 13.69
-        }
+        },
+        "light": "#E8EFFD"
       },
       "focusRing": {
         "value": "#5B9DFF",
@@ -343,13 +385,17 @@
         "label": "待核对",
         "value": "#E8B84B",
         "bg": "#2B2411",
-        "role": "黄底徽章，列表内可见"
+        "role": "黄底徽章，列表内可见",
+        "light": "#8A5B00",
+        "lightBg": "#FBF1DC"
       },
       "unknown": {
         "label": "未知",
         "value": "#8A94A6",
         "bg": "#232A38",
-        "role": "灰底徽章；数值位显示「未知」二字，绝不显示 0.00"
+        "role": "灰底徽章；数值位显示「未知」二字，绝不显示 0.00",
+        "light": "#586172",
+        "lightBg": "#E9EDF5"
       }
     }
   },
@@ -361,17 +407,27 @@
       "vsSurface1": 1.16,
       "textOnIt": 13.3,
       "posOnIt": 8.41,
-      "note": "1.16:1 的整行偏移 + 590 字重 + 顶部 1px accent 环，三件套建立冠军层级。不做发光、不做条纹"
+      "note": "1.16:1 的整行偏移 + 590 字重 + 顶部 1px accent 环，三件套建立冠军层级。不做发光、不做条纹",
+      "light": "#F5F8FD"
     },
     "hoverBg": {
       "value": "#181E29",
       "type": "color",
-      "vsSurface1": 1.09
+      "vsSurface1": 1.09,
+      "light": "#F3F6FB"
     },
     "excludedBg": {
       "value": "#11151D",
       "type": "color",
       "note": "失格行不加底，靠 opacity 0.6 + 独立分组标题 + 原因文字"
+    },
+    "raised": {
+      "value": "#1F2532",
+      "light": "#FFFFFF",
+      "type": "color",
+      "role": "抬起块：段控件的滑块、需要「浮在同层背景之上」的小面",
+      "lightNote": "浅色下抬起 = 最白（#FFFFFF），深色下抬起 = 更亮（#1F2532）。方向相反，所以不能复用 surface 台阶",
+      "vsTrack": "深色 = 对 surface-2 的 1.24:1；浅色 = 对 surface-2 的 1.21:1"
     }
   },
   "font": {
@@ -469,8 +525,15 @@
         "value": "2.5rem",
         "px": 40,
         "type": "dimension",
-        "role": "唯一主角：本次净返金额（全屏仅 1 个）",
+        "role": "次级金额 / 额度页 KPI 数字（L-Stat 上限）",
         "lineHeight": 1.1
+      },
+      "3xl": {
+        "value": "3rem",
+        "px": 48,
+        "type": "dimension",
+        "role": "金额主角（输入值、答案净返）。全屏仅 1–2 处，再多就互相削弱",
+        "lineHeight": 1.06
       }
     },
     "tracking": {
@@ -594,9 +657,9 @@
       "role": "金额输入框高"
     },
     "listRow": {
-      "value": "72px",
+      "value": "84px",
       "type": "dimension",
-      "role": "卡库列表行高（卡面 48 + 上下内边距 12×2；做过 64，卡面只能到 40，卡组织标识糊成色块）"
+      "role": "卡库列表行高（卡面 89×56 + 上下内边距 14×2）。卡面从 48 提到 56 后 72 装不下，会压扁卡面"
     },
     "compareRow": {
       "value": "56px",

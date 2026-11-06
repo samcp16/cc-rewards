@@ -21,6 +21,7 @@ import { FxSheet } from '../components/settings/FxSheet';
 import { ImportSheet } from '../components/settings/ImportSheet';
 import type { ImportPhase } from '../components/settings/ImportSheet';
 import { ActionRow, Group, ValueRow } from '../components/settings/SettingsRows';
+import { ThemeRow } from '../components/settings/ThemeRow';
 import { applyImport, exportBackup, findConflicts, validateBackup } from '../db/backup';
 import type { BackupFile } from '../db/backup';
 import { markExported, loadLastExportAt } from '../db/settingsRepository';
@@ -178,6 +179,10 @@ export function SettingsPage(): React.JSX.Element {
             value={params.fx.userAdjusted ? '你改过' : '默认值'}
             hint={`默认 HKD 1 = MOP ${String(DEFAULT_FX_TABLE.rates[0]?.rate ?? 1.03)}`}
           />
+        </Group>
+
+        <Group title="外观">
+          <ThemeRow />
         </Group>
 
         <Group title="关于">

@@ -29,6 +29,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { CSS_NAME, DERIVED } from './token-map';
+import { LIGHT_NAME } from './token-light';
 import { FOOTER, HEADER, STATIC_A11Y, STATIC_BASE } from './token-static';
 import { SECTIONS } from './token-sections';
 
@@ -57,6 +58,8 @@ interface Emitted {
   value: string;
   /** 生成到 CSS 里的单行注释 */
   comment?: string;
+  /** 浅色主题下的替代值。目前只有阴影派生变量需要 */
+  lightValue?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -187,8 +190,60 @@ function buildCss(tree: TokenTree): string {
     throw new Error(`以下变量没有归属到任何段，不会出现在 CSS 中：${orphans.join(', ')}`);
   }
 
+  blocks.push(buildLightBlock(tree));
+
   blocks.push(STATIC_A11Y, STATIC_BASE, FOOTER);
   return `${blocks.join('\n\n')}\n`;
+}
+
+/**
+ * 浅色覆盖块。
+ *
+ * 只输出颜色与 color-scheme —— 字体、间距、尺寸、动效两主题共用，重复输出会让
+ * 两份值有机会漂移。缺字段直接报错：浅色主题少一个变量不会白屏，但会在某个页面
+ * 露出深色主题的残留色，那种问题比白屏难查得多。
+ */
+function buildLightBlock(tree: TokenTree): string {
+  const lines: string[] = [];
+  const missing: string[] = [];
+
+  for (const [source, name, field] of LIGHT_NAME) {
+    const node = readPath(tree, source);
+    const value = node?.[field];
+    if (typeof value !== 'string') {
+      missing.push(`${source}.${field}  (-> ${name})`);
+      continue;
+    }
+    lines.push(`  ${name}: ${value};`);
+  }
+
+  /* 派生变量的浅色值（阴影）：它们的值不是单一颜色，无法用 light 字段表达，
+     所以在 token-map.ts 里直接写两套 */
+  for (const token of DERIVED) {
+    if (token.lightValue !== undefined) lines.push(`  ${token.name}: ${token.lightValue};`);
+  }
+
+  if (missing.length > 0) {
+    throw new Error(
+      `design-tokens.json 缺少以下浅色值，无法生成浅色主题：\n  ${missing.join('\n  ')}\n` +
+        '若是有意调整结构，请同步修改 scripts/token-light.ts 的 LIGHT_NAME。',
+    );
+  }
+
+  return [
+    '/* ---------------------------------------------------------------------------',
+    '   浅色主题覆盖（:root[data-theme="light"]）',
+    '   ---------------------------------------------------------------------------',
+    '   只覆盖颜色。字体、间距、尺寸、动效两主题共用 —— 组件层零改动换主题。',
+    '   全部对比度为 WCAG 2.1 相对亮度公式实算值，见 design-tokens.json 的 lightNote。',
+    '   color-scheme 必须一起换：否则原生滚动条、输入框光标、日期选择器仍是深色，',
+    '   浅底上会出现刺眼黑块。',
+    '--------------------------------------------------------------------------- */',
+    ':root[data-theme="light"] {',
+    '  color-scheme: light;',
+    ...lines,
+    '}',
+  ].join('\n');
 }
 
 // ---------------------------------------------------------------------------

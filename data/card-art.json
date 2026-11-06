@@ -1,0 +1,91 @@
+{
+  "$comment": "官方卡面素材登记册。只登记**已人工核对「这张图确实是这张卡」**的素材 —— 宁可没有，也不要贴错。没有登记的卡走 CardFace 的绘制卡面。",
+  "version": 1,
+  "capturedAt": "2026-11-06",
+  "targetSize": "720x454",
+  "targetRatio": "1.586:1（信用卡 ISO 7810 ID-1：85.60 × 53.98mm）",
+  "format": "WebP q84",
+  "rules": [
+    "素材全部来自发卡行官网，逐张人工核对过卡名与卡面文字一致",
+    "官网上「营销图/场景图/带人物/带促销文字」一律不用 —— 那种图缩到 88px 只会是一团色块",
+    "官网把横卡压成竖版导出的情况很常见（AEON / 中银 / DBS），处理时按 1.586 非等比还原，不是旋转",
+    "任何一张图的来源 URL 都必须可回溯，便于日后换代理或官网改版时重抓"
+  ],
+  "art": {
+    "hsbc-vs-signature": {
+      "file": "hsbc-vs-signature.webp",
+      "issuerPage": "https://www.hsbc.com.hk/credit-cards/products/",
+      "source": "https://www.hsbc.com.hk/content/dam/hsbc/hk/images/mass/credit-cards/tile-16-9/9358-hsbc-visa-signature-card-grey-1600x900.jpg",
+      "transform": "灰底 bbox 裁切 + 圆角遮罩",
+      "note": "灰狮子卡面，官方产品图 1600×900"
+    },
+    "hsbc-red": {
+      "file": "hsbc-red.webp",
+      "issuerPage": "https://www.hsbc.com.hk/credit-cards/products/",
+      "source": "https://www.hsbc.com.hk/content/dam/hsbc/hk/images/mass/credit-cards/tile-16-9/9358-hsbc-red-credit-card-grey-1600x900.jpg",
+      "transform": "灰底 bbox 裁切 + 圆角遮罩"
+    },
+    "hsbc-everymile": {
+      "file": "hsbc-everymile.webp",
+      "issuerPage": "https://www.hsbc.com.hk/credit-cards/products/",
+      "source": "https://www.hsbc.com.hk/content/dam/hsbc/hk/images/mass/credit-cards/tile-16-9/8520-everymile-card-sky-grey-1600x900.jpg",
+      "transform": "手动坐标裁切（背景是天空渐变，自动检测会把云认成卡片）+ 圆角遮罩"
+    },
+    "amex-hk-explorer": {
+      "file": "amex-hk-explorer.webp",
+      "issuerPage": "https://www.americanexpress.com/hk/en/credit-cards/",
+      "source": "https://www.americanexpress.com/content/dam/amex/hk/ch/campaigns/explorer-credit-card/BAU2025/explorer_hk_960x608.png",
+      "transform": "透明底 alpha 裁切 + 圆角遮罩",
+      "note": "质量最好的一张：官方透明底、原生 1.58:1"
+    },
+    "wewa-unionpay": {
+      "file": "wewa-unionpay.webp",
+      "issuerPage": "https://www.wewacard.com/",
+      "source": "https://www.wewacard.com/wp-content/uploads/2025/06/WeWa_UPI_new.png",
+      "transform": "透明底 alpha 裁切 + 圆角遮罩"
+    },
+    "aeon-wakuwaku": {
+      "file": "aeon-wakuwaku.webp",
+      "issuerPage": "https://www.aeon.com.hk/tc/credit-card/",
+      "source": "https://www.aeon.com.hk/html/assets/cashback-wakuwaku-0322-rgb.png",
+      "transform": "透明底 alpha 裁切 + 非等比还原（官网导出把横卡压成 0.63 竖版）"
+    },
+    "aeon-unionpay-premium": {
+      "file": "aeon-unionpay-premium.webp",
+      "issuerPage": "https://www.aeon.com.hk/tc/credit-card/",
+      "source": "https://www.aeon.com.hk/html/assets/images/AEON-UNION-PURPLE.png",
+      "transform": "同上"
+    },
+    "aeon-standard": {
+      "file": "aeon-standard.webp",
+      "issuerPage": "https://www.aeon.com.hk/tc/credit-card/",
+      "source": "https://www.aeon.com.hk/html/assets/images/AEON-VISA-PURPLE.png",
+      "transform": "同上"
+    },
+    "dbs-black-world": {
+      "file": "dbs-black-world.webp",
+      "issuerPage": "https://www.dbs.com.hk/zh/credit-cards",
+      "source": "https://www.dbs.com.hk/iwov-resources/media/images/products/credit-card/square-banner/credit-card-blackmc-684x630-en.jpg",
+      "transform": "透明区裁切 + 非等比还原"
+    },
+    "boc-hk-chill": {
+      "file": "boc-hk-chill.webp",
+      "issuerPage": "https://www.bochk.com/dam/boccreditcard/chillcard/chi/index.html",
+      "source": "https://www.bochk.com/dam/boccreditcard/chillcard/images/cardface_world.png",
+      "transform": "透明区裁切 + 非等比还原",
+      "note": "World Mastercard 版。同页另有 cardface_platinum（白金版），本卡库只收了 World"
+    },
+    "sc-simply-cash": {
+      "file": "sc-simply-cash.webp",
+      "issuerPage": "https://www.sc.com/hk/credit-cards/",
+      "source": "https://www.sc.com/content/dam/sc/hk/en/credit-cards/hk-sc-simply-cash.png",
+      "transform": "手动坐标裁切（原图是正反对照图，只取左侧正面）"
+    }
+  },
+  "$missing": {
+    "$comment": "以下 27 张没有可用的官方干净卡面。不是没找，是找了拿不到 —— 记录在此，避免下次重复劳动。",
+    "js-shell": ["恒生 enJoy", "花旗 Cash Back", "花旗 PremierMiles", "东亚 World Mastercard", "Mox 信用卡", "汇丰 PULSE 银联"],
+    "macau": "澳门 8 家（BNU / 中银澳门 / 工银澳门 / 大丰 / BCM / 澳门国际 / 华侨永亨 / 立桥）官网要么是 JS 空壳、要么图片不可达、要么只有营销 banner。逐家试过，不再重复",
+    "earnmore": "安信 EarnMORE 站点只有文字与表单，无卡面图"
+  }
+}
