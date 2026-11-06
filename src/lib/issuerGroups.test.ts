@@ -1,0 +1,97 @@
+/**
+ * 银行分组与卡摘要的契约。
+ *
+ * 这两个函数决定了「添加卡片」那两屏长什么样，也决定了用户会不会被
+ * 「费率待补」这种说法误导 —— 积分卡数据是全的，缺的只是用户自己的
+ * 分值假设，不能和「核实中」混为一谈。
+ */
+
+import { describe, it, expect } from 'vitest';
+import { CARDS, getCardById } from '../domain/data/loadCards';
+import { cardSummary, cardsOfIssuer, issuerGroups } from './issuerGroups';
+
+describe('issuerGroups', () => {
+  it('每张卡只被分到一组，且总量守恒', () => {
+    const groups = issuerGroups();
+    const total = groups.reduce((n, g) => n + g.cards.length, 0);
+    expect(total).toBe(CARDS.length);
+  });
+
+  it('澳门银行排在香港前面（主要消费地优先）', () => {
+    const groups = issuerGroups();
+    const firstHk = groups.findIndex((g) => g.region === 'HK');
+    const lastMo = groups.map((g) => g.region).lastIndexOf('MO');
+    expect(lastMo).toBeLessThan(firstHk);
+  });
+
+  it('组内按卡名排序，顺序稳定（不是 JSON 里碰巧的顺序）', () => {
+    for (const group of issuerGroups()) {
+      const names = group.cards.map((c) => c.cardName);
+      expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b, 'zh-Hans-CN')));
+    }
+  });
+
+  it('usableCount 只数「至少有一个类别有数据」的卡', () => {
+    const group = issuerGroups().find((g) => g.issuer.includes('汇丰'));
+    expect(group).toBeDefined();
+    // 汇丰 4 张里至少 1 张有可用数据（EveryMile 是积分卡，也算有数据）
+    expect(group?.usableCount).toBeGreaterThan(0);
+  });
+
+  it('exclude 掉的卡不出现，整条银行消失而不是留一个空组', () => {
+    const all = issuerGroups();
+    const first = all[0]!;
+    const exclude = new Set(first.cards.map((c) => c.cardId));
+    const after = issuerGroups({ exclude });
+    expect(after.find((g) => g.issuer === first.issuer)).toBeUndefined();
+    // 只少了这一组，其余银行不受影响
+    expect(after.length).toBe(all.length - 1);
+  });
+
+  it('exclude 单张卡时，同组其它卡仍在', () => {
+    const group = issuerGroups().find((g) => g.cards.length >= 3);
+    expect(group).toBeDefined();
+    const drop = group!.cards[0]!.cardId;
+    const after = issuerGroups({ exclude: new Set([drop]) }).find((g) => g.issuer === group!.issuer);
+    expect(after?.cards.map((c) => c.cardId)).not.toContain(drop);
+    expect(after?.cards.length).toBe(group!.cards.length - 1);
+  });
+
+  it('cardsOfIssuer 未知银行返回空数组，不抛错', () => {
+    expect(cardsOfIssuer('不存在的银行')).toEqual([]);
+  });
+});
+
+describe('cardSummary', () => {
+  it('现金回赠卡报最高百分比', () => {
+    const card = getCardById('sc-simply-cash');
+    expect(card).toBeDefined();
+    expect(cardSummary(card!).state).toBe('cashback');
+    expect(cardSummary(card!).text).toMatch(/^最高 \d+\.\d{2}%$/);
+  });
+
+  it('积分卡说「积分 x 倍」，不说「费率待补」——它的数据是全的', () => {
+    const card = getCardById('amex-hk-explorer');
+    expect(card).toBeDefined();
+    const s = cardSummary(card!);
+    expect(s.state).toBe('points');
+    expect(s.text).toMatch(/^积分 \d+x$/);
+  });
+
+  it('真正没核实的卡才说「核实中」', () => {
+    const card = getCardById('hsbc-pulse-unionpay');
+    expect(card).toBeDefined();
+    expect(cardSummary(card!)).toEqual({ text: '核实中', state: 'unknown' });
+  });
+
+  it('回赠卡优先于积分：同时有两种规则时报表内最高百分比', () => {
+    const mixed = {
+      ...getCardById('sc-simply-cash')!,
+      categories: {
+        ...getCardById('sc-simply-cash')!.categories,
+        dining: { kind: 'points' as const, multiplier: 4 },
+      },
+    };
+    expect(cardSummary(mixed).state).toBe('cashback');
+  });
+});

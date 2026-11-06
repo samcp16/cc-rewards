@@ -12,8 +12,10 @@
  */
 
 import { useLiveQuery } from 'dexie-react-hooks';
+import { useMemo } from 'react';
 import { db } from './schema';
 import type { CardRow } from './schema';
+import { KEY_DELETED_PRESETS } from './cardsRepository';
 import type { LedgerEntry } from '../domain/types';
 
 export interface CardsState {
@@ -60,3 +62,18 @@ export function useLedgerForCard(cardId: string | undefined): LedgerEntry[] {
 }
 
 export type { CardRow };
+
+/**
+ * 用户从卡库里删掉过的预置卡 id。
+ *
+ * 用途只有一个：添加卡片页不再把这些卡列出来。
+ * 用户删掉它 = 我不用这张，那就别在他每次添加新卡时反复推荐同一张。
+ * 注意这是「不再显示」，不是「永久禁止添加」—— 页面上的「显示全部」能翻出来。
+ */
+export function useDeletedPresetIds(): ReadonlySet<string> {
+  const row = useLiveQuery(() => db.settings.get(KEY_DELETED_PRESETS), []);
+  return useMemo(() => {
+    const ids = (row?.value as { ids?: string[] } | undefined)?.ids;
+    return new Set<string>(Array.isArray(ids) ? ids : []);
+  }, [row]);
+}
