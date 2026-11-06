@@ -1,7 +1,7 @@
 {
   "name": "cc-rewards",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "type": "module",
   "description": "刷卡决策器 — 付款前比较港澳信用卡净回报率",
   "engines": {
