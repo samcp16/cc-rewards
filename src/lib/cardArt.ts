@@ -27,6 +27,15 @@ for (const [path, url] of Object.entries(urls)) {
 export interface CardArt {
   /** 打包后的图片 URL */
   src: string;
+  /**
+   * 这张卡面的平均色（构建前从图上采样，写进 data/card-art.json）。
+   *
+   * 用途只有一个：图还没到的那几百毫秒里，卡位铺这个色而不是留白。
+   * 铺品牌色是不够的 —— AEON 品牌色是洋红，卡本身却是浅粉蓝；用采样色
+   * 才能让「正在加载的那张卡」和「加载完的那张卡」是同一个颜色，
+   * 图出现时不会有一下跳色。
+   */
+  tint: string;
   /** 来源页面，详情页展示「图从哪来」用 */
   issuerPage: string;
 }
@@ -34,7 +43,7 @@ export interface CardArt {
 const ART = new Map<string, CardArt>();
 for (const [cardId, entry] of Object.entries(registry.art)) {
   const src = byFile.get(entry.file);
-  if (src !== undefined) ART.set(cardId, { src, issuerPage: entry.issuerPage });
+  if (src !== undefined) ART.set(cardId, { src, tint: entry.tint, issuerPage: entry.issuerPage });
 }
 
 /** 有官方卡面就返回，没有返回 undefined（调用方走绘制卡面） */

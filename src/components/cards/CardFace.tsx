@@ -56,11 +56,11 @@ export function CardFace({ card, size = 'thumb', muted = false, indexInIssuer = 
       <div
         aria-hidden="true"
         className="relative isolate shrink-0 overflow-hidden"
-        /* 底色用这张卡的品牌色，而不是留白。
+        /* 底色用这张图自己的平均色，而不是留白、也不是品牌色。
            踩过的坑：慢网下（地铁里、跨境漫游）图要几秒才到，这段时间卡位是一块
-           纯白 —— 深色主题下更像「数据丢了」。铺品牌色之后，加载中看到的是
-           「一张红色的汇丰卡正在变清晰」，而不是一个空洞。 */
-        style={{ ...shell, background: `var(--brand-${v.brand})` }}
+           纯白 —— 深色主题下更像「数据丢了」。改成品牌色后又发现颜色对不上：
+           AEON 品牌是洋红，卡却是浅粉蓝，图到了会明显跳一下。采样色两头都对。 */
+        style={{ ...shell, background: art.tint }}
       >
         {/* 图片上不加任何 filter。
             踩过的坑：给缩略图加 contrast/saturate 补偿缩放损失，会让带 alpha 的 WebP

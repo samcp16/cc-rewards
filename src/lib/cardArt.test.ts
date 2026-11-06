@@ -52,3 +52,17 @@ describe('cardArt：查询', () => {
     expect(cardArt('no-such-card')).toBeUndefined();
   });
 });
+
+describe('卡面主色调：加载中的那一块', () => {
+  it('每张登记过的卡都带一个合法的 tint', () => {
+    for (const cardId of ['hsbc-red', 'amex-hk-explorer', 'sc-simply-cash']) {
+      expect(cardArt(cardId)?.tint).toMatch(/^#[0-9A-F]{6}$/);
+    }
+  });
+
+  it('tint 来自图本身，不是品牌色 —— AEON 洋红品牌配的是浅色卡', () => {
+    // 只断言「有值且不等于品牌 token 名」，防止有人把它改回 var(--brand-*)
+    const tint = cardArt('aeon-wakuwaku')?.tint ?? '';
+    expect(tint.startsWith('#')).toBe(true);
+  });
+});
