@@ -162,9 +162,15 @@ export function NewCardPage(): React.JSX.Element {
                 <span className="text-[length:var(--text-sm)] text-fg-2">
                   已隐藏 <span className="num">{hiddenCount}</span> 家银行
                 </span>
-                <Button variant="ghost" size="compact" onClick={() => void restoreAll()}>
+                {/* 用 accent 文字而非 ghost 按钮：ghost 的 fg-2 在这里和左侧说明文字同色，
+                    藏错了的人看不出「恢复」是可以点的，而这恰好是他唯一的出路。 */}
+                <button
+                  type="button"
+                  onClick={() => void restoreAll()}
+                  className="flex h-11 shrink-0 items-center px-[var(--space-2)] text-[length:var(--text-sm)] font-[var(--fw-emphasize)] text-accent-text"
+                >
                   恢复
-                </Button>
+                </button>
               </div>
             )}
 
