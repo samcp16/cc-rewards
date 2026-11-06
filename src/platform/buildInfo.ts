@@ -19,4 +19,4 @@ export const BUILD_STAMP: string =
   typeof __BUILD_STAMP__ === 'string' ? __BUILD_STAMP__ : '开发构建';
 
 /** 面向用户的功能版本，随「有意义的发布」递增。 */
-export const APP_VERSION = '1.2.2';
+export const APP_VERSION = '1.3.0';

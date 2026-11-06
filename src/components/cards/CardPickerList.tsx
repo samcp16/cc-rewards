@@ -12,6 +12,7 @@ import { ChevronRight } from 'lucide-react';
 import type { Card } from '../../domain/types';
 import { cardSummary } from '../../lib/issuerGroups';
 import { NETWORK_SHORT } from '../../lib/labels';
+import { CardFace } from './CardFace';
 
 interface CardPickerListProps {
   cards: Card[];
@@ -24,7 +25,7 @@ interface CardPickerListProps {
 export function CardPickerList({ cards, existingIds, busy, onPick }: CardPickerListProps): React.JSX.Element {
   return (
     <ul className="border-t border-line-subtle">
-      {cards.map((card) => {
+      {cards.map((card, i) => {
         const summary = cardSummary(card);
         return (
           <li key={card.cardId}>
@@ -36,6 +37,7 @@ export function CardPickerList({ cards, existingIds, busy, onPick }: CardPickerL
               }}
               className="flex w-full items-center gap-[var(--space-3)] border-b border-line-subtle py-[var(--space-3)] text-left transition-colors duration-[var(--motion-fast)] hover:bg-surface-2 active:bg-surface-3 disabled:opacity-50"
             >
+              <CardFace card={card} indexInIssuer={i} />
               <span className="flex min-w-0 flex-1 flex-col gap-1">
                 <span className="flex items-center gap-[var(--space-2)]">
                   <span className="truncate text-[length:var(--text-base)] font-[var(--fw-emphasize)] text-fg">
@@ -47,17 +49,19 @@ export function CardPickerList({ cards, existingIds, busy, onPick }: CardPickerL
                     </span>
                   )}
                 </span>
-                <span className="truncate text-[length:var(--text-xs)] text-muted">
-                  {NETWORK_SHORT[card.network]} · {card.cardCurrency}
+                <span className="flex min-w-0 items-center gap-[var(--space-2)]">
+                  <span className="min-w-0 flex-1 truncate text-[length:var(--text-xs)] text-muted">
+                    {NETWORK_SHORT[card.network]} · {card.cardCurrency}
+                  </span>
+                  <span
+                    className={[
+                      'num shrink-0 text-[length:var(--text-sm)] font-[var(--fw-emphasize)]',
+                      summary.state === 'unknown' ? 'text-meta' : 'text-fg-2',
+                    ].join(' ')}
+                  >
+                    {summary.text}
+                  </span>
                 </span>
-              </span>
-              <span
-                className={[
-                  'num shrink-0 text-[length:var(--text-sm)]',
-                  summary.state === 'unknown' ? 'text-meta' : 'text-fg-2',
-                ].join(' ')}
-              >
-                {summary.text}
               </span>
               <ChevronRight size={16} strokeWidth={2} className="shrink-0 text-meta" aria-hidden="true" />
             </button>

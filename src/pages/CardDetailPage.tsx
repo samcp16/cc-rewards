@@ -22,6 +22,7 @@ import { PageShell } from '../components/layout/PageShell';
 import { IconAction, TopBar } from '../components/layout/TopBar';
 import { SourceLink } from '../components/common/SourceLink';
 import { showToast } from '../components/common/Toast';
+import { CardFace } from '../components/cards/CardFace';
 import { DeleteConfirm } from '../components/cards/DeleteConfirm';
 import { TemplatePickerSheet } from '../components/cards/TemplatePickerSheet';
 import { IdentityFxFeeSection } from '../components/cards/IdentityFxFeeSection';
@@ -205,6 +206,15 @@ export function CardDetailPage(): React.JSX.Element {
       contentPaddingBottom="calc(var(--space-8) + 72px + var(--safe-bottom))"
     >
       <div className="mx-auto w-full max-w-[var(--container-desktop)] px-[var(--space-4)]">
+        {/* 卡面只做「这是我的那张卡」的视觉确认。
+            卡名不在这里重复 —— 顶栏已经是它，下面「基本信息」的第一个字段也是它。
+            同一个名字在一屏出现三次，是在用信息填空，不是在给信息。 */}
+        <div className="flex justify-center pb-[var(--space-2)] pt-[var(--space-4)]">
+          <div className="w-[200px]">
+            <CardFace card={draft} size="full" muted={draft.active === false} />
+          </div>
+        </div>
+
         <CardStatusBands
           validity={validity}
           staleDays={staleDays}

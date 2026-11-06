@@ -13,6 +13,8 @@
  */
 
 @import '../design/design-tokens.css';
+/* 卡面品牌色：外部银行标识色，不进 token 体系（见文件头说明） */
+@import '../design/card-brand.css';
 @import 'tailwindcss';
 
 /*

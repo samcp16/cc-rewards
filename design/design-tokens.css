@@ -211,8 +211,8 @@
   --size-seg: 44px;
   /* 金额输入框高 */
   --size-amount-input: 56px;
-  /* 卡库列表行高（两行文字） */
-  --size-row-list: 64px;
+  /* 卡库列表行高（卡面 48 + 上下内边距 12×2；做过 64，卡面只能到 40，卡组织标识糊成色块） */
+  --size-row-list: 72px;
   /* 对比表行高（两行文字） */
   --size-row-compare: 56px;
   /* 视觉高 36px，命中区仍需 44px */

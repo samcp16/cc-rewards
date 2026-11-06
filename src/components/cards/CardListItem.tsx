@@ -1,26 +1,33 @@
 /**
  * 卡库列表行（card-library.md §3）。
  *
- * 64px 定高（--size-row-list）不是随手取的：卡名 1 行 + 副行 1 行的自然高度是 40px，
- * 加 12px×2 的上下内边距得 64 —— 低于这个值副行会贴着分隔线，
- * 高于它会让人以为「每张卡之间有空隙」，而它们是同一张列表。
+ * 高度 72px = 卡面 48 + 上下 12×2。
  *
- * 右侧的微进度条只有 64×4：它是「扫一眼知道哪张快用完了」的提示，
- * 不是额度明细。做成满宽条会让列表变成仪表盘，而这一页的任务是「找到那张卡」。
+ * 布局上做了一次返工：最初把「最高 5.00%」放在行尾独立列（76px 卡面 + 72px
+ * 百分比 + 16px 箭头），卡名只剩 174px，「BCM World Mastercard」被截成
+ * 「BCM World Master...」——认不出是哪张卡，卡面带来的辨识度全赔进去了。
+ *
+ * 现在：卡名独占一行（可用宽度 282px），百分比下移到副行右端。行尾箭头也去掉，
+ * 整行本就可点，箭头只是多占 24px。
+ *
+ * 百分比留在副行而不是并进卡名行，是因为它是这一屏的第二信息：
+ * 「哪张回报高」重要，「哪张叫什么」更重要 —— 叫不出名字的卡，回报再高也没用。
  */
 
-import { ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import type { CardRow } from '../../db/schema';
 import { staleDaysOf } from '../../lib/cardFacts';
 import { cardSummary } from '../../lib/issuerGroups';
 import { ConfidenceTag } from '../common/ConfidenceTag';
+import { CardFace } from './CardFace';
 
 interface CardListItemProps {
   card: CardRow;
   today: string;
   /** 该卡本月已用额度比例（0–1+）；无月度上限时为 null */
   usedRatio: number | null;
+  /** 这张卡在发卡行内的序号，用于同银行多卡时区分卡面深浅 */
+  indexInIssuer?: number;
 }
 
 /** 进度条颜色：只有 ≥80% 才染黄、≥100% 染红（limits.md §3 的三色规则） */
@@ -30,7 +37,7 @@ function barClass(ratio: number): string {
   return 'bg-line-strong';
 }
 
-export function CardListItem({ card, today, usedRatio }: CardListItemProps): React.JSX.Element {
+export function CardListItem({ card, today, usedRatio, indexInIssuer }: CardListItemProps): React.JSX.Element {
   const navigate = useNavigate();
   const staleDays = staleDaysOf(card, today);
   const summary = cardSummary(card);
@@ -45,10 +52,12 @@ export function CardListItem({ card, today, usedRatio }: CardListItemProps): Rea
       onClick={() => {
         void navigate(`/cards/${card.cardId}`);
       }}
-      className="flex w-full items-center gap-[var(--space-3)] border-b border-line-subtle px-[var(--space-4)] text-left transition-colors duration-[var(--motion-fast)] hover:bg-surface-2 last:border-b-0"
+      className="relative flex w-full items-center gap-[var(--space-3)] px-[var(--space-4)] py-[var(--space-3)] text-left transition-colors duration-[var(--motion-fast)] hover:bg-surface-2 active:bg-surface-3"
       style={{ minHeight: 'var(--size-row-list)' }}
     >
-      <span className="flex min-w-0 flex-1 flex-col gap-1 py-[var(--space-3)]">
+      <CardFace card={card} muted={inactive} indexInIssuer={indexInIssuer} />
+
+      <span className="flex min-w-0 flex-1 flex-col gap-1">
         <span className="flex min-w-0 items-center gap-[var(--space-2)]">
           <span
             className={[
@@ -60,12 +69,13 @@ export function CardListItem({ card, today, usedRatio }: CardListItemProps): Rea
           </span>
           <ConfidenceTag confidence={card.confidence} />
         </span>
-        <span className="flex min-w-0 items-center justify-between gap-[var(--space-2)]">
+
+        <span className="flex min-w-0 items-center gap-[var(--space-2)]">
           <span className="min-w-0 flex-1 truncate text-[length:var(--text-xs)] text-muted">{facts.join(' · ')}</span>
           {usedRatio !== null && (
             <span
               className="relative block shrink-0 overflow-hidden rounded-[var(--radius-sm)] bg-line"
-              style={{ width: 64, height: 4 }}
+              style={{ width: 48, height: 4 }}
               role="img"
               aria-label={`本月额度已用 ${String(Math.round(Math.min(1, usedRatio) * 100))}%`}
             >
@@ -78,17 +88,23 @@ export function CardListItem({ card, today, usedRatio }: CardListItemProps): Rea
               />
             </span>
           )}
+          <span
+            className={[
+              'num shrink-0 text-[length:var(--text-sm)] font-[var(--fw-emphasize)] whitespace-nowrap',
+              summary.state === 'unknown' ? 'text-meta' : 'text-fg-2',
+            ].join(' ')}
+          >
+            {summary.text}
+          </span>
         </span>
       </span>
+
+      {/* 分隔线缩进到卡面右边缘：贯穿到左侧会让卡面看起来像被切掉的图片 */}
       <span
-        className={[
-          'num w-[72px] shrink-0 text-right text-[length:var(--text-sm)] whitespace-nowrap',
-          summary.state === 'unknown' ? 'text-muted' : 'text-fg-2',
-        ].join(' ')}
-      >
-        {summary.text}
-      </span>
-      <ChevronRight size={16} strokeWidth={2} className="shrink-0 text-meta" aria-hidden="true" />
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 right-0 h-px bg-line-subtle"
+        style={{ left: 'calc(var(--space-4) + 76px + var(--space-3))' }}
+      />
     </button>
   );
 }

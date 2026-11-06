@@ -7,133 +7,189 @@
     "phase": "Phase 2",
     "contract": "docs/SPEC.md §8 设计 Token（锁定）",
     "register": "product",
-    "axes": { "designVariance": 3, "motionIntensity": 3, "visualDensity": 6 },
+    "axes": {
+      "designVariance": 3,
+      "motionIntensity": 3,
+      "visualDensity": 6
+    },
     "theme": {
-      "implemented": ["dark"],
+      "implemented": [
+        "dark"
+      ],
       "structure": "语义名挂 [data-theme]，浅色仅留空插槽不实现（SPEC §0 / O16）",
       "followSystem": false
     },
     "contrastMethod": "WCAG 2.1 相对亮度公式，脚本实算（/tmp/contrast*.py），非估算",
     "usage": "前端 import 后写入 CSS 变量或 Tailwind @theme。禁止在 src/ 出现裸 hex（SPEC §8 硬编码色禁令，仅 #fff/#000 例外）。"
   },
-
   "color": {
     "$comment": "层级用背景台阶表达，不用阴影（深色下阴影视觉无效，见 elevation.$comment）。所有对比度 = 该色 vs 所列背景的实际计算值。",
-
     "surface": {
       "0": {
         "value": "#0B0E14",
         "type": "color",
         "role": "页面底色 / app canvas",
         "usage": "body 背景、全屏 sheet 遮罩下的底、TabBar 底",
-        "contrast": { "onSelf": "—", "note": "基准背景，diffusers 的参照物" }
+        "contrast": {
+          "onSelf": "—",
+          "note": "基准背景，diffusers 的参照物"
+        }
       },
       "1": {
         "value": "#11151D",
         "type": "color",
         "role": "一级面板",
         "usage": "答案卡、顶栏、底部 TabBar、列表容器",
-        "contrast": { "vsSurface0": 1.12 }
+        "contrast": {
+          "vsSurface0": 1.12
+        }
       },
       "2": {
         "value": "#171C26",
         "type": "color",
         "role": "二级面板 / 控件底",
         "usage": "未选中的段按钮、输入框底、对比表行 hover 之上的静默面",
-        "contrast": { "vsSurface0": 1.32, "vsSurface1": 1.18 }
+        "contrast": {
+          "vsSurface0": 1.32,
+          "vsSurface1": 1.18
+        }
       },
       "3": {
         "value": "#1F2532",
         "type": "color",
         "role": "三级面板 / 提升态",
         "usage": "选中态段按钮、bottom sheet 本体、FAB 悬浮层底",
-        "contrast": { "vsSurface0": 1.63, "vsSurface1": 1.45 }
+        "contrast": {
+          "vsSurface0": 1.63,
+          "vsSurface1": 1.45
+        }
       },
       "4": {
         "value": "#2A3140",
         "type": "color",
         "role": "四级面板 / 最高台阶",
         "usage": "sheet 内再嵌套的卡片、popover、日期选择器弹层。全项目最多用到这一级",
-        "contrast": { "vsSurface0": 2.04, "vsSurface1": 1.82 }
+        "contrast": {
+          "vsSurface0": 2.04,
+          "vsSurface1": 1.82
+        }
       }
     },
-
     "text": {
       "primary": {
         "value": "#E8ECF2",
         "type": "color",
         "role": "主文本：卡名、主数字、标题",
-        "contrast": { "onSurface0": 16.29, "onSurface1": 15.42, "onSurface2": 14.39, "onSurface3": 12.94, "onSurface4": 10.99 },
+        "contrast": {
+          "onSurface0": 16.29,
+          "onSurface1": 15.42,
+          "onSurface2": 14.39,
+          "onSurface3": 12.94,
+          "onSurface4": 10.99
+        },
         "note": "刻意不用 #FFFFFF。近白（≈91%）降低长时间读金额的刺眼感，与 Copilot Money 同策略"
       },
       "secondary": {
         "value": "#B7C0CE",
         "type": "color",
         "role": "次级文本：渠道行、说明句",
-        "contrast": { "onSurface0": 10.53, "onSurface1": 9.96, "onSurface2": 9.30, "onSurface3": 8.36, "onSurface4": 7.11 }
+        "contrast": {
+          "onSurface0": 10.53,
+          "onSurface1": 9.96,
+          "onSurface2": 9.3,
+          "onSurface3": 8.36,
+          "onSurface4": 7.11
+        }
       },
       "tertiary": {
         "value": "#8A94A6",
         "type": "color",
         "role": "三级文本：字段标签、列头、少赚差值、币种符号",
-        "contrast": { "onSurface0": 6.32, "onSurface1": 5.98, "onSurface2": 5.58, "onSurface3": 5.02, "onSurface4": 4.26 },
+        "contrast": {
+          "onSurface0": 6.32,
+          "onSurface1": 5.98,
+          "onSurface2": 5.58,
+          "onSurface3": 5.02,
+          "onSurface4": 4.26
+        },
         "note": "surface-4 上 4.26 < 4.5，故 tertiary 文本不得出现在 surface-3 及以上嵌套层（见 MASTER §10 禁用组合）"
       },
       "meta": {
         "value": "#7D8798",
         "type": "color",
         "role": "元数据：核实日期、计数、来源域名",
-        "contrast": { "onSurface0": 5.33, "onSurface1": 5.04, "onSurface2": 4.71, "onSurface3": 4.23 },
+        "contrast": {
+          "onSurface0": 5.33,
+          "onSurface1": 5.04,
+          "onSurface2": 4.71,
+          "onSurface3": 4.23
+        },
         "note": "仅允许出现在 surface 0/1/2。11–12px 小字必须 ≥4.5:1，不用 3:1 大字阈值"
       },
       "disabled": {
         "value": "#5A6274",
         "type": "color",
         "role": "禁用态文本",
-        "contrast": { "onSurface1": 2.99 },
+        "contrast": {
+          "onSurface1": 2.99
+        },
         "note": "WCAG 明确豁免 disabled 控件。但项目规则：禁用控件必须同时带 disabled 语义（aria-disabled），不靠颜色传达"
       },
       "onAccent": {
         "value": "#FFFFFF",
         "type": "color",
         "role": "accent 填充上的文字",
-        "contrast": { "onAccent": 5.17 },
+        "contrast": {
+          "onAccent": 5.17
+        },
         "note": "全项目唯一允许的纯白使用点（SPEC §8 例外条款）"
       }
     },
-
     "border": {
       "subtle": {
         "value": "#232A38",
         "type": "color",
         "role": "行分隔线 / divide-y",
-        "contrast": { "vsSurface0": 1.34, "vsSurface1": 1.27 },
+        "contrast": {
+          "vsSurface0": 1.34,
+          "vsSurface1": 1.27
+        },
         "note": "纯结构线，不承担信息。1px"
       },
       "default": {
         "value": "#2A3140",
         "type": "color",
         "role": "控件边框（输入框、段按钮、pill 未选中）",
-        "contrast": { "vsSurface0": 1.48, "vsSurface1": 1.40 },
+        "contrast": {
+          "vsSurface0": 1.48,
+          "vsSurface1": 1.4
+        },
         "note": "1px 结构线。UI 组件非文本对比 3:1 不适用于本产品的静默边框——控件的可辨识性由底色台阶 + 文字承担，边框只做边界暗示"
       },
       "strong": {
         "value": "#3D4659",
         "type": "color",
         "role": "强调边框：输入框 focus 前的 hover、选中态描边、进度条轨道",
-        "contrast": { "vsSurface0": 2.04, "vsSurface1": 1.93, "vsSurface2": 1.80 },
+        "contrast": {
+          "vsSurface0": 2.04,
+          "vsSurface1": 1.93,
+          "vsSurface2": 1.8
+        },
         "note": "2.04:1。若前端需要完全满足 WCAG 1.4.11（非文本 3:1），将控件边框统一提为 strong 并把控件最小尺寸做到 44px（形状可辨），二者取其一即可"
       }
     },
-
     "semantic": {
       "$comment": "四色 + info。铁律：颜色永不单独承担语义（SPEC §8）。所有金额强制 ± 符号；倒贴额外写「倒贴」二字；未知写「未知」二字。",
-
       "pos": {
         "value": "#3DD68C",
         "type": "color",
         "role": "省钱 / 正净返（净额 > 0）",
-        "contrast": { "onSurface0": 10.30, "onSurface1": 9.75, "onSurface2": 9.10, "championRow": 8.41 },
+        "contrast": {
+          "onSurface0": 10.3,
+          "onSurface1": 9.75,
+          "onSurface2": 9.1,
+          "championRow": 8.41
+        },
         "tint": "#122A20",
         "tintSource": "极低透明度绿底，用于「省钱」小面积底（如额度条已用段、正收益徽章）",
         "textOnTint": 8.13,
@@ -143,7 +199,12 @@
         "value": "#FF7A6E",
         "type": "color",
         "role": "亏钱 / 负净返（倒贴）。仅真亏钱使用",
-        "contrast": { "onSurface0": 7.60, "onSurface1": 7.19, "onSurface2": 6.71, "championRow": 6.20 },
+        "contrast": {
+          "onSurface0": 7.6,
+          "onSurface1": 7.19,
+          "onSurface2": 6.71,
+          "championRow": 6.2
+        },
         "tint": "#2B1614",
         "textOnTint": 6.73,
         "note": "偏橙红而非纯红 #DC2626。纯红在近黑底上会「烧边」，偏橙红保 7.19:1 且不刺眼"
@@ -153,7 +214,10 @@
         "type": "color",
         "role": "少赚（非冠军但净额 ≥ 0 的差值）",
         "aliasOf": "color.text.tertiary",
-        "contrast": { "onSurface1": 5.98, "championRow": 5.16 },
+        "contrast": {
+          "onSurface1": 5.98,
+          "championRow": 5.16
+        },
         "note": "少赚不配语义色，直接用 tertiary 灰。理由：全屏红差值会让红失去信号价值（alarm fatigue）。前端不要为 loss 新建色值，直接引用 text.tertiary"
       },
       "neutral": {
@@ -167,7 +231,12 @@
         "value": "#E8B84B",
         "type": "color",
         "role": "警示：额度 ≥80%、优惠即将到期（≤60天）、数据待核对、规则过期",
-        "contrast": { "onSurface0": 10.48, "onSurface1": 9.91, "onSurface2": 9.26, "onSurface3": 8.32 },
+        "contrast": {
+          "onSurface0": 10.48,
+          "onSurface1": 9.91,
+          "onSurface2": 9.26,
+          "onSurface3": 8.32
+        },
         "tint": "#2B2411",
         "textOnTint": 8.35,
         "note": "不用 #F2C14E 更亮的黄——11.5:1 在暗底上过亮会抢走主数字注意力"
@@ -176,19 +245,26 @@
         "value": "#6BA6F0",
         "type": "color",
         "role": "信息提示：DCC 提示、数据来源说明、豁免生效说明",
-        "contrast": { "onSurface0": 7.67, "onSurface1": 7.26, "onSurface2": 6.78 },
+        "contrast": {
+          "onSurface0": 7.67,
+          "onSurface1": 7.26,
+          "onSurface2": 6.78
+        },
         "tint": "#121F33",
         "textOnTint": 6.57,
         "note": "与 accent 同族但更亮，确保在非按钮语境中不被误读为可点击"
       }
     },
-
     "accent": {
       "base": {
         "value": "#2563EB",
         "type": "color",
         "role": "唯一强调色：主按钮填充、选中态、focus ring 基色、当前 Tab",
-        "contrast": { "onSurface0": 3.74, "onSurface1": 3.54, "whiteOnIt": 5.17 },
+        "contrast": {
+          "onSurface0": 3.74,
+          "onSurface1": 3.54,
+          "whiteOnIt": 5.17
+        },
         "constraint": "只做填充色，不做 15px 以下文字色（3.54:1 不达 4.5:1）。需要蓝色文字时用 accent.text",
         "hueJustification": "中性偏冷的蓝（hue ≈ 218，饱和度受控）。绿色已被 pos 占用，故主色绝不能是绿；蓝色不承载任何金额语义，只表示「可点/选中」"
       },
@@ -196,55 +272,108 @@
         "value": "#2E6FE8",
         "type": "color",
         "role": "accent 填充 hover",
-        "contrast": { "whiteOnIt": 4.61, "onSurface0": 4.19 },
+        "contrast": {
+          "whiteOnIt": 4.61,
+          "onSurface0": 4.19
+        },
         "note": "深色主题下 hover 明确提亮（不是压暗），白色文字仍 4.61:1 达标"
       },
       "active": {
         "value": "#1D4ED8",
         "type": "color",
         "role": "accent 填充 pressed / 当前 Tab 文字",
-        "contrast": { "whiteOnIt": 6.70, "onSurface0": 2.88 },
+        "contrast": {
+          "whiteOnIt": 6.7,
+          "onSurface0": 2.88
+        },
         "note": "pressed 压暗，形成「按下去」的方向感"
       },
       "text": {
         "value": "#5B9DFF",
         "type": "color",
         "role": "蓝色文字与图标：链接、当前 Tab 文字、渠道 pill 选中文字",
-        "contrast": { "onSurface0": 7.09, "onSurface1": 6.71, "onSurface2": 6.27, "onSurface3": 5.63, "onSurface4": 4.78 },
+        "contrast": {
+          "onSurface0": 7.09,
+          "onSurface1": 6.71,
+          "onSurface2": 6.27,
+          "onSurface3": 5.63,
+          "onSurface4": 4.78
+        },
         "note": "accent.base 做文字不达标（3.54），故单独给一个 accent.text。前端混淆这两个是最高频错误之一"
       },
       "tint": {
         "value": "#12203A",
         "type": "color",
         "role": "accent 极淡底：选中行底色、当前 Tab 底",
-        "contrast": { "vsSurface0": 1.13 },
-        "textOnTint": { "accentText": 5.96, "textPrimary": 13.69 }
+        "contrast": {
+          "vsSurface0": 1.13
+        },
+        "textOnTint": {
+          "accentText": 5.96,
+          "textPrimary": 13.69
+        }
       },
       "focusRing": {
         "value": "#5B9DFF",
         "type": "color",
         "role": "focus-visible 环（3px，配 2px offset）",
-        "contrast": { "onSurface0": 7.09, "onSurface1": 6.71, "onSurface2": 6.27, "onSurface3": 5.63 },
+        "contrast": {
+          "onSurface0": 7.09,
+          "onSurface1": 6.71,
+          "onSurface2": 6.27,
+          "onSurface3": 5.63
+        },
         "note": "全部为 3px + outline-offset: 2px。键盘用户 100% 可见"
       }
     },
-
     "confidence": {
       "$comment": "数据置信度四态。注意：这不是「卡好不好」，是「我们知道多少」。视觉必须与收益语义完全分开——用中性/警示，绝不用 pos/neg。",
-      "high": { "label": "已核实", "value": "#8A94A6", "role": "正常显示，不做徽章", "note": "high 不给徽章。给徽章会让「正常」变成「值得一提」，反而制造噪音" },
-      "medium": { "label": "已核实", "value": "#8A94A6", "role": "详情内标注来源与核实日期，列表不加徽章" },
-      "low": { "label": "待核对", "value": "#E8B84B", "bg": "#2B2411", "role": "黄底徽章，列表内可见" },
-      "unknown": { "label": "未知", "value": "#8A94A6", "bg": "#232A38", "role": "灰底徽章；数值位显示「未知」二字，绝不显示 0.00" }
+      "high": {
+        "label": "已核实",
+        "value": "#8A94A6",
+        "role": "正常显示，不做徽章",
+        "note": "high 不给徽章。给徽章会让「正常」变成「值得一提」，反而制造噪音"
+      },
+      "medium": {
+        "label": "已核实",
+        "value": "#8A94A6",
+        "role": "详情内标注来源与核实日期，列表不加徽章"
+      },
+      "low": {
+        "label": "待核对",
+        "value": "#E8B84B",
+        "bg": "#2B2411",
+        "role": "黄底徽章，列表内可见"
+      },
+      "unknown": {
+        "label": "未知",
+        "value": "#8A94A6",
+        "bg": "#232A38",
+        "role": "灰底徽章；数值位显示「未知」二字，绝不显示 0.00"
+      }
     }
   },
-
   "row": {
     "$comment": "行级底色台阶。用于对比表/列表区分「冠军行」「普通行」「失格行」，替代左侧彩色条纹（AI 模板罪 #5）。",
-    "championBg": { "value": "#1B2331", "type": "color", "vsSurface1": 1.16, "textOnIt": 13.30, "posOnIt": 8.41, "note": "1.16:1 的整行偏移 + 590 字重 + 顶部 1px accent 环，三件套建立冠军层级。不做发光、不做条纹" },
-    "hoverBg": { "value": "#181E29", "type": "color", "vsSurface1": 1.09 },
-    "excludedBg": { "value": "#11151D", "type": "color", "note": "失格行不加底，靠 opacity 0.6 + 独立分组标题 + 原因文字" }
+    "championBg": {
+      "value": "#1B2331",
+      "type": "color",
+      "vsSurface1": 1.16,
+      "textOnIt": 13.3,
+      "posOnIt": 8.41,
+      "note": "1.16:1 的整行偏移 + 590 字重 + 顶部 1px accent 环，三件套建立冠军层级。不做发光、不做条纹"
+    },
+    "hoverBg": {
+      "value": "#181E29",
+      "type": "color",
+      "vsSurface1": 1.09
+    },
+    "excludedBg": {
+      "value": "#11151D",
+      "type": "color",
+      "note": "失格行不加底，靠 opacity 0.6 + 独立分组标题 + 原因文字"
+    }
   },
-
   "font": {
     "family": {
       "display": {
@@ -267,119 +396,386 @@
         "note": "仅用于规则代码、capId 展示、JSON 导入错误定位。不用于任何金额"
       }
     },
-
     "weight": {
-      "read": { "value": 400, "type": "fontWeight", "role": "正文、说明句、备注" },
-      "emphasize": { "value": 510, "type": "fontWeight", "role": "卡名、列表值、按钮文字、次级数字（L-Stat）" },
-      "announce": { "value": 590, "type": "fontWeight", "role": "唯一主角数字（40px）、页面标题、对比表冠军卡名" },
+      "read": {
+        "value": 400,
+        "type": "fontWeight",
+        "role": "正文、说明句、备注"
+      },
+      "emphasize": {
+        "value": 510,
+        "type": "fontWeight",
+        "role": "卡名、列表值、按钮文字、次级数字（L-Stat）"
+      },
+      "announce": {
+        "value": 590,
+        "type": "fontWeight",
+        "role": "唯一主角数字（40px）、页面标题、对比表冠军卡名"
+      },
       "$note": "三级到底，不引入 700。590 在半粗区间已有权威感且不过重"
     },
-
     "size": {
       "$note": "固定 rem 阶梯，不做 fluid clamp（Product 寄存器，SPEC §8）。换算基准 16px。",
-      "2xs": { "value": "0.6875rem", "px": 11, "type": "dimension", "role": "徽章、分组小标题。必须配 letter-spacing 0.06em", "lineHeight": 1.0 },
-      "xs": { "value": "0.75rem", "px": 12, "type": "dimension", "role": "元数据、字段标签、列头", "lineHeight": 1.5 },
-      "sm": { "value": "0.8125rem", "px": 13, "type": "dimension", "role": "次级说明、差值行、明细行", "lineHeight": 1.5 },
-      "base": { "value": "0.875rem", "px": 14, "type": "dimension", "role": "正文基准。手机上 14px 才是对的", "lineHeight": 1.6 },
-      "md": { "value": "1rem", "px": 16, "type": "dimension", "role": "卡名（列表行）、输入值、对比表卡名", "lineHeight": 1.4 },
-      "lg": { "value": "1.125rem", "px": 18, "type": "dimension", "role": "区块标题", "lineHeight": 1.35 },
-      "xl": { "value": "1.5rem", "px": 24, "type": "dimension", "role": "答案卡卡名 / 额度页 KPI 数字（L-Stat 上限）", "lineHeight": 1.25 },
-      "2xl": { "value": "2.5rem", "px": 40, "type": "dimension", "role": "唯一主角：本次净返金额（全屏仅 1 个）", "lineHeight": 1.1 }
+      "2xs": {
+        "value": "0.6875rem",
+        "px": 11,
+        "type": "dimension",
+        "role": "徽章、分组小标题。必须配 letter-spacing 0.06em",
+        "lineHeight": 1.0
+      },
+      "xs": {
+        "value": "0.75rem",
+        "px": 12,
+        "type": "dimension",
+        "role": "元数据、字段标签、列头",
+        "lineHeight": 1.5
+      },
+      "sm": {
+        "value": "0.8125rem",
+        "px": 13,
+        "type": "dimension",
+        "role": "次级说明、差值行、明细行",
+        "lineHeight": 1.5
+      },
+      "base": {
+        "value": "0.875rem",
+        "px": 14,
+        "type": "dimension",
+        "role": "正文基准。手机上 14px 才是对的",
+        "lineHeight": 1.6
+      },
+      "md": {
+        "value": "1rem",
+        "px": 16,
+        "type": "dimension",
+        "role": "卡名（列表行）、输入值、对比表卡名",
+        "lineHeight": 1.4
+      },
+      "lg": {
+        "value": "1.125rem",
+        "px": 18,
+        "type": "dimension",
+        "role": "区块标题",
+        "lineHeight": 1.35
+      },
+      "xl": {
+        "value": "1.5rem",
+        "px": 24,
+        "type": "dimension",
+        "role": "答案卡卡名 / 额度页 KPI 数字（L-Stat 上限）",
+        "lineHeight": 1.25
+      },
+      "2xl": {
+        "value": "2.5rem",
+        "px": 40,
+        "type": "dimension",
+        "role": "唯一主角：本次净返金额（全屏仅 1 个）",
+        "lineHeight": 1.1
+      }
     },
-
     "tracking": {
-      "display": { "value": "-0.02em", "type": "dimension", "role": "40px 主数字、24px 卡名" },
-      "heading": { "value": "-0.01em", "type": "dimension", "role": "18px 区块标题" },
-      "body": { "value": "0em", "type": "dimension", "role": "14–16px 正文（中文尤其必须 0）" },
-      "label": { "value": "0.01em", "type": "dimension", "role": "11–13px 小字标签" },
-      "caps": { "value": "0.06em", "type": "dimension", "role": "全大写英文 / 分组小标题 / 币种缩写", "note": "低于 0.06em 的全大写会粘连" }
+      "display": {
+        "value": "-0.02em",
+        "type": "dimension",
+        "role": "40px 主数字、24px 卡名"
+      },
+      "heading": {
+        "value": "-0.01em",
+        "type": "dimension",
+        "role": "18px 区块标题"
+      },
+      "body": {
+        "value": "0em",
+        "type": "dimension",
+        "role": "14–16px 正文（中文尤其必须 0）"
+      },
+      "label": {
+        "value": "0.01em",
+        "type": "dimension",
+        "role": "11–13px 小字标签"
+      },
+      "caps": {
+        "value": "0.06em",
+        "type": "dimension",
+        "role": "全大写英文 / 分组小标题 / 币种缩写",
+        "note": "低于 0.06em 的全大写会粘连"
+      }
     },
-
     "feature": {
-      "tabular": { "value": "\"tnum\" 1, \"cv01\" 1", "type": "fontFeature", "note": "全部数字容器强制开启。目标是「改金额时数字宽度不跳」，这是信任问题不是美观问题" }
+      "tabular": {
+        "value": "\"tnum\" 1, \"cv01\" 1",
+        "type": "fontFeature",
+        "note": "全部数字容器强制开启。目标是「改金额时数字宽度不跳」，这是信任问题不是美观问题"
+      }
     }
   },
-
   "space": {
     "$note": "4px 基准网格。仅允许下列值，禁止 5/7/13/15/22/30 等非标值。",
-    "0": { "value": "0px", "type": "dimension" },
-    "1": { "value": "4px", "type": "dimension", "role": "图标与文字间隙、字号内衬" },
-    "2": { "value": "8px", "type": "dimension", "role": "同组元素间距、pill gap" },
-    "3": { "value": "12px", "type": "dimension", "role": "表单标签与控件、列表行内行距" },
-    "4": { "value": "16px", "type": "dimension", "role": "页面左右 gutter（375px 视口）、卡片内边距" },
-    "5": { "value": "20px", "type": "dimension", "role": "输入分区之间的上间距" },
-    "6": { "value": "24px", "type": "dimension", "role": "区块间距、sheet 顶部内边距" },
-    "8": { "value": "32px", "type": "dimension", "role": "大区块间距" },
-    "10": { "value": "40px", "type": "dimension", "role": "页面级上下留白" },
-    "12": { "value": "48px", "type": "dimension", "role": "最大间距；同时也是最小触摸行高" },
-    "16": { "value": "64px", "type": "dimension", "role": "仅用于空状态的垂直居中留白" }
-  },
-
-  "size": {
-    "$note": "组件固定尺寸，px 级。前端不要用 padding 拼出这些高度，直接设固定高度避免抖动。",
-    "topBar": { "value": "48px", "type": "dimension", "role": "顶栏内容高（不含 safe-area）" },
-    "tabBar": { "value": "56px", "type": "dimension", "role": "底部 TabBar 内容高（不含 safe-area）" },
-    "touchMin": { "value": "44px", "type": "dimension", "role": "所有可点元素最小边长（WCAG 2.5.5）" },
-    "segBtn": { "value": "44px", "type": "dimension", "role": "地区/类别段按钮高" },
-    "amountInput": { "value": "56px", "type": "dimension", "role": "金额输入框高" },
-    "listRow": { "value": "64px", "type": "dimension", "role": "卡库列表行高（两行文字）" },
-    "compareRow": { "value": "56px", "type": "dimension", "role": "对比表行高（两行文字）" },
-    "pill": { "value": "36px", "type": "dimension", "role": "渠道 pill 高（配 44px 命中区，见 MASTER §6）" },
-    "icon": {
-      "inline": { "value": "16px", "type": "dimension", "role": "行内图标，配 12–13px 文字" },
-      "button": { "value": "20px", "type": "dimension", "role": "按钮内 / 列表行图标" },
-      "standalone": { "value": "24px", "type": "dimension", "role": "TabBar、空状态、独立图标" }
+    "0": {
+      "value": "0px",
+      "type": "dimension"
     },
-    "progressBar": {
-      "thin": { "value": "4px", "type": "dimension", "role": "答案卡内额度条" },
-      "normal": { "value": "6px", "type": "dimension", "role": "额度页每卡额度条" }
+    "1": {
+      "value": "4px",
+      "type": "dimension",
+      "role": "图标与文字间隙、字号内衬"
     },
-    "container": {
-      "maxMobile": { "value": "100%", "type": "dimension", "role": "375–767px：满宽 + 16px gutter" },
-      "maxDesktop": { "value": "640px", "type": "dimension", "role": "≥768px：单列居中加宽，不新增功能" }
+    "2": {
+      "value": "8px",
+      "type": "dimension",
+      "role": "同组元素间距、pill gap"
     },
-    "bottomSheetMaxHeight": { "value": "88vh", "type": "dimension", "role": "bottom sheet 最大高度，留 12vh 露出答案卡做空间锚点" }
-  },
-
-  "radius": {
-    "$note": "卡片圆角上限 16px（过度圆角 = AI 味）。本产品卡片只用到 12px。",
-    "sm": { "value": "4px", "type": "dimension", "role": "徽章、tag、小 pill" },
-    "md": { "value": "8px", "type": "dimension", "role": "按钮、输入框、段按钮" },
-    "lg": { "value": "12px", "type": "dimension", "role": "卡片、bottom sheet 顶角、选中行" },
-    "pill": { "value": "9999px", "type": "dimension", "role": "渠道 pill、圆点、标签药丸" },
-    "none": { "value": "0px", "type": "dimension", "role": "对比表行、列表行（用分隔线而不是圆角框）" }
-  },
-
-  "elevation": {
-    "$comment": "关键判断：深色背景下阴影几乎不可见（近黑底上投影 = 更黑的黑，视觉增益趋近 0）。本产品用「背景层色阶台阶 + 1px 边框」表达层级，阴影只保留 1 个极轻值用于真正浮起的元素（FAB / popover / bottom sheet 顶缘）。这是与浅色主题设计习惯最大的分歧点，前端按浅色思维加 shadow 会得到一片糊。",
-    "flat": { "value": "none", "type": "boxShadow", "role": "默认。所有卡片、列表行、面板用 flat + 背景台阶" },
-    "ring": { "value": "0 0 0 1px #232A38", "type": "boxShadow", "role": "需要明确边界时（输入框、pill）", "note": "1px 环比 border 更可控（不参与布局计算，不引起 0.5px 抖动）" },
-    "raised": { "value": "0 8px 24px rgba(0, 0, 0, 0.48), 0 0 0 1px #2A3140", "type": "boxShadow", "role": "仅 3 处使用：FAB、popover（日期选择）、bottom sheet 上缘", "note": "rgba 黑在这里是「遮光」而非「投影」，深色下唯一有效的阴影语义" },
-    "zIndex": {
-      "base": { "value": 0 },
-      "stickyAnswer": { "value": 100 },
-      "tabBar": { "value": 110 },
-      "fab": { "value": 120 },
-      "sheetScrim": { "value": 200 },
-      "sheet": { "value": 210 },
-      "toast": { "value": 300 }
+    "3": {
+      "value": "12px",
+      "type": "dimension",
+      "role": "表单标签与控件、列表行内行距"
+    },
+    "4": {
+      "value": "16px",
+      "type": "dimension",
+      "role": "页面左右 gutter（375px 视口）、卡片内边距"
+    },
+    "5": {
+      "value": "20px",
+      "type": "dimension",
+      "role": "输入分区之间的上间距"
+    },
+    "6": {
+      "value": "24px",
+      "type": "dimension",
+      "role": "区块间距、sheet 顶部内边距"
+    },
+    "8": {
+      "value": "32px",
+      "type": "dimension",
+      "role": "大区块间距"
+    },
+    "10": {
+      "value": "40px",
+      "type": "dimension",
+      "role": "页面级上下留白"
+    },
+    "12": {
+      "value": "48px",
+      "type": "dimension",
+      "role": "最大间距；同时也是最小触摸行高"
+    },
+    "16": {
+      "value": "64px",
+      "type": "dimension",
+      "role": "仅用于空状态的垂直居中留白"
     }
   },
-
+  "size": {
+    "$note": "组件固定尺寸，px 级。前端不要用 padding 拼出这些高度，直接设固定高度避免抖动。",
+    "topBar": {
+      "value": "48px",
+      "type": "dimension",
+      "role": "顶栏内容高（不含 safe-area）"
+    },
+    "tabBar": {
+      "value": "56px",
+      "type": "dimension",
+      "role": "底部 TabBar 内容高（不含 safe-area）"
+    },
+    "touchMin": {
+      "value": "44px",
+      "type": "dimension",
+      "role": "所有可点元素最小边长（WCAG 2.5.5）"
+    },
+    "segBtn": {
+      "value": "44px",
+      "type": "dimension",
+      "role": "地区/类别段按钮高"
+    },
+    "amountInput": {
+      "value": "56px",
+      "type": "dimension",
+      "role": "金额输入框高"
+    },
+    "listRow": {
+      "value": "72px",
+      "type": "dimension",
+      "role": "卡库列表行高（卡面 48 + 上下内边距 12×2；做过 64，卡面只能到 40，卡组织标识糊成色块）"
+    },
+    "compareRow": {
+      "value": "56px",
+      "type": "dimension",
+      "role": "对比表行高（两行文字）"
+    },
+    "pill": {
+      "value": "36px",
+      "type": "dimension",
+      "role": "渠道 pill 高（配 44px 命中区，见 MASTER §6）"
+    },
+    "icon": {
+      "inline": {
+        "value": "16px",
+        "type": "dimension",
+        "role": "行内图标，配 12–13px 文字"
+      },
+      "button": {
+        "value": "20px",
+        "type": "dimension",
+        "role": "按钮内 / 列表行图标"
+      },
+      "standalone": {
+        "value": "24px",
+        "type": "dimension",
+        "role": "TabBar、空状态、独立图标"
+      }
+    },
+    "progressBar": {
+      "thin": {
+        "value": "4px",
+        "type": "dimension",
+        "role": "答案卡内额度条"
+      },
+      "normal": {
+        "value": "6px",
+        "type": "dimension",
+        "role": "额度页每卡额度条"
+      }
+    },
+    "container": {
+      "maxMobile": {
+        "value": "100%",
+        "type": "dimension",
+        "role": "375–767px：满宽 + 16px gutter"
+      },
+      "maxDesktop": {
+        "value": "640px",
+        "type": "dimension",
+        "role": "≥768px：单列居中加宽，不新增功能"
+      }
+    },
+    "bottomSheetMaxHeight": {
+      "value": "88vh",
+      "type": "dimension",
+      "role": "bottom sheet 最大高度，留 12vh 露出答案卡做空间锚点"
+    }
+  },
+  "radius": {
+    "$note": "卡片圆角上限 16px（过度圆角 = AI 味）。本产品卡片只用到 12px。",
+    "sm": {
+      "value": "4px",
+      "type": "dimension",
+      "role": "徽章、tag、小 pill"
+    },
+    "md": {
+      "value": "8px",
+      "type": "dimension",
+      "role": "按钮、输入框、段按钮"
+    },
+    "lg": {
+      "value": "12px",
+      "type": "dimension",
+      "role": "卡片、bottom sheet 顶角、选中行"
+    },
+    "pill": {
+      "value": "9999px",
+      "type": "dimension",
+      "role": "渠道 pill、圆点、标签药丸"
+    },
+    "none": {
+      "value": "0px",
+      "type": "dimension",
+      "role": "对比表行、列表行（用分隔线而不是圆角框）"
+    }
+  },
+  "elevation": {
+    "$comment": "关键判断：深色背景下阴影几乎不可见（近黑底上投影 = 更黑的黑，视觉增益趋近 0）。本产品用「背景层色阶台阶 + 1px 边框」表达层级，阴影只保留 1 个极轻值用于真正浮起的元素（FAB / popover / bottom sheet 顶缘）。这是与浅色主题设计习惯最大的分歧点，前端按浅色思维加 shadow 会得到一片糊。",
+    "flat": {
+      "value": "none",
+      "type": "boxShadow",
+      "role": "默认。所有卡片、列表行、面板用 flat + 背景台阶"
+    },
+    "ring": {
+      "value": "0 0 0 1px #232A38",
+      "type": "boxShadow",
+      "role": "需要明确边界时（输入框、pill）",
+      "note": "1px 环比 border 更可控（不参与布局计算，不引起 0.5px 抖动）"
+    },
+    "raised": {
+      "value": "0 8px 24px rgba(0, 0, 0, 0.48), 0 0 0 1px #2A3140",
+      "type": "boxShadow",
+      "role": "仅 3 处使用：FAB、popover（日期选择）、bottom sheet 上缘",
+      "note": "rgba 黑在这里是「遮光」而非「投影」，深色下唯一有效的阴影语义"
+    },
+    "zIndex": {
+      "base": {
+        "value": 0
+      },
+      "stickyAnswer": {
+        "value": 100
+      },
+      "tabBar": {
+        "value": 110
+      },
+      "fab": {
+        "value": 120
+      },
+      "sheetScrim": {
+        "value": 200
+      },
+      "sheet": {
+        "value": 210
+      },
+      "toast": {
+        "value": 300
+      }
+    }
+  },
   "motion": {
     "$comment": "SPEC §8 锁定时长上限：答案 200ms / 额度条 400ms。禁止数字滚动计数、页面入场编排、bounce/elastic、闪烁脉冲。只动 transform 与 opacity。",
     "duration": {
-      "instant": { "value": "80ms", "type": "duration", "role": "旧值淡出（交叉淡入的前半）" },
-      "fast": { "value": "120ms", "type": "duration", "role": "选中态换色、图标状态切换" },
-      "base": { "value": "150ms", "type": "duration", "role": "hover、tab 切换、Toast 进出（全系统收敛值）" },
-      "answer": { "value": "200ms", "type": "duration", "role": "答案卡整体交叉淡入（SPEC 锁定的 200ms）" },
-      "expand": { "value": "220ms", "type": "duration", "role": "对比 sheet / 明细 accordion 展开（grid-template-rows 0fr→1fr）" },
-      "progress": { "value": "400ms", "type": "duration", "role": "额度条 scaleX 填充。全项目最长动效，上限不得超越" }
+      "instant": {
+        "value": "80ms",
+        "type": "duration",
+        "role": "旧值淡出（交叉淡入的前半）"
+      },
+      "fast": {
+        "value": "120ms",
+        "type": "duration",
+        "role": "选中态换色、图标状态切换"
+      },
+      "base": {
+        "value": "150ms",
+        "type": "duration",
+        "role": "hover、tab 切换、Toast 进出（全系统收敛值）"
+      },
+      "answer": {
+        "value": "200ms",
+        "type": "duration",
+        "role": "答案卡整体交叉淡入（SPEC 锁定的 200ms）"
+      },
+      "expand": {
+        "value": "220ms",
+        "type": "duration",
+        "role": "对比 sheet / 明细 accordion 展开（grid-template-rows 0fr→1fr）"
+      },
+      "progress": {
+        "value": "400ms",
+        "type": "duration",
+        "role": "额度条 scaleX 填充。全项目最长动效，上限不得超越"
+      }
     },
     "easing": {
-      "standard": { "value": "cubic-bezier(0.2, 0, 0, 1)", "type": "cubicBezier", "role": "默认。出快入慢，符合「即时响应」的感知" },
-      "exit": { "value": "cubic-bezier(0.4, 0, 1, 1)", "type": "cubicBezier", "role": "仅用于元素离场" },
-      "progress": { "value": "cubic-bezier(0.25, 1, 0.5, 1)", "type": "cubicBezier", "role": "额度条 eoe-out-quart：起步快、收尾稳，比 standard 更适合条形填充" }
+      "standard": {
+        "value": "cubic-bezier(0.2, 0, 0, 1)",
+        "type": "cubicBezier",
+        "role": "默认。出快入慢，符合「即时响应」的感知"
+      },
+      "exit": {
+        "value": "cubic-bezier(0.4, 0, 1, 1)",
+        "type": "cubicBezier",
+        "role": "仅用于元素离场"
+      },
+      "progress": {
+        "value": "cubic-bezier(0.25, 1, 0.5, 1)",
+        "type": "cubicBezier",
+        "role": "额度条 eoe-out-quart：起步快、收尾稳，比 standard 更适合条形填充"
+      }
     },
     "reducedMotion": {
       "strategy": "prefers-reduced-motion: reduce 时全部时长降为 0ms（不只 dot 掉 transform，颜色过渡也一起关），布局切换改瞬变",
@@ -387,7 +783,6 @@
       "note": "用 0.01ms 而不是 0ms：部分浏览器对 0ms 的 transitionend 事件不触发，会导致依赖 transitionend 的逻辑挂住"
     }
   },
-
   "a11y": {
     "focusRing": {
       "width": "3px",
@@ -396,7 +791,10 @@
       "color": "#5B9DFF",
       "rule": "全项目仅使用 :focus-visible，禁止 :focus。鼠标点击不显示环（避免视觉噪音），键盘/读屏用户 100% 可见"
     },
-    "touchTarget": { "min": "44px", "note": "视觉尺寸可小于 44（如 36px pill），但命中区必须用 padding 或 ::after 撑满 44×44" },
+    "touchTarget": {
+      "min": "44px",
+      "note": "视觉尺寸可小于 44（如 36px pill），但命中区必须用 padding 或 ::after 撑满 44×44"
+    },
     "contrastRules": {
       "bodyText": "4.5:1",
       "largeText": "3:1（≥18.66px bold 或 ≥24px regular）",
@@ -414,7 +812,6 @@
       ]
     }
   },
-
   "emptyStates": {
     "$comment": "全部为真实可用中文，无占位文案。前端直接取用，不要再改写。",
     "firstOpen": {
@@ -447,7 +844,6 @@
       "body": "有上限的卡会在这里显示已用和剩余。"
     }
   },
-
   "errorStates": {
     "readFailed": {
       "title": "读不到卡片数据",
@@ -478,7 +874,6 @@
       "cta": null
     }
   },
-
   "copyRules": {
     "forbidden": [
       "Welcome to / 欢迎使用 / 开启你的省钱之旅",
@@ -493,7 +888,6 @@
       "日期用 YYYY-MM-DD（港澳用户对 2026/12/31 与 31/12 都习惯，统一 ISO 避免歧义）"
     ]
   },
-
   "tailwind": {
     "$comment": "Tailwind v4 写法：@theme 中声明。刻意不定义任何 purple/pink 色阶（SPEC §8 从源头断掉紫粉渐变可能）。",
     "theme": {

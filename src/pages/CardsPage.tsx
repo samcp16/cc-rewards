@@ -63,6 +63,22 @@ export function CardsPage({ view = 'cards' }: CardsPageProps): React.JSX.Element
     [cards],
   );
 
+  /**
+   * 发卡行内序号：同银行的第 2、3 张卡卡面依次加深。
+   * 只数「同一地区 + 同一发卡行」，因为大西洋银行和汇丰是不同的红。
+   */
+  const issuerIndex = useMemo(() => {
+    const seen = new Map<string, number>();
+    const map = new Map<string, number>();
+    for (const c of cards) {
+      const key = `${c.issuerRegion}|${c.issuer}`;
+      const n = seen.get(key) ?? 0;
+      map.set(c.cardId, n);
+      seen.set(key, n + 1);
+    }
+    return map;
+  }, [cards]);
+
   const inactive = cards.filter((c) => c.active === false);
   const limitRows = useMemo(
     () =>
@@ -108,22 +124,40 @@ export function CardsPage({ view = 'cards' }: CardsPageProps): React.JSX.Element
 
             {groups.map((group) => (
               <section key={group.region}>
-                <h2 className="px-[var(--space-4)] pb-[var(--space-1)] pt-[var(--space-5)] text-[length:var(--text-xs)] font-[var(--fw-emphasize)] tracking-[var(--tracking-caps)] text-muted">
+                <h2 className="flex items-baseline gap-[var(--space-2)] px-[var(--space-4)] pb-[var(--space-1)] pt-[var(--space-5)] text-[length:var(--text-xs)] font-[var(--fw-emphasize)] tracking-[var(--tracking-caps)] text-muted">
                   {ISSUER_REGION_LABEL[group.region]}
+                  <span className="num text-[length:var(--text-2xs)] font-[var(--fw-read)] tracking-normal text-meta">
+                    {group.items.length}
+                  </span>
                 </h2>
                 {group.items.map((card) => (
-                  <CardListItem key={card.cardId} card={card} today={params.today} usedRatio={ratios.get(card.cardId) ?? null} />
+                  <CardListItem
+                    key={card.cardId}
+                    card={card}
+                    today={params.today}
+                    usedRatio={ratios.get(card.cardId) ?? null}
+                    indexInIssuer={issuerIndex.get(card.cardId) ?? 0}
+                  />
                 ))}
               </section>
             ))}
 
             {inactive.length > 0 && (
               <section>
-                <h2 className="px-[var(--space-4)] pb-[var(--space-1)] pt-[var(--space-5)] text-[length:var(--text-xs)] font-[var(--fw-emphasize)] tracking-[var(--tracking-caps)] text-muted">
-                  已停用 · {inactive.length} 张
+                <h2 className="flex items-baseline gap-[var(--space-2)] px-[var(--space-4)] pb-[var(--space-1)] pt-[var(--space-5)] text-[length:var(--text-xs)] font-[var(--fw-emphasize)] tracking-[var(--tracking-caps)] text-muted">
+                  已停用
+                  <span className="num text-[length:var(--text-2xs)] font-[var(--fw-read)] tracking-normal text-meta">
+                    {inactive.length}
+                  </span>
                 </h2>
                 {inactive.map((card) => (
-                  <CardListItem key={card.cardId} card={card} today={params.today} usedRatio={null} />
+                  <CardListItem
+                    key={card.cardId}
+                    card={card}
+                    today={params.today}
+                    usedRatio={null}
+                    indexInIssuer={issuerIndex.get(card.cardId) ?? 0}
+                  />
                 ))}
               </section>
             )}

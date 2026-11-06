@@ -1,0 +1,92 @@
+/*
+ * 卡面品牌色。
+ *
+ * 为什么不并进 design-tokens.json：
+ *   design-tokens 是**界面语义色**——surface/fg/accent/pos/neg，它们随主题走、
+ *   承担语义、由设计系统决定。这里的颜色是**外部品牌标识**：汇丰的红是汇丰的，
+ *   不是「危险」的；它不随主题变化，也不该由设计系统挑选。
+ *   并在一起会让后来的人以为可以改，而那等于改别人的 logo。
+ *
+ * 为什么不做成自动生成：
+ *   源数据是各行公开的标识色，不是设计师的决策。它由 src/lib/cardVisual.ts
+ *   的映射表驱动，一对一的 key，加一行就多一个色，没有派生逻辑。
+ *
+ * -ink 是压在该底色上的文字色，按 WCAG 相对亮度预先算好并写死在这里：
+ * Mox 的亮青底（相对亮度 0.466）上放白字只有 2.1:1，必须用黑。
+ * 写在 token 里而不是运行时算，是为了让「这批色各自配什么字」在一处可见、可审。
+ */
+
+:root,
+:root[data-theme='dark'] {
+  --brand-hsbc: #db0011;
+  --brand-hsbc-ink: var(--on-accent);
+  --brand-sc: #0473ea;
+  --brand-sc-ink: var(--on-accent);
+  --brand-citi: #1b2a6b;
+  --brand-citi-ink: var(--on-accent);
+  --brand-bochk: #b01f24;
+  --brand-bochk-ink: var(--on-accent);
+  --brand-hase: #00843d;
+  --brand-hase-ink: var(--on-accent);
+  --brand-dbs: #ed1c24;
+  --brand-dbs-ink: var(--on-accent);
+  /* 亮青，白字读不出，配黑 */
+  --brand-mox: #00c9d6;
+  --brand-mox-ink: #000;
+  --brand-amex: #006fcf;
+  --brand-amex-ink: var(--on-accent);
+  --brand-aeon: #b5007f;
+  --brand-aeon-ink: var(--on-accent);
+  --brand-bea: #c8102e;
+  --brand-bea-ink: var(--on-accent);
+  --brand-ocbc: #ee2e24;
+  --brand-ocbc-ink: var(--on-accent);
+  --brand-icbc: #c7000b;
+  --brand-icbc-ink: var(--on-accent);
+  --brand-bnu: #1e335a;
+  --brand-bnu-ink: var(--on-accent);
+  --brand-bocm: #b01f24;
+  --brand-bocm-ink: var(--on-accent);
+  --brand-tf: #00693e;
+  --brand-tf-ink: var(--on-accent);
+  --brand-wewa: #e4002b;
+  --brand-wewa-ink: var(--on-accent);
+  --brand-earnmore: #0b4ea2;
+  --brand-earnmore-ink: var(--on-accent);
+  /* 取不到官方色的澳门本地行落到这里。刻意做成**中性灰**而不是深蓝：
+     深蓝会和 BNU（#1e335a）撞成同一个色，两张卡并排像同一张的副本 */
+  --brand-neutral: #3a4048;
+  --brand-neutral-ink: var(--on-accent);
+
+  /* 卡面光泽：单层斜向，一色起一色落。多色渐变是 AI 模板味的第一个指纹 */
+  --card-sheen: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0) 38%,
+    rgba(0, 0, 0, 0.32) 100%
+  );
+  /* 卡面边缘：1px 内高光 + 1px 内暗边，制造「一片有厚度的塑料」 */
+  --card-rim: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+  /* 芯片 */
+  --chip-face: linear-gradient(155deg, #e8c87a 0%, #b08d3e 46%, #ddbe6f 100%);
+  --chip-etch: rgba(90, 68, 24, 0.5);
+
+  /* 同一家银行的多张卡共用品牌色 —— 汇丰 4 张全是 #db0011，并排看像同一张卡的
+     4 个副本。按卡在发卡行内的序号叠 4 档黑，做出「同系不同款」的层次：
+     这比给每张卡猜一个个性色诚实，因为它只表达「它们是一家的」。 */
+  /* 只往暗走，不做提亮：提亮会把深红变成粉色，读起来像印刷褪色。
+     一路加深反而符合真实的卡等级系列（普卡→金卡→白金→黑卡）。 */
+  --card-shade-1: rgba(0, 0, 0, 0.26);
+  --card-shade-2: rgba(0, 0, 0, 0.36);
+  --card-shade-3: rgba(0, 0, 0, 0.54);
+
+  /* 卡组织官方标志色 */
+  --net-visa: #1a1f71;
+  --net-mastercard-red: #eb001b;
+  --net-mastercard-yellow: #f79e1b;
+  --net-mastercard-orange: #ff5f00;
+  --net-unionpay-red: #e21836;
+  --net-unionpay-blue: #00447c;
+  --net-unionpay-green: #007b84;
+  --net-amex: #006fcf;
+}
