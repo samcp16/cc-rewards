@@ -60,7 +60,10 @@ export function CardFace({ card, size = 'thumb', muted = false, indexInIssuer = 
           className="h-full w-full object-cover"
           /* 缩略尺寸下细节会糊，轻微提对比让轮廓更实；不是滤镜美化，是补偿缩放损失 */
           style={{ filter: isFull ? undefined : 'contrast(1.06) saturate(1.04)' }}
-          loading="lazy"
+          /* 不用 loading="lazy"：图就在本地包里（workbox 预缓存），没有网络成本，
+             而懒加载会让快速滚动时先出现一块空白再补上图 —— 卡面是列表的主视觉，
+             空白闪烁比多花 2ms 解码难看得多 */
+          loading="eager"
           decoding="async"
           draggable={false}
         />
