@@ -21,9 +21,11 @@ import { IssuerPicker } from '../components/cards/IssuerPicker';
 import { PageShell } from '../components/layout/PageShell';
 import { TopBar } from '../components/layout/TopBar';
 import { blankCard, cardFromTemplate, putCard } from '../db/cardsRepository';
-import { useCards, useDeletedPresetIds } from '../db/useDb';
+import { hideIssuer, unhideAllIssuers } from '../db/hiddenIssuersRepository';
+import { useCards, useDeletedPresetIds, useHiddenIssuers } from '../db/useDb';
 import type { Card } from '../domain/types';
 import { cardSummary, cardsOfIssuer, issuerGroups } from '../lib/issuerGroups';
+import type { IssuerGroup } from '../lib/issuerGroups';
 import { showToast } from '../components/common/Toast';
 
 export function NewCardPage(): React.JSX.Element {
@@ -32,24 +34,49 @@ export function NewCardPage(): React.JSX.Element {
   const [busy, setBusy] = useState(false);
   const [issuer, setIssuer] = useState<string | null>(null);
   const [showAll, setShowAll] = useState(false);
+  const [editing, setEditing] = useState(false);
 
   const deletedIds = useDeletedPresetIds();
+  const hidden = useHiddenIssuers();
   const existingIds = useMemo(() => new Set(cards.map((c) => c.cardId)), [cards]);
 
   /**
-   * 默认只列「我还没有、也没删过」的卡。
-   *
-   * 删过的卡不再出现，是因为用户删它就是在说「我不用这张」——
-   * 每次添加新卡都被同一张不用的卡挡在前面，等同于没删掉。
-   * 但「不显示」不等于「禁止添加」，所以留了 showAll 这个翻出来的口子。
+   * 「显示全部」是彻底的：既不排除我已有的/删过的卡，也不排除我藏起来的银行。
+   * 否则用户点开「全部」却还是看不到那几家，会以为自己的操作没生效。
    */
   const exclude = useMemo(() => {
     if (showAll) return new Set<string>();
     return new Set<string>([...existingIds, ...deletedIds]);
   }, [showAll, existingIds, deletedIds]);
 
-  const groups = useMemo(() => issuerGroups({ exclude }), [exclude]);
+  const hiddenForList = useMemo(() => (showAll ? new Set<string>() : hidden), [showAll, hidden]);
+
+  const groups = useMemo(
+    () => issuerGroups({ exclude, hidden: hiddenForList }),
+    [exclude, hiddenForList],
+  );
   const picks = useMemo(() => (issuer ? cardsOfIssuer(issuer).filter((c) => !exclude.has(c.cardId)) : []), [issuer, exclude]);
+
+  const hiddenCount = hidden.size;
+
+  async function hide(group: IssuerGroup): Promise<void> {
+    try {
+      await hideIssuer(group.region, group.issuer);
+      // 不弹「已隐藏」toast：行消失 + 页面上方的「已隐藏 N 家 · 恢复」
+      // 已经是更持久的反馈，再来一条会挡住列表下方那行（实测会遮挡）。
+    } catch {
+      showToast('隐藏失败，本机数据库写入不出去', 'error');
+    }
+  }
+
+  async function restoreAll(): Promise<void> {
+    try {
+      await unhideAllIssuers();
+      showToast('已恢复隐藏的银行');
+    } catch {
+      showToast('恢复失败，本机数据库写入不出去', 'error');
+    }
+  }
 
   async function createFrom(template: Card): Promise<void> {
     if (busy) return;
@@ -96,6 +123,19 @@ export function NewCardPage(): React.JSX.Element {
               setIssuer(null);
             }
           }}
+          actions={
+            issuer === null && !showAll ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setEditing((v) => !v);
+                }}
+                className="flex h-11 items-center px-[var(--space-3)] text-[length:var(--text-sm)] font-[var(--fw-emphasize)] text-accent-text"
+              >
+                {editing ? '完成' : '编辑'}
+              </button>
+            ) : undefined
+          }
           borderless
         />
       }
@@ -104,24 +144,48 @@ export function NewCardPage(): React.JSX.Element {
         {issuer === null ? (
           <>
             <p className="pt-[var(--space-3)] text-[length:var(--text-sm)] leading-[var(--leading-body)] text-fg-2">
-              先选银行，再选卡。费率、门槛、手续费都从卡库带出来，你不用填。
+              {editing
+                ? '点右边的减号，藏起你没有的银行。藏错了随时能恢复。'
+                : '先选银行，再选卡。费率、门槛、手续费都从卡库带出来，你不用填。'}
             </p>
 
             {groups.length === 0 && (
               <p className="py-[var(--space-6)] text-[length:var(--text-sm)] text-fg-2">
-                卡库里的卡都在你这儿了，没有可添加的。
+                {hiddenCount > 0
+                  ? `能选的银行都藏起来了（${String(hiddenCount)} 家）。上面可以恢复。`
+                  : '卡库里的卡都在你这儿了，没有可添加的。'}
               </p>
+            )}
+
+            {hiddenCount > 0 && !showAll && (
+              <div className="mt-[var(--space-3)] flex items-center justify-between gap-[var(--space-3)] rounded-md border border-line-subtle px-[var(--space-3)] py-[var(--space-2)]">
+                <span className="text-[length:var(--text-sm)] text-fg-2">
+                  已隐藏 <span className="num">{hiddenCount}</span> 家银行
+                </span>
+                <Button variant="ghost" size="compact" onClick={() => void restoreAll()}>
+                  恢复
+                </Button>
+              </div>
             )}
 
             <IssuerPicker
               groups={groups}
+              editing={editing}
+              onHide={(group) => void hide(group)}
               onPick={(next) => {
                 setIssuer(next);
               }}
             />
 
             <div className="flex flex-col gap-[var(--space-2)] py-[var(--space-6)]">
-              <Button variant="ghost" fullWidth onClick={() => setShowAll((v) => !v)}>
+              <Button
+                variant="ghost"
+                fullWidth
+                onClick={() => {
+                  setShowAll((v) => !v);
+                  setEditing(false);
+                }}
+              >
                 {showAll ? '只看还没加的卡' : '显示全部（含已删除的）'}
               </Button>
               <Button variant="ghost" fullWidth disabled={busy} onClick={() => void createBlank()}>

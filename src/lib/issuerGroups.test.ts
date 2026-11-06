@@ -8,7 +8,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { CARDS, getCardById } from '../domain/data/loadCards';
-import { cardSummary, cardsOfIssuer, issuerGroups } from './issuerGroups';
+import { cardSummary, cardsOfIssuer, issuerGroups, issuerKey } from './issuerGroups';
 
 describe('issuerGroups', () => {
   it('每张卡只被分到一组，且总量守恒', () => {
@@ -59,6 +59,37 @@ describe('issuerGroups', () => {
 
   it('cardsOfIssuer 未知银行返回空数组，不抛错', () => {
     expect(cardsOfIssuer('不存在的银行')).toEqual([]);
+  });
+
+  it('打错一个银行名不该连累别家（hidden 只认精确键）', () => {
+    const all = issuerGroups();
+    const target = all[0]!;
+    const typo = new Set([`${target.region}|${target.issuer}支行`]);
+    expect(issuerGroups({ hidden: typo })).toHaveLength(all.length);
+  });
+
+  it('exclude 与 hidden 同时生效，互不干扰', () => {
+    const all = issuerGroups();
+    const [a, b] = [all[0]!, all[1]!];
+    const after = issuerGroups({
+      hidden: new Set([issuerKey(a.region, a.issuer)]),
+      exclude: new Set(b.cards.map((c) => c.cardId)),
+    });
+    expect(after.find((g) => g.issuer === a.issuer)).toBeUndefined();
+    expect(after.find((g) => g.issuer === b.issuer)).toBeUndefined();
+    expect(after).toHaveLength(all.length - 2);
+  });
+
+  it('hidden 掉一家银行，只少这一家的卡，别家一张不少', () => {
+    const all = issuerGroups();
+    const target = all[0]!;
+    const totalBefore = all.reduce((n, g) => n + g.cards.length, 0);
+    const after = issuerGroups({ hidden: new Set([issuerKey(target.region, target.issuer)]), exclude: undefined });
+    expect(after.reduce((n, g) => n + g.cards.length, 0)).toBe(totalBefore - target.cards.length);
+  });
+
+  it('issuerKey 带地区 —— 澳门与香港的同名银行是两个不同的键', () => {
+    expect(issuerKey('MO', '中国银行')).not.toBe(issuerKey('HK', '中国银行'));
   });
 });
 

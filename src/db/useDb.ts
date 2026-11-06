@@ -16,6 +16,7 @@ import { useMemo } from 'react';
 import { db } from './schema';
 import type { CardRow } from './schema';
 import { KEY_DELETED_PRESETS } from './cardsRepository';
+import { KEY_HIDDEN_ISSUERS } from './hiddenIssuersRepository';
 import type { LedgerEntry } from '../domain/types';
 
 export interface CardsState {
@@ -75,5 +76,19 @@ export function useDeletedPresetIds(): ReadonlySet<string> {
   return useMemo(() => {
     const ids = (row?.value as { ids?: string[] } | undefined)?.ids;
     return new Set<string>(Array.isArray(ids) ? ids : []);
+  }, [row]);
+}
+
+/**
+ * 用户主动藏起来的银行（`region|issuer`）。
+ *
+ * 与「已删预置卡」分开两个键，是因为恢复必须精确：
+ * 清空隐藏名单只能让银行回到候选列表，不能顺带把用户真删掉的卡复活。
+ */
+export function useHiddenIssuers(): ReadonlySet<string> {
+  const row = useLiveQuery(() => db.settings.get(KEY_HIDDEN_ISSUERS), []);
+  return useMemo(() => {
+    const keys = (row?.value as { keys?: string[] } | undefined)?.keys;
+    return new Set<string>(Array.isArray(keys) ? keys : []);
   }, [row]);
 }

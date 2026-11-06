@@ -26,18 +26,37 @@ export interface IssuerGroup {
 const REGION_ORDER: Record<'MO' | 'HK', number> = { MO: 0, HK: 1 };
 
 /**
+ * 银行的稳定标识。
+ *
+ * 带上地区是因为「中国银行」在澳门和香港是两家不同的发卡机构，
+ * 只按名字去重会把它们合并成一家，藏一家等于同时藏掉两地。
+ */
+export function issuerKey(region: 'MO' | 'HK', issuer: string): string {
+  return `${region}|${issuer}`;
+}
+
+/**
  * 全库分组，顺序稳定：澳门在前，组内按卡名排序。
  *
  * `exclude` 用来把「已经在我的卡库里」和「我删掉过的卡」挡在外面。
  * 添加页列出用户已经持有的卡，等于让他在一堆废选项里找那张真正缺的。
  * 一条卡都不剩的银行整个不出现（点进去是空页，比不显示更糟）。
+ *
+ * `hidden` 是用户主动藏起来的银行（他根本没有那家的卡）。
+ * 二十家银行里他只关心三四家，剩下十几家每次都在挡路 —— 藏掉之后
+ * 这个列表才真的在为他服务。恢复入口在页面上，不是黑洞。
  */
-export function issuerGroups(options?: { exclude?: ReadonlySet<string> }): IssuerGroup[] {
+export function issuerGroups(options?: {
+  exclude?: ReadonlySet<string>;
+  hidden?: ReadonlySet<string>;
+}): IssuerGroup[] {
   const exclude = options?.exclude;
+  const hidden = options?.hidden;
   const map = new Map<string, IssuerGroup>();
 
   for (const card of CARDS) {
     if (exclude?.has(card.cardId)) continue;
+    if (hidden?.has(issuerKey(card.issuerRegion, card.issuer))) continue;
     const key = `${card.issuerRegion}|${card.issuer}`;
     let group = map.get(key);
     if (!group) {
