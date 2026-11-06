@@ -46,7 +46,7 @@ export function RecordSpendSheet({
 
   const amount = parseAmount(amountText);
 
-  // 实时回显「这一笔会记多少返现」，让用户在保存前就看到后果
+  // 实时回显「这一笔会记多少回赠」，让用户在保存前就看到后果
   const preview = useMemo(() => {
     if (amount <= 0) return null;
     return rankSingleCard(card, ledger, params, {
@@ -167,8 +167,8 @@ export function RecordSpendSheet({
 
         <p className="num rounded-md bg-surface-2 px-[var(--space-3)] py-[var(--space-2)] text-[length:var(--text-xs)] leading-[var(--leading-body)] text-muted">
           {preview && !invalid
-            ? `这一笔按 ${categoryLabel(category)} · ${channelLabel(channel)} 计，预计返现 ${formatMoney(preview.grossCashback)} ${defaultCurrency}。记账后额度与答案会一起更新。`
-            : '填了金额之后，这里会显示这一笔预计拿多少返现。'}
+            ? `这一笔按 ${categoryLabel(category)} · ${channelLabel(channel)} 计，预计回赠 ${formatMoney(preview.grossCashback)} ${defaultCurrency}。记账后额度与答案会一起更新。`
+            : '填了金额之后，这里会显示这一笔预计拿多少回赠。'}
         </p>
       </div>
     </BottomSheet>

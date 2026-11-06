@@ -67,7 +67,7 @@ export function IdentityFxFeeSection({ draft, patch, fxError, fxRef }: IdentityF
           外币手续费
         </h2>
         <PercentField
-          label="费率"
+          label="手续费率"
           value={draft.fxFee.rate * 100}
           error={fxError}
           onChange={(v) => {

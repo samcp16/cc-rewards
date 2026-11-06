@@ -129,7 +129,7 @@ export function CardsPage({ view = 'cards' }: CardsPageProps): React.JSX.Element
             )}
 
             <p className="px-[var(--space-4)] py-[var(--space-5)] text-[length:var(--text-xs)] leading-[var(--leading-body)] text-meta">
-              点任意一张卡可以核对费率、看来源和核实日期。费率变了随时能改，改完答案立刻跟着变。
+              点任意一张卡可以核对回赠、看来源和核实日期。回赠变了随时能改，改完答案立刻跟着变。
             </p>
           </>
         ) : (
@@ -231,7 +231,7 @@ function LimitsView({
     return (
       <EmptyState
         title="没有卡设了上限"
-        body="你库里的卡都没有月度/年度返现上限，所以这里没有进度可看。刷哪张只看费率就行。"
+        body="你库里的卡都没有月度/年度回赠上限，所以这里没有进度可看。刷哪张只看回赠就行。"
         action={
           <button
             type="button"

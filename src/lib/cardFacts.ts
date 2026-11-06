@@ -61,3 +61,17 @@ export function categoriesConfigured(card: Card): number {
 export function isDualCurrency(card: Card): boolean {
   return card.network === 'unionpay' && Boolean(card.fxFee.waivedWhen?.settlementCurrencyIn?.length);
 }
+
+/**
+ * 外币手续费这一项算不算「填过」。
+ *
+ * 「0%」在这个产品里有两个截然不同的来源：
+ *   - 豁免卡真的收 0（本币 / 双币结算免收），它是齐的数据
+ *   - 空白卡没填，0 只是默认值
+ * 只看 `rate <= 0` 会把整批豁免卡判成「没填」：用户从卡库选了一张
+ * 数据齐全的双币卡，点保存却被要求去填一个本来就是 0 的数。
+ */
+export function fxFeeIsFilled(fxFee: Pick<Card['fxFee'], 'rate' | 'waivedWhen'>): boolean {
+  if (fxFee.rate > 0) return true;
+  return (fxFee.waivedWhen?.settlementCurrencyIn?.length ?? 0) > 0;
+}

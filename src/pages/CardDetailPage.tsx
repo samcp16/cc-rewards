@@ -23,6 +23,7 @@ import { IconAction, TopBar } from '../components/layout/TopBar';
 import { SourceLink } from '../components/common/SourceLink';
 import { showToast } from '../components/common/Toast';
 import { DeleteConfirm } from '../components/cards/DeleteConfirm';
+import { TemplatePickerSheet } from '../components/cards/TemplatePickerSheet';
 import { IdentityFxFeeSection } from '../components/cards/IdentityFxFeeSection';
 import { CardStatusBands } from '../components/cards/CardStatusBands';
 import { CategorySection, CapUsageRow } from '../components/cards/CategorySection';
@@ -30,8 +31,8 @@ import { useCard, useCards, useLedger } from '../db/useDb';
 import { deleteCard, putCard, touchVerified } from '../db/cardsRepository';
 import { useEngineParams } from '../db/paramsRepository';
 import type { CardRow } from '../db/schema';
-import type { SpendCategory } from '../domain/types';
-import { unknownCategories, validityOf, staleDaysOf } from '../lib/cardFacts';
+import type { Card, SpendCategory } from '../domain/types';
+import { fxFeeIsFilled, unknownCategories, validityOf, staleDaysOf } from '../lib/cardFacts';
 import { useCardUsages } from '../hooks/useCapUsage';
 import { PERIOD_LABEL, categoryLabel } from '../lib/labels';
 import { formatMoney } from '../lib/format';
@@ -56,6 +57,7 @@ export function CardDetailPage(): React.JSX.Element {
   const [draft, setDraft] = useState<CardRow | null>(null);
   const [saving, setSaving] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [pickerOpen, setPickerOpen] = useState(false);
   const [fxError, setFxError] = useState<string | null>(null);
   const fxRef = useRef<HTMLDivElement>(null);
 
@@ -98,6 +100,23 @@ export function CardDetailPage(): React.JSX.Element {
   const staleDays = staleDaysOf(draft, params.today);
   const unknown = unknownCategories(draft);
 
+  /**
+   * 「刚建出来的空白卡」：一张卡该有的信息一项都没有。
+   * 只有这种卡才显示「从卡库选一张」的引导 —— 已经填过内容的卡再提示一次，
+   * 等于怀疑用户自己的输入。
+   */
+  const isBlank = draft.origin === 'user' && draft.cardName.trim() === '' && unknown.length === 7;
+
+  /** 用模板整体覆盖草稿，只保留这张卡自己的 id 与来源标记 */
+  function fillFromTemplate(template: Card): void {
+    setDraft((prev) => {
+      if (!prev) return prev;
+      const fresh = JSON.parse(JSON.stringify(template)) as Card;
+      return { ...fresh, cardId: prev.cardId, origin: 'user', updatedAt: prev.updatedAt };
+    });
+    showToast('已按卡库数据填好，核对后点保存');
+  }
+
   function patch(next: Partial<CardRow>): void {
     setDraft((prev) => (prev ? { ...prev, ...next } : prev));
   }
@@ -112,7 +131,7 @@ export function CardDetailPage(): React.JSX.Element {
           ...prev.categories,
           [category]:
             rule.kind === 'unknown'
-              ? { kind: 'cashback', rates: { local: 0 }, note: '你手动填的费率' }
+              ? { kind: 'cashback', rates: { local: 0 }, note: '你手动填的回赠' }
               : rule,
         },
       };
@@ -121,7 +140,14 @@ export function CardDetailPage(): React.JSX.Element {
 
   async function handleSave(): Promise<void> {
     if (!draft) return;
-    if (draft.fxFee.rate <= 0) {
+    /**
+     * 「0%」有两种含义，必须分开：
+     *   - 豁免卡（本币/双币结算免收）真的有 0 费率，它是完整数据
+     *   - 空白卡没填，0 只是默认值
+     * 只按 `rate <= 0` 拦，会把整批豁免卡判成「没填」—— 用户从卡库
+     * 选了一张数据齐全的卡，点保存却被要求填一个本来就是 0 的数。
+     */
+    if (!fxFeeIsFilled(draft.fxFee)) {
       setFxError('外币手续费率没填。这一项直接决定净回报算得对不对。');
       fxRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' });
       return;
@@ -190,11 +216,27 @@ export function CardDetailPage(): React.JSX.Element {
           }}
         />
 
+        {isBlank && (
+          <section className="mt-[var(--space-5)] rounded-md border border-line px-[var(--space-4)] py-[var(--space-4)]">
+            <p className="text-[length:var(--text-base)] font-[var(--fw-emphasize)] text-fg">
+              从卡库选一张，回赠和手续费自动填上
+            </p>
+            <p className="mt-[var(--space-1)] text-[length:var(--text-sm)] leading-[var(--leading-body)] text-fg-2">
+              卡库里确实没有这张卡，再往下自己填也可以。
+            </p>
+            <div className="mt-[var(--space-3)]">
+              <Button fullWidth onClick={() => { setPickerOpen(true); }}>
+                从卡库选
+              </Button>
+            </div>
+          </section>
+        )}
+
         <IdentityFxFeeSection draft={draft} patch={patch} fxError={fxError} fxRef={fxRef} />
 
         <section className="pt-[var(--space-6)]">
           <h2 className="mb-[var(--space-2)] flex items-baseline justify-between text-[length:var(--text-xs)] font-[var(--fw-emphasize)] tracking-[var(--tracking-caps)] text-muted">
-            <span>各类别返现</span>
+            <span>各类别回赠</span>
             <span className="num text-meta">{unknown.length === 0 ? '7 类都填了' : `${String(unknown.length)} 类待补`}</span>
           </h2>
           <CategorySection
@@ -270,7 +312,7 @@ export function CardDetailPage(): React.JSX.Element {
           </div>
           {draft.confidence === 'low' && (
             <p className="mt-[var(--space-2)] text-[length:var(--text-sm)] leading-[var(--leading-body)] text-fg-2">
-              不确定的具体项：{draft.notes ?? `${String(unknown.length)} 个类别费率来源单一，上限口径待交叉验证`}。
+              不确定的具体项：{draft.notes ?? `${String(unknown.length)} 个类别回赠来源单一，上限口径待交叉验证`}。
             </p>
           )}
           {draft.notes !== undefined && draft.confidence !== 'low' && (
@@ -278,6 +320,13 @@ export function CardDetailPage(): React.JSX.Element {
           )}
         </section>
       </div>
+
+      <TemplatePickerSheet
+        open={pickerOpen}
+        onClose={() => { setPickerOpen(false); }}
+        onPick={fillFromTemplate}
+        existingIds={new Set(cards.map((c) => c.cardId))}
+      />
 
       <DeleteConfirm
         open={confirmDelete}

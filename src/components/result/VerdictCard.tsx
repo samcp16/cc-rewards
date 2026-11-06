@@ -44,23 +44,23 @@ function warningText(warning: SchemeWarning): string {
     case 'cap_nearly_exhausted':
       return `额度即将用尽：剩余 ${formatAmount2(warning.remaining)} ${warning.currency}`;
     case 'cap_exhausted':
-      return '本期额度已用尽，超出部分按降档费率计算';
+      return '本期额度已用尽，超出部分按降档回赠计算';
     case 'stale_rate':
-      return `费率为 ${warning.verifiedAt} 核实，已超过 90 天，建议核对`;
+      return `回赠数据是 ${warning.verifiedAt} 核实的，已超过 90 天，建议核对`;
     case 'fx_fee_exempt_expired':
-      return `免手续费优惠已于 ${warning.validUntil} 到期，现按默认费率计算`;
+      return `免手续费优惠已于 ${warning.validUntil} 到期，现按默认手续费率计算`;
     case 'fx_fee_exempt_expiring':
       return `免手续费优惠将于 ${warning.validUntil} 到期（还剩 ${warning.daysLeft} 天）`;
     case 'cap_cross_currency_converted':
       return `额度以 ${warning.from} 计，已按参考汇率折算为 ${warning.to} 归集`;
     case 'unknown_rate':
-      return '该类别费率未知，不参与排序';
+      return '该类别回赠未知，不参与排序';
     // 渠道不适用必须给出「换成哪个渠道就好了」这个可执行动作，
     // 否则用户只知道这张卡没了，不知道该怎么补救。
     case 'channel_gated':
       return warning.applicableChannels.length > 0
-        ? `本卡此类别仅在${warning.applicableChannels.map(channelLabel).join(' / ')}渠道适用，${channelLabel(warning.channel)} 下费率未知，不参与排序`
-        : `本卡此类别在 ${channelLabel(warning.channel)} 下费率未知，不参与排序`;
+        ? `本卡此类别仅在${warning.applicableChannels.map(channelLabel).join(' / ')}渠道适用，${channelLabel(warning.channel)} 下回赠未知，不参与排序`
+        : `本卡此类别在 ${channelLabel(warning.channel)} 下回赠未知，不参与排序`;
     case 'no_point_valuation':
       return '积分价值未设定，暂按保守估值计算';
     case 'point_valuation_estimated':

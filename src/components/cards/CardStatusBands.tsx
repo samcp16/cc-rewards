@@ -102,7 +102,7 @@ export function CardStatusBands({
         icon={History}
         tone="neutral"
         title={`这张卡 ${String(staleDays)} 天没核对了`}
-        body="费率可能已经变了。核对过就点右边确认。"
+        body="回赠可能已经变了。核对过就点右边确认。"
         action={{ label: '确认过了', onClick: onConfirmFresh }}
       />,
     );

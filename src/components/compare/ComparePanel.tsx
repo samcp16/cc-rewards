@@ -54,7 +54,7 @@ export function ComparePanel({ open, onClose, result, region }: ComparePanelProp
         <div className="flex items-center gap-[var(--space-2)] border-b border-line px-[var(--space-3)] py-[var(--space-2)]">
           <span className="min-w-0 flex-1 text-[length:var(--text-2xs)] text-meta">卡 / 渠道</span>
           <span className="shrink-0 text-right text-[length:var(--text-2xs)] text-meta" style={{ width: 56 }}>
-            费率
+            回赠
           </span>
           <span className="shrink-0 text-right text-[length:var(--text-2xs)] text-meta" style={{ width: 72 }}>
             净返
@@ -150,7 +150,7 @@ export function UnrankedRow({ scheme, channel }: { scheme: Scheme; channel: stri
         </span>
       </span>
       <span className="shrink-0 text-[length:var(--text-sm)] text-warn">
-        {gated ? '渠道不适用' : '返现未知'}
+        {gated ? '渠道不适用' : '回赠未知'}
       </span>
     </li>
   );

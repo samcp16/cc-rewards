@@ -49,7 +49,6 @@ export function CardPickerList({ cards, existingIds, busy, onPick }: CardPickerL
                 </span>
                 <span className="truncate text-[length:var(--text-xs)] text-muted">
                   {NETWORK_SHORT[card.network]} · {card.cardCurrency}
-                  {summary.state === 'unknown' ? ' · 数据核实中' : ''}
                 </span>
               </span>
               <span

@@ -150,7 +150,7 @@ function ReadyBody({
         </p>
         <p className="text-[length:var(--text-sm)] leading-[var(--leading-body)] text-fg-2">
           {unknownCount > 0
-            ? `这 ${String(unknownCount)} 张卡在这个类别都没有返现数据。不是它们不好，是我们还没查到。`
+            ? `这 ${String(unknownCount)} 张卡在这个类别都没有回赠数据。不是它们不好，是我们还没查到。`
             : '从预置的 12 张港澳常见卡里选一张，规则会自动带出来。'}
         </p>
         <button

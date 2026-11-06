@@ -12,8 +12,8 @@
 import { ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import type { CardRow } from '../../db/schema';
-import { maxCategoryRate, staleDaysOf } from '../../lib/cardFacts';
-import { percent2 } from '../../lib/format';
+import { staleDaysOf } from '../../lib/cardFacts';
+import { cardSummary } from '../../lib/issuerGroups';
 import { ConfidenceTag } from '../common/ConfidenceTag';
 
 interface CardListItemProps {
@@ -21,12 +21,6 @@ interface CardListItemProps {
   today: string;
   /** 该卡本月已用额度比例（0–1+）；无月度上限时为 null */
   usedRatio: number | null;
-}
-
-function rateSummary(card: CardRow): string {
-  const rate = maxCategoryRate(card);
-  if (rate === null) return '费率待补';
-  return `最高 ${percent2(rate)}`;
 }
 
 /** 进度条颜色：只有 ≥80% 才染黄、≥100% 染红（limits.md §3 的三色规则） */
@@ -39,6 +33,7 @@ function barClass(ratio: number): string {
 export function CardListItem({ card, today, usedRatio }: CardListItemProps): React.JSX.Element {
   const navigate = useNavigate();
   const staleDays = staleDaysOf(card, today);
+  const summary = cardSummary(card);
   const inactive = card.active === false;
 
   const facts: string[] = [card.issuer];
@@ -88,10 +83,10 @@ export function CardListItem({ card, today, usedRatio }: CardListItemProps): Rea
       <span
         className={[
           'num w-[72px] shrink-0 text-right text-[length:var(--text-sm)] whitespace-nowrap',
-          maxCategoryRate(card) === null ? 'text-muted' : 'text-fg-2',
+          summary.state === 'unknown' ? 'text-muted' : 'text-fg-2',
         ].join(' ')}
       >
-        {rateSummary(card)}
+        {summary.text}
       </span>
       <ChevronRight size={16} strokeWidth={2} className="shrink-0 text-meta" aria-hidden="true" />
     </button>

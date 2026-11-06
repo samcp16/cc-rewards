@@ -73,7 +73,7 @@ export function FxSheet({ open, onClose, table, onSaved }: FxSheetProps): React.
       }
     >
       <p className="pb-[var(--space-3)] text-[length:var(--text-sm)] leading-[var(--leading-body)] text-fg-2">
-        只用于把外币上限折算成同一币种来归集已用额度。它不影响外币手续费的金额 —— 那部分按卡上的费率算。
+        只用于把外币上限折算成同一币种来归集已用额度。它不影响外币手续费的金额 —— 那部分按卡上的手续费率算。
       </p>
       <div className="flex flex-col">
         {rates.map((rate, index) => (

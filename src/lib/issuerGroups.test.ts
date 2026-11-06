@@ -109,10 +109,21 @@ describe('cardSummary', () => {
     expect(s.text).toMatch(/^积分 \d+x$/);
   });
 
-  it('真正没核实的卡才说「核实中」', () => {
+  it('真正没核实的卡说「回赠待补」，且不说「费率」', () => {
     const card = getCardById('hsbc-pulse-unionpay');
     expect(card).toBeDefined();
-    expect(cardSummary(card!)).toEqual({ text: '核实中', state: 'unknown' });
+    const s = cardSummary(card!);
+    expect(s).toEqual({ text: '回赠待补', state: 'unknown' });
+    // 「费率」在这个产品里专指外币手续费，用它描述回赠会让用户去查错栏位
+    expect(s.text).not.toContain('费率');
+  });
+
+  it('三种摘要都不出现「费率」二字', () => {
+    for (const id of ['sc-simply-cash', 'amex-hk-explorer', 'hsbc-pulse-unionpay']) {
+      const card = getCardById(id);
+      expect(card).toBeDefined();
+      expect(cardSummary(card!).text).not.toContain('费率');
+    }
   });
 
   it('回赠卡优先于积分：同时有两种规则时报表内最高百分比', () => {

@@ -87,7 +87,8 @@ export function cardsOfIssuer(issuer: string): Card[] {
  *   cashback → 「最高 2.50%」是用户要比的数
  *   points   → 它没有百分比。写「积分 1×」是事实，写「费率待补」是撒谎
  *              （数据是全的，缺的是「1 分值多少钱」这个用户自己的假设）
- *   unknown  → 真的没核实，明说
+ *   unknown  → 真的没核实，且要说清缺的是
+ *              「回赠」——写成「费率待补」会被读成手续费，那是另一栏
  */
 export function cardSummary(card: Card): { text: string; state: 'cashback' | 'points' | 'unknown' } {
   const cashbackRates = Object.values(card.categories)
@@ -109,5 +110,5 @@ export function cardSummary(card: Card): { text: string; state: 'cashback' | 'po
     return { text: `积分 ${String(max)}x`, state: 'points' };
   }
 
-  return { text: '核实中', state: 'unknown' };
+  return { text: '回赠待补', state: 'unknown' };
 }

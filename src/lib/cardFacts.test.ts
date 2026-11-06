@@ -16,6 +16,7 @@ import {
   maxCategoryRate,
   categoriesConfigured,
   isDualCurrency,
+  fxFeeIsFilled,
   EXPIRING_SOON_DAYS,
   STALE_DAYS,
 } from './cardFacts';
@@ -188,5 +189,29 @@ describe('isDualCurrency：银联 + 指定币种豁免', () => {
       fxFee: { ...base.fxFee, waivedWhen: undefined },
     };
     expect(isDualCurrency(unionpayNoWaiver)).toBe(false);
+  });
+});
+
+describe('fxFeeIsFilled：「0%」有两种含义', () => {
+  it('空白卡 0% 且无豁免 = 没填（要拦）', () => {
+    expect(fxFeeIsFilled({ rate: 0 })).toBe(false);
+  });
+
+  it('豁免卡 0% = 填了（齐的数据，不能拦）', () => {
+    expect(fxFeeIsFilled({ rate: 0, waivedWhen: { settlementCurrencyIn: ['MOP', 'HKD'] } })).toBe(true);
+  });
+
+  it('有空豁免数组不算豁免 —— 空清单解释不了 0', () => {
+    expect(fxFeeIsFilled({ rate: 0, waivedWhen: { settlementCurrencyIn: [] } })).toBe(false);
+  });
+
+  it('正常收费的卡不看豁免', () => {
+    expect(fxFeeIsFilled({ rate: 0.0195 })).toBe(true);
+  });
+
+  it('卡库里的豁免卡全部通过（防止模板填充后保存被拦）', () => {
+    const waived = ['hsbc-pulse-unionpay', 'boc-hk-chill'].map((id) => card(id)).filter((c) => (c.fxFee.waivedWhen?.settlementCurrencyIn?.length ?? 0) > 0);
+    expect(waived.length).toBeGreaterThan(0);
+    for (const c of waived) expect(fxFeeIsFilled(c.fxFee)).toBe(true);
   });
 });

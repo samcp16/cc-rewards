@@ -87,7 +87,7 @@ export function NewCardPage(): React.JSX.Element {
       const summary = cardSummary(template);
       showToast(
         summary.state === 'unknown'
-          ? `${template.cardName} 已添加，它的费率还在核实`
+          ? `${template.cardName} 已添加，它的回赠还在核实`
           : `${template.cardName} 已添加`,
       );
       void navigate('/cards', { replace: true });
@@ -146,7 +146,7 @@ export function NewCardPage(): React.JSX.Element {
             <p className="pt-[var(--space-3)] text-[length:var(--text-sm)] leading-[var(--leading-body)] text-fg-2">
               {editing
                 ? '点右边的减号，藏起你没有的银行。藏错了随时能恢复。'
-                : '先选银行，再选卡。费率、门槛、手续费都从卡库带出来，你不用填。'}
+                : '先选银行，再选卡。回赠、门槛、手续费都从卡库带出来，你不用填。'}
             </p>
 
             {groups.length === 0 && (
@@ -225,7 +225,7 @@ export function NewCardPage(): React.JSX.Element {
             />
 
             <p className="py-[var(--space-5)] text-[length:var(--text-xs)] leading-[var(--leading-body)] text-meta">
-              「核实中」表示该卡的部分费率官方尚未公布，加进来暂时不参与排序。我们会持续补，不需要你填。
+              「回赠待补」表示该卡的部分回赠官方尚未公布，加进来暂时不参与排序。我们会持续补，不需要你填。
             </p>
           </>
         )}

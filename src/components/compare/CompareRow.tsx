@@ -78,7 +78,7 @@ export function CompareRow({
           </span>
         </span>
 
-        {/* ② 费率 */}
+        {/* ② 回赠 */}
         <span
           className="num shrink-0 text-right text-[length:var(--text-md)] font-[var(--fw-emphasize)] text-fg-2"
           style={{ width: 56 }}
@@ -106,7 +106,7 @@ export function CompareRow({
       {unknown && (
         <p className="flex items-center gap-[var(--space-1)] px-[var(--space-3)] pb-[var(--space-2)] text-[length:var(--text-xs)] text-warn">
           <TriangleAlert size={14} strokeWidth={2} aria-hidden="true" />
-          这个类别没有返现数据，未参与排序
+          这个类别没有回赠数据，未参与排序
         </p>
       )}
 

@@ -65,7 +65,7 @@ export function CategorySection({ card, onEditCategory, capNotes }: CategorySect
                 onClick={() => {
                   onEditCategory(opt.value);
                 }}
-                aria-label={unknown ? `手动填${opt.label}费率` : `修改${opt.label}费率`}
+                aria-label={unknown ? `手动填${opt.label}回赠` : `修改${opt.label}回赠`}
                 className="flex h-11 w-11 shrink-0 items-center justify-center text-muted hover:text-fg"
               >
                 <Pencil size={16} strokeWidth={2} aria-hidden="true" />

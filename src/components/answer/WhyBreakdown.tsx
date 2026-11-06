@@ -21,7 +21,7 @@ interface WhyBreakdownProps {
 }
 
 const ROW_LABEL: Record<BreakdownItem['kind'], string> = {
-  cashback: '毛返现',
+  cashback: '毛回赠',
   points: '积分价值',
   fx_fee: '外币手续费',
   channel_fee: '渠道服务费',
