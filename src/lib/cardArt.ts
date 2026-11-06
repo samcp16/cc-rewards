@@ -46,9 +46,24 @@ for (const [cardId, entry] of Object.entries(registry.art)) {
   if (src !== undefined) ART.set(cardId, { src, tint: entry.tint, issuerPage: entry.issuerPage });
 }
 
+/**
+ * 模板副本的 id 后缀，形如 `-copy` / `-copy2`。
+ *
+ * `cardFromTemplate()` 给每次「从卡库添加」都发一个新主键，因为同一张卡加两次
+ * 要分开记额度。但卡面是同一张 —— 按 id 精确查会导致**用户添加的每一张卡
+ * 都退回绘制卡面**，而「选择卡片」那一屏（读目录 id）有真图。
+ * 同一张卡在两屏长得不一样，用户会以为自己加错了。
+ *
+ * 只剥尾部，且必须带连字符：名字中间的 copy 与这里无关。
+ */
+const COPY_SUFFIX = /-copy\d*$/;
+
 /** 有官方卡面就返回，没有返回 undefined（调用方走绘制卡面） */
 export function cardArt(cardId: string): CardArt | undefined {
-  return ART.get(cardId);
+  const direct = ART.get(cardId);
+  if (direct !== undefined) return direct;
+  const base = cardId.replace(COPY_SUFFIX, '');
+  return base === cardId ? undefined : ART.get(base);
 }
 
 /** 已接入官方卡面的卡数量，设置页/关于页用来交代覆盖率 */

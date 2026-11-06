@@ -34,6 +34,14 @@
       "source": "https://www.hsbc.com.hk/content/dam/hsbc/hk/images/mass/credit-cards/tile-16-9/8520-everymile-card-sky-grey-1600x900.jpg",
       "transform": "手动坐标裁切（背景是天空渐变，自动检测会把云认成卡片）+ 圆角遮罩"
     },
+    "hsbc-pulse-unionpay": {
+      "file": "hsbc-pulse-unionpay.webp",
+      "tint": "#483436",
+      "issuerPage": "https://www.hsbc.com.hk/credit-cards/products/",
+      "source": "https://www.hsbc.com.hk/content/dam/hsbc/hk/images/mass/credit-cards/tile-16-9/9358-hsbc-pulse-unionpay-grey-1600x900.jpg",
+      "transform": "灰底 bbox 裁切 441,225–1160,678 + 圆角遮罩（半径 42/640）",
+      "note": "黑底红点阵狮子 + DIAMOND 烫印，银联双币钻石卡官方产品图"
+    },
     "amex-hk-explorer": {
       "file": "amex-hk-explorer.webp",
       "tint": "#243138",

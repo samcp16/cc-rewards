@@ -51,6 +51,25 @@ describe('cardArt：查询', () => {
   it('不存在的 cardId 不抛错', () => {
     expect(cardArt('no-such-card')).toBeUndefined();
   });
+
+  /* 这一组是这个文件名存在的原因。
+     从卡库添加一张卡时，cardId 会带上 `-copy` 后缀（同一张卡加两次要分开记额度），
+     而卡面按目录 id 精确匹配 —— 于是「选择卡片」那一屏有真图，
+     「我的卡」里同一张卡退回成绘制卡面。用户在两个屏看到两种卡面，
+     会以为自己加错了卡。 */
+  it('模板副本（-copy）沿用母卡的官方卡面', () => {
+    expect(cardArt('hsbc-everymile-copy')?.src).toBe(cardArt('hsbc-everymile')?.src);
+  });
+
+  it('同一张卡加第三次的 -copy2 也认', () => {
+    expect(cardArt('hsbc-red-copy2')?.src).toBe(cardArt('hsbc-red')?.src);
+  });
+
+  it('只剥尾部的 -copy，不误伤名字里本来就有 copy 的卡', () => {
+    for (const id of Object.keys(registry.art)) expect(cardArt(id), id).toBeDefined();
+    // 「copy」出现在中间不该被剥
+    expect(cardArt('copy-hsbc-red')).toBeUndefined();
+  });
 });
 
 describe('卡面主色调：加载中的那一块', () => {
