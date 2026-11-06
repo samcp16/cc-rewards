@@ -64,6 +64,9 @@ const ISSUER_BRAND: Array<{ match: string; brand: BrandKey; mark: string }> = [
   { match: 'Mox', brand: 'mox', mark: 'MOX' },
   { match: '美国运通', brand: 'amex', mark: 'AMEX' },
   { match: 'AEON', brand: 'aeon', mark: 'AEON' },
+  // 安信信贷一家发 WeWa 与 EarnMORE 两个牌子。银行行不能借用其中任一个的红，
+  // 所以给中性色 + 母品牌缩写；卡那一层再按卡名上各自的品牌色
+  { match: '安信信贷', brand: 'neutral', mark: 'PC' },
   { match: '东亚银行', brand: 'bea', mark: 'BEA' },
   // —— 澳门 ——
   { match: '华侨永亨', brand: 'ocbc', mark: 'OCBC' },
@@ -85,17 +88,36 @@ const CARD_NAME_BRAND: Array<{ match: string; brand: BrandKey; mark: string }> =
   { match: 'EarnMORE', brand: 'earnmore', mark: 'EARN' },
 ];
 
-export function cardVisual(input: { issuer: string; cardName: string; network: string }): CardVisual {
+/**
+ * 只按发卡行取色，忽略卡名里的品牌。
+ *
+ * 给「选银行」那一屏用：安信信贷一家发 WeWa 和 EarnMORE 两个牌子，
+ * 按卡名取色会把整家银行画成 WeWa 的红 —— 用户会以为这家银行就叫 WeWa。
+ * 银行行只代表银行，卡级品牌留给卡那一层去表达。
+ */
+export function issuerVisual(issuer: string): CardVisual {
+  return matchIssuer({ issuer, cardName: '' });
+}
+
+export function cardVisual(input: { issuer: string; cardName?: string; network?: string }): CardVisual {
   const network = normalizeNetwork(input.network);
+  const cardName = input.cardName ?? '';
 
   for (const entry of CARD_NAME_BRAND) {
-    if (input.cardName.includes(entry.match)) {
+    if (cardName.includes(entry.match)) {
       return { brand: entry.brand, mark: entry.mark, network };
     }
   }
 
+  return matchIssuer(input, network);
+}
+
+function matchIssuer(
+  input: { issuer: string; cardName?: string },
+  network: CardNetwork = 'unknown',
+): CardVisual {
   for (const entry of ISSUER_BRAND) {
-    if (input.issuer.includes(entry.match)) {
+    if ((input.issuer ?? '').includes(entry.match)) {
       return { brand: entry.brand, mark: entry.mark, network };
     }
   }
@@ -105,8 +127,10 @@ export function cardVisual(input: { issuer: string; cardName: string; network: s
   return { brand: 'neutral', mark: 'CARD', network };
 }
 
-function normalizeNetwork(raw: string): CardNetwork {
-  const s = raw.toLowerCase();
+/* 入参放宽到 undefined：卡是存在 IndexedDB 里的，早期版本写进去的行没有
+   network 字段。渲染一张卡面不该因为一行旧数据就抛错 */
+function normalizeNetwork(raw: string | undefined): CardNetwork {
+  const s = (raw ?? '').toLowerCase();
   if (s.includes('visa')) return 'visa';
   if (s.includes('master')) return 'mastercard';
   if (s.includes('union')) return 'unionpay';

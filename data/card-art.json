@@ -79,7 +79,7 @@
       "file": "sc-simply-cash.webp",
       "issuerPage": "https://www.sc.com/hk/credit-cards/",
       "source": "https://www.sc.com/content/dam/sc/hk/en/credit-cards/hk-sc-simply-cash.png",
-      "transform": "手动坐标裁切（原图是正反对照图，只取左侧正面）"
+      "transform": "手动坐标裁切（2048² 正反对照图，取右侧横版正面 966,748–1894,1313）。左卡是竖版渲染，塞进 1.586 卡位只能拉伸或旋转，都不对"
     }
   },
   "$missing": {

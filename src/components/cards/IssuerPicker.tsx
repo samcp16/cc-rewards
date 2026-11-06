@@ -15,6 +15,7 @@
  */
 
 import { ChevronRight, Minus } from 'lucide-react';
+import { issuerVisual } from '../../lib/cardVisual';
 import { shortIssuer, type IssuerGroup } from '../../lib/issuerGroups';
 import { ISSUER_REGION_LABEL } from '../../lib/labels';
 
@@ -87,14 +88,54 @@ export function IssuerPicker({ groups, onPick, editing = false, onHide }: Issuer
 
 function IssuerLabel({ group }: { group: IssuerGroup }): React.JSX.Element {
   return (
-    <span className="flex min-w-0 flex-1 flex-col gap-1">
-      {/* 用短名：全名是法定名 + 拉丁名，在手机上永远被截成半句，读起来像加载失败 */}
-      <span className="truncate text-[length:var(--text-base)] font-[var(--fw-emphasize)] text-fg">
-        {shortIssuer(group.issuer)}
+    <span className="flex min-w-0 flex-1 items-center gap-[var(--space-3)]">
+      <IssuerMark group={group} />
+      <span className="flex min-w-0 flex-1 flex-col gap-1">
+        {/* 用短名：全名是法定名 + 拉丁名，在手机上永远被截成半句，读起来像加载失败 */}
+        <span className="truncate text-[length:var(--text-base)] font-[var(--fw-emphasize)] text-fg">
+          {shortIssuer(group.issuer)}
+        </span>
+        <span className="truncate text-[length:var(--text-xs)] text-muted">
+          {group.cards.length} 张卡
+          {group.usableCount < group.cards.length ? ` · ${String(group.cards.length - group.usableCount)} 张核实中` : ''}
+        </span>
       </span>
-      <span className="truncate text-[length:var(--text-xs)] text-muted">
-        {group.cards.length} 张卡
-        {group.usableCount < group.cards.length ? ` · ${String(group.cards.length - group.usableCount)} 张核实中` : ''}
+    </span>
+  );
+}
+
+/**
+ * 银行的色块标识。
+ *
+ * 二十家银行排成一列时，全是「短名 + N 张卡」的纯文字，用户只能逐行读。
+ * 加上一块品牌色之后，找「那家红色的」变成扫色而不是扫字 —— 这正是胶袋里
+ * 翻卡片的动作。颜色取自卡面同一个 token 源，所以这里看到的红和卡库里的
+ * 汇丰红是同一个红，不会一个列表两套配色。
+ *
+ * 不写 logo：商标风险 + 二十套图形风格统一不了 + 32px 下大部分 logo 已是糊的。
+ */
+function IssuerMark({ group }: { group: IssuerGroup }): React.JSX.Element {
+  const v = issuerVisual(group.issuer);
+  /* 没查到官方色的银行（澳门商业 / 澳门国际 / 立桥）不铺灰底。
+     三个一模一样的深灰块并排，看起来像图片没加载；描边空块才说得清
+     「这家我们不知道它是什么颜色」，而不是「这家是深灰色」 */
+  const unknownBrand = v.brand === 'neutral';
+
+  return (
+    <span
+      aria-hidden="true"
+      className={[
+        'relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-[var(--radius-md)]',
+        unknownBrand ? 'border border-line-strong' : '',
+      ].join(' ')}
+      style={unknownBrand ? undefined : { background: `var(--brand-${v.brand})` }}
+    >
+      {!unknownBrand && <span className="absolute inset-0" style={{ background: 'var(--card-sheen)' }} />}
+      <span
+        className="relative text-[length:10px] leading-none font-[var(--fw-emphasize)] tracking-[0.02em]"
+        style={{ color: unknownBrand ? 'var(--fg-2)' : `var(--brand-${v.brand}-ink)` }}
+      >
+        {v.mark}
       </span>
     </span>
   );

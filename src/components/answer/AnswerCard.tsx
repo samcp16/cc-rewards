@@ -11,10 +11,10 @@
  * - 全部 tabular-nums：改金额时宽度不跳，这是信任问题
  */
 
-import { TriangleAlert } from 'lucide-react';
+import { ChevronRight, TriangleAlert } from 'lucide-react';
 import type { ReactNode } from 'react';
 import type { RankResult, Scheme } from '../../domain/types.result';
-import { formatMoney, percent2, signedMoney, signedPercent } from '../../lib/format';
+import { formatMoney, percent2, signedMoney } from '../../lib/format';
 import { CardFace } from '../cards/CardFace';
 
 export type AnswerState =
@@ -113,22 +113,27 @@ function ErrorBody({ onRetry, onGoImport }: { onRetry: () => void; onGoImport: (
   );
 }
 
-/** 冠军卡的副行解释：优先讲「名义 vs 实际」，没有落差时讲「比第二名多多少」 */
-function subLine(champion: Scheme, result: RankResult): string {
+/**
+ * 冠军卡的副行 —— 回答「为什么是这张」，不重复下面的「净返 X%」。
+ *
+ * 踩过的坑：这里原本以「净返 2.00%」开头，而大数字正下方那行也写「净返 2.00%」。
+ * 同一句话隔 60px 说两遍，用户第一反应不是「信息一致」，而是「这两个数是不是不一样」。
+ * 副行只讲**差异**：外币费吃掉多少，或者比第二名多赚多少。都没有就不占这一行。
+ */
+function subLine(champion: Scheme, result: RankResult): string | null {
   const runnerUp = result.ranked[1];
   const currency = result.input.settlementCurrency;
-  const nominal = Math.abs(champion.netRateRealistic + champion.fxFee / Math.max(1, result.input.amount));
-  const parts: string[] = [`净返 ${percent2(champion.netRateRealistic)}`];
+  const parts: string[] = [];
+
   if (champion.fxFee > 0 && champion.route !== 'local') {
     parts.push(`外币费 ${percent2(champion.fxFee / result.input.amount)}`);
-  } else if (nominal > champion.netRateRealistic + 0.0001) {
-    parts.push(`名义 ${percent2(nominal)}`);
   }
-  if (runnerUp && result.ranked.length > 1) {
+  if (runnerUp !== undefined) {
     const lead = champion.netRealistic - runnerUp.netRealistic;
     if (lead > 0) parts.push(`比第二名多 ${formatMoney(lead)} ${currency}`);
   }
-  return parts.join(' · ');
+
+  return parts.length > 0 ? parts.join(' · ') : null;
 }
 
 function ReadyBody({
@@ -171,6 +176,12 @@ function ReadyBody({
     champion.confidence === 'low' || champion.confidence === 'unknown' ||
     champion.warnings.some((w) => w.code === 'unknown_rate' || w.code === 'low_confidence');
   const optimisticDiffers = Math.abs(champion.netOptimistic - champion.netRealistic) >= 0.005;
+  const why = subLine(champion, result);
+  const netRate = champion.netRealistic / result.input.amount;
+  const nominalRate = Math.max(0, champion.grossCashback + champion.pointsValue) / result.input.amount;
+  /* 名义和实返相等时只写一个。写「净返 2.00% · 名义 2.00%」等于让用户去比两个
+     一模一样的数，然后怀疑自己看错了 */
+  const showNominal = Math.abs(nominalRate - netRate) >= 0.0001;
 
   return (
     <div className="flex flex-col">
@@ -183,9 +194,7 @@ function ReadyBody({
           >
             {champion.cardName}
           </p>
-          <p className="num mt-[var(--space-1)] text-[length:var(--text-sm)] text-fg-2">
-            {subLine(champion, result)}
-          </p>
+          {why !== null && <p className="num mt-[var(--space-1)] text-[length:var(--text-sm)] text-fg-2">{why}</p>}
         </div>
         {/* 小卡面：让「刷这张」从一句卡名变成一张看得见的卡。
             没有官方素材时自动退回绘制卡面，不会留空 */}
@@ -216,10 +225,8 @@ function ReadyBody({
       </p>
 
       <p className="mt-[var(--space-1)] text-[length:var(--text-xs)] text-meta">
-        {champion.netRealistic < 0 ? '倒贴 · ' : ''}净返 {percent2(champion.netRealistic / result.input.amount)} · 名义{' '}
-        {percent2(
-          (Math.max(0, champion.grossCashback + champion.pointsValue) / result.input.amount),
-        )}
+        {champion.netRealistic < 0 ? '倒贴 · ' : ''}净返 {percent2(netRate)}
+        {showNominal && <> · 名义 {percent2(nominalRate)}</>}
       </p>
 
       {optimisticDiffers && (
@@ -244,7 +251,9 @@ function ReadyBody({
         <span>
           查看全部 {String(result.ranked.length + result.unranked.length)} 张对比
         </span>
-        <span className="num text-[length:var(--text-sm)] text-muted">{signedPercent(champion.netRateRealistic)}</span>
+        {/* 右侧原本再报一次「+2.00%」，那是主数字已经说过的话。
+            换成箭头：这一行是「还有更多」，不是「又一个数字」 */}
+        <ChevronRight size={18} strokeWidth={2} className="text-muted" aria-hidden="true" />
       </button>
     </div>
   );

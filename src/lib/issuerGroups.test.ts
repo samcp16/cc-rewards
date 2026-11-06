@@ -8,7 +8,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { CARDS, getCardById } from '../domain/data/loadCards';
-import { cardSummary, cardsOfIssuer, issuerGroups, issuerKey, shortIssuer } from './issuerGroups';
+import { cardSummary, cardTitle, cardsOfIssuer, issuerGroups, issuerKey, shortIssuer } from './issuerGroups';
 
 describe('issuerGroups', () => {
   it('每张卡只被分到一组，且总量守恒', () => {
@@ -157,5 +157,64 @@ describe('shortIssuer：列表副行用的短名', () => {
   it('结果一定短于原始全名，否则截断白做了', () => {
     const full = '澳门国际银行（Macau Chinese Bank / MIB）';
     expect(shortIssuer(full).length).toBeLessThan(full.length);
+  });
+});
+
+describe('cardTitle：列表主名', () => {
+  it('剥掉与副行重复的机构名前缀', () => {
+    expect(
+      cardTitle({ issuer: '中银香港（Bank of China Hong Kong）', cardName: '中银香港 Chill 信用卡（World Mastercard）' }).main,
+    ).toBe('Chill 信用卡');
+    expect(cardTitle({ issuer: '东亚银行（Bank of China HK）', cardName: '东亚银行 World Mastercard' }).main).toBe(
+      'World Mastercard',
+    );
+    expect(cardTitle({ issuer: '澳门国际银行（MIB）', cardName: '澳门国际银行大湾区白金卡' }).main).toBe('大湾区白金卡');
+  });
+
+  it('尾部等级括号单独拆出来，不进主名', () => {
+    const t = cardTitle({ issuer: 'AEON 信贷财务（AEON Credit）', cardName: 'AEON 信用卡（标准卡）' });
+    expect(t.main).toBe('AEON 信用卡');
+    expect(t.tag).toBe('标准卡');
+    expect(cardTitle({ issuer: 'X', cardName: 'X 白金卡' }).tag).toBeNull();
+  });
+
+  it('完整机构名没匹配上时不乱剥 —— 剥完剩中文就放弃', () => {
+    // 「香港上海汇丰银行」缩写是「汇丰」，但「汇丰银行信用卡」剥完剩「银行信用卡」，
+    // 那是把一个词从中间切断，不是简洁
+    expect(cardTitle({ issuer: '香港上海汇丰银行（HSBC HK）', cardName: '汇丰银行信用卡' }).main).toBe('汇丰银行信用卡');
+  });
+
+  it('剥完只剩一两个字时不剥，宁可长也不给残名', () => {
+    expect(cardTitle({ issuer: 'Mox Bank', cardName: 'Mox 信用卡' }).main).toBe('Mox 信用卡');
+  });
+
+  it('全库扫描：主名只会变短，不会变长，也不会被剥空', () => {
+    let shortened = 0;
+    for (const c of CARDS) {
+      const t = cardTitle(c);
+      expect(t.main.length).toBeGreaterThan(0);
+      expect(t.main.length).toBeLessThanOrEqual(c.cardName.length);
+      if (t.main.length < c.cardName.length) shortened += 1;
+    }
+    // 至少「中银」两张 + 东亚 + 澳门国际三张 + AEON 标准卡 这类尾部带括号的
+    expect(shortened).toBeGreaterThanOrEqual(5);
+  });
+});
+
+describe('cardTitle：短名兜底', () => {
+  it('完整名没匹配上时，短名可以剥 —— 前提是剩下的以拉丁字母或数字开头', () => {
+    expect(cardTitle({ issuer: '渣打银行香港（Standard Chartered HK）', cardName: '渣打 Simply Cash Visa 卡' }).main).toBe(
+      'Simply Cash Visa 卡',
+    );
+    expect(cardTitle({ issuer: '香港上海汇丰银行（HSBC HK）', cardName: '汇丰 Red 信用卡' }).main).toBe('Red 信用卡');
+  });
+
+  it('剥完剩中文就不剥 —— 不把「东亚银行」切成「银行」', () => {
+    // 这条走完整名匹配，剩 World Mastercard
+    expect(cardTitle({ issuer: '东亚银行（Bank of East Asia）', cardName: '东亚银行 World Mastercard' }).main).toBe(
+      'World Mastercard',
+    );
+    // 只有短名能匹配、且剥完剩中文：保持原样（剥成「信用卡」等于把这个名字说没了）
+    expect(cardTitle({ issuer: '东亚银行（Bank of East Asia）', cardName: '东亚信用卡' }).main).toBe('东亚信用卡');
   });
 });

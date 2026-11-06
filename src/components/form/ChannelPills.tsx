@@ -26,20 +26,18 @@ const ICON: Record<PaymentChannel, ReactNode> = {
 interface ChannelPillsProps {
   value: PaymentChannel;
   onChange: (next: PaymentChannel) => void;
-  /** 「上次用的」标记 —— 写具体渠道名，不写「常用」（后者暗示会智能排序） */
-  showLastHint?: boolean;
 }
 
-export function ChannelPills({ value, onChange, showLastHint = true }: ChannelPillsProps): React.JSX.Element {
+export function ChannelPills({ value, onChange }: ChannelPillsProps): React.JSX.Element {
   return (
     <div>
-      <div className="mb-[var(--space-2)] flex items-baseline justify-between">
+      {/* 这里原本右侧挂一句「上次用的记在这里」。它想解释「为什么一进来就选中了刷卡」，
+          可那个解释对一个已经选中的 chip 是多余的；而且它没有任何视觉对应物 ——
+          用户读完会去找哪个是「上次的」，结果找不到。删掉。 */}
+      <div className="mb-[var(--space-2)]">
         <span id="channel-label" className="text-[length:var(--text-xs)] text-muted">
           走哪个渠道
         </span>
-        {showLastHint && (
-          <span className="text-[length:var(--text-xs)] text-meta">上次用的记在这里</span>
-        )}
       </div>
       <div className="relative">
         <div

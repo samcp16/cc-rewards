@@ -11,7 +11,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { cardVisual, NETWORK_LABEL } from './cardVisual';
+import { cardVisual, issuerVisual, NETWORK_LABEL } from './cardVisual';
 import { CARDS } from '../domain/data/loadCards';
 
 function v(issuer: string, cardName: string, network = 'visa') {
@@ -91,5 +91,25 @@ describe('cardVisual：卡库全覆盖', () => {
     expect(hsbc.length).toBeGreaterThan(1);
     const brands = new Set(hsbc.map((c) => cardVisual(c).brand));
     expect(brands.size).toBe(1);
+  });
+});
+
+describe('issuerVisual：银行行只代表银行', () => {
+  it('一家银行发两个牌子时，银行行不借用其中任一个卡品牌的色', () => {
+    const bank = issuerVisual('安信信贷（PrimeCredit）');
+    expect(bank.brand).toBe('neutral');
+    expect(bank.mark).toBe('PC');
+    // 卡那一层仍然分开
+    expect(cardVisual({ issuer: '安信信贷（PrimeCredit）', cardName: 'WeWa 银联信用卡', network: 'UnionPay' }).brand).toBe('wewa');
+    expect(cardVisual({ issuer: '安信信贷（PrimeCredit）', cardName: 'EarnMORE 银联钻石卡', network: 'UnionPay' }).brand).toBe('earnmore');
+  });
+
+  it('有官方色的银行，行级与卡级同色', () => {
+    expect(issuerVisual('香港上海汇丰银行（HSBC HK）').brand).toBe('hsbc');
+    expect(issuerVisual('渣打银行香港（Standard Chartered HK）').brand).toBe('sc');
+  });
+
+  it('查不到官方色的银行给中性色 + 真缩写，而不是通用占位', () => {
+    expect(issuerVisual('澳门国际银行（Macau Chinese Bank / MIB）')).toEqual({ brand: 'neutral', mark: 'MIB', network: 'unknown' });
   });
 });

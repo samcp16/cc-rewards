@@ -18,7 +18,7 @@
 import { useNavigate } from 'react-router-dom';
 import type { CardRow } from '../../db/schema';
 import { STALE_DAYS, staleDaysOf } from '../../lib/cardFacts';
-import { cardSummary, shortIssuer } from '../../lib/issuerGroups';
+import { cardSummary, cardTitle, shortIssuer } from '../../lib/issuerGroups';
 import { ConfidenceTag } from '../common/ConfidenceTag';
 import { CardFace } from './CardFace';
 
@@ -39,6 +39,7 @@ export function CardListItem({ card, today, usedRatio, indexInIssuer }: CardList
      90 天内没人需要知道这件事，超过 90 天才需要 */
   const stale = staleDays > STALE_DAYS;
   const summary = cardSummary(card);
+  const title = cardTitle(card);
   const inactive = card.active === false;
   const limitAlmostUsed = usedRatio !== null && usedRatio >= 0.8;
 
@@ -61,7 +62,7 @@ export function CardListItem({ card, today, usedRatio, indexInIssuer }: CardList
               inactive ? 'text-muted line-through' : 'text-fg',
             ].join(' ')}
           >
-            {card.cardName || '未命名卡'}
+            {title.main || '未命名卡'}
           </span>
           <ConfidenceTag confidence={card.confidence} />
         </span>
@@ -69,6 +70,7 @@ export function CardListItem({ card, today, usedRatio, indexInIssuer }: CardList
         <span className="flex min-w-0 items-baseline gap-[var(--space-2)]">
           <span className="min-w-0 flex-1 truncate text-[length:var(--text-xs)] text-muted">
             {shortIssuer(card.issuer)}
+            {title.tag !== null && <span className="text-meta"> · {title.tag}</span>}
             {stale && <span className="text-warn"> · {String(staleDays)} 天未核对</span>}
             {limitAlmostUsed && (
               <span className="text-warn"> · 额度 {String(Math.round(Math.min(1.2, usedRatio) * 100))}%</span>

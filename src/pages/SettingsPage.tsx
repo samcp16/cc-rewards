@@ -127,7 +127,7 @@ export function SettingsPage(): React.JSX.Element {
       <div className="mx-auto w-full max-w-[var(--container-desktop)] px-[var(--space-4)]">
         <DataSafetyCard daysSinceExport={lastExportDays} onExport={() => void handleExport()} exporting={exporting} />
 
-        <Group title="安装到主屏幕">
+        <Group title="离线使用">
           {platform.installed ? (
             <div className="flex items-center gap-[var(--space-3)] px-[var(--space-1)] py-[var(--space-3)]" style={{ minHeight: 64 }}>
               <CheckCircle2 size={20} strokeWidth={2} className="shrink-0 text-muted" aria-hidden="true" />
@@ -158,11 +158,6 @@ export function SettingsPage(): React.JSX.Element {
               setImportPhase({ kind: 'pick' });
               setSheet('import');
             }}
-          />
-          <ValueRow
-            label="上次导出"
-            value={lastExportDays === null ? '还没导出过' : lastExportDays === 0 ? '今天' : `${String(lastExportDays)} 天前`}
-            valueTone={lastExportDays === null || lastExportDays > 30 ? 'warn' : 'normal'}
           />
         </Group>
 
@@ -200,8 +195,8 @@ export function SettingsPage(): React.JSX.Element {
           />
         </Group>
 
-        <p className="px-[var(--space-1)] py-[var(--space-6)] text-center text-[length:var(--text-xs)] leading-[var(--leading-body)] text-muted">
-          本产品的数据全都存在这台设备上，没有任何上传。
+        <p className="px-[var(--space-1)] py-[var(--space-6)] text-center text-[length:var(--text-xs)] leading-[var(--leading-body)] text-meta">
+          回赠以发卡行最新公告为准，本工具只做测算。
         </p>
       </div>
 

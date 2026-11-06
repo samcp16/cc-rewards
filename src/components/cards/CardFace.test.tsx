@@ -92,8 +92,12 @@ describe('CardFace：官方素材', () => {
     const html = render({ card: { ...HSBC, cardId: 'hsbc-red' } });
     expect(html).toContain('<img');
     expect(html).toContain('.webp');
-    // 有真图就不该再叠品牌底色，否则图片没加载出来时会露出一个假卡面
-    expect(html).not.toContain('var(--brand-hsbc)');
+    // 图没到之前露出来的应该是这张卡自己的品牌色，不是一块白
+    expect(html).toContain('var(--brand-hsbc)');
+    // 但底子上不能有芯片和卡组织标识 —— 那是「画出来的卡」的零件，
+    // 叠在真图下面就成了一个加载中看起来像假卡的缝合怪
+    expect(html).not.toContain('var(--chip-face)');
+    expect(html).not.toContain('<svg');
   });
 
   it('没登记素材的卡仍然画卡面 —— 空槽比假卡面更糟', () => {

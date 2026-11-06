@@ -19,7 +19,7 @@ import { RecordSpendSheet } from '../components/cards/RecordSpendSheet';
 import { EmptyState } from '../components/common/EmptyState';
 import { PageShell } from '../components/layout/PageShell';
 import { TabBar } from '../components/layout/TabBar';
-import { TopBar } from '../components/layout/TopBar';
+import { IconAction, TopBar } from '../components/layout/TopBar';
 import { useCards, useLedger } from '../db/useDb';
 import type { CardRow } from '../db/schema';
 import type { CapUsage } from '../hooks/useCapUsage';
@@ -91,9 +91,23 @@ export function CardsPage({ view = 'cards' }: CardsPageProps): React.JSX.Element
 
   return (
     <PageShell
-      topbar={<TopBar title="我的卡" />}
+      topbar={
+        <TopBar
+          title="我的卡"
+          actions={
+            <IconAction
+              label="添加卡片"
+              onClick={() => {
+                void navigate('/cards/new');
+              }}
+            >
+              <Plus size={22} strokeWidth={2} aria-hidden="true" />
+            </IconAction>
+          }
+        />
+      }
       tabbar={<TabBar />}
-      contentPaddingBottom="calc(var(--size-tabbar) + var(--safe-bottom) + 88px)"
+      contentPaddingBottom="calc(var(--size-tabbar) + var(--safe-bottom) + var(--space-8))"
     >
       <div className="mx-auto w-full max-w-[var(--container-desktop)]">
         <TabSwitch value={tab} onChange={setTab} />
@@ -190,18 +204,6 @@ export function CardsPage({ view = 'cards' }: CardsPageProps): React.JSX.Element
           defaultCurrency={recordTarget.cardCurrency}
         />
       )}
-
-      <button
-        type="button"
-        onClick={() => {
-          void navigate('/cards/new');
-        }}
-        aria-label="添加卡片"
-        className="fixed right-[var(--space-4)] z-[var(--z-fab)] flex h-14 w-14 items-center justify-center rounded-[var(--radius-pill)] bg-accent text-on-accent transition-colors duration-[var(--motion-fast)] hover:bg-accent-hover"
-        style={{ bottom: 'calc(var(--size-tabbar) + var(--safe-bottom) + var(--space-4))' }}
-      >
-        <Plus size={24} strokeWidth={2} aria-hidden="true" />
-      </button>
     </PageShell>
   );
 }

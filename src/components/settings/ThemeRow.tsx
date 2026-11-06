@@ -28,7 +28,8 @@ export function ThemeRow(): React.JSX.Element {
 
   return (
     <div className="flex flex-col gap-[var(--space-3)] px-[var(--space-1)] py-[var(--space-3)]">
-      <span className="text-[length:var(--text-md)] font-[var(--fw-emphasize)] text-fg">外观</span>
+      {/* 这里不再写一遍「外观」——分组标题已经写了，隔 20px 重复同一个词
+          只会让页面显得是拼出来的 */}
       <SegmentedControl
         label="外观"
         options={OPTIONS}

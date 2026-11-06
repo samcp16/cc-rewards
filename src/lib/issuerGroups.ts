@@ -106,6 +106,49 @@ export function shortIssuer(issuer: string): string {
   return SHORT_OVERRIDE[base] ?? base;
 }
 
+/**
+ * 卡名拆成「主名 + 等级标注」。
+ *
+ * 列表里的卡名有两个固定的赘余：
+ *
+ *   1. **机构名重复**。副行已经写了「中银香港」，卡名再以「中银香港」开头，
+ *      等于一行里说两遍同一件事 —— 而这一行总共只有 ~190px。
+ *      只剥**完整机构名**（issuer 去括号那一段），不做模糊匹配：
+ *      模糊匹配会把「东亚银行 World Mastercard」剥成「银行 World Mastercard」。
+ *
+ *   2. **尾部等级括号**。「（Visa Signature）」「（World Mastercard）」在
+ *      32 字的卡名里占掉一大半，却是列表里最不紧急的信息。拆出来交给副行，
+ *      主名就回到「Chill 信用卡」这种一眼能扫的长度。
+ *
+ * 拿不准时不剥：宁可长一点，也不要剥出一个语义残缺的名字。
+ */
+export function cardTitle(card: { issuer: string; cardName: string }): { main: string; tag: string | null } {
+  const raw = card.cardName.trim();
+  const bracket = /[（(]([^（()）]+)[)）]\s*$/.exec(raw);
+  const tag = bracket?.[1]?.trim() ?? null;
+  let main = bracket ? raw.slice(0, bracket.index).trim() : raw;
+
+  const fullIssuer = card.issuer.split('（')[0]?.trim() ?? '';
+  if (fullIssuer !== '' && main.startsWith(fullIssuer)) {
+    const rest = main.slice(fullIssuer.length).trim();
+    // 剥完只剩空白、或只剩一两个字符时，说明这名字本来就等于机构名
+    if (rest.length >= 2) main = rest;
+  } else {
+    /* 完整名没匹配上时，再试一次短名 —— 但只在**剥完剩下的是拉丁字母或数字**
+       时才认。否则「东亚银行 World Mastercard」会被短名「东亚」剥成
+       「银行 World Mastercard」：那不是简洁，是把一个词从中间切断。
+       「渣打 Simply Cash Visa 卡」剩「Simply Cash Visa 卡」，是安全的。 */
+    const short = shortIssuer(card.issuer);
+    if (short !== '' && main.startsWith(short)) {
+      const rest = main.slice(short.length).trim();
+      if (rest.length >= 2 && /^[0-9A-Za-z]/.test(rest)) main = rest;
+    }
+  }
+
+  return { main, tag };
+}
+
+
 export function cardsOfIssuer(issuer: string): Card[] {
   return issuerGroups().find((g) => g.issuer === issuer)?.cards ?? [];
 }

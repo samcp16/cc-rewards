@@ -53,16 +53,23 @@ export function CardFace({ card, size = 'thumb', muted = false, indexInIssuer = 
 
   if (art) {
     return (
-      <div aria-hidden="true" className="relative isolate shrink-0 overflow-hidden" style={shell}>
+      <div
+        aria-hidden="true"
+        className="relative isolate shrink-0 overflow-hidden"
+        /* 底色用这张卡的品牌色，而不是留白。
+           踩过的坑：慢网下（地铁里、跨境漫游）图要几秒才到，这段时间卡位是一块
+           纯白 —— 深色主题下更像「数据丢了」。铺品牌色之后，加载中看到的是
+           「一张红色的汇丰卡正在变清晰」，而不是一个空洞。 */
+        style={{ ...shell, background: `var(--brand-${v.brand})` }}
+      >
+        {/* 图片上不加任何 filter。
+            踩过的坑：给缩略图加 contrast/saturate 补偿缩放损失，会让带 alpha 的 WebP
+            在部分 Chromium 上栅格化失败，整块渲染成白色 —— 而且时有时无，
+            比「稍微糊一点」糟得多。缩放损失交给浏览器的缩略图算法就好。 */}
         <img
           src={art.src}
           alt=""
-          className="h-full w-full object-cover"
-          /* 缩略尺寸下细节会糊，轻微提对比让轮廓更实；不是滤镜美化，是补偿缩放损失 */
-          style={{ filter: isFull ? undefined : 'contrast(1.06) saturate(1.04)' }}
-          /* 不用 loading="lazy"：图就在本地包里（workbox 预缓存），没有网络成本，
-             而懒加载会让快速滚动时先出现一块空白再补上图 —— 卡面是列表的主视觉，
-             空白闪烁比多花 2ms 解码难看得多 */
+          className="relative h-full w-full object-cover"
           loading="eager"
           decoding="async"
           draggable={false}
